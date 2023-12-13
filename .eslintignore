@@ -1,0 +1,12 @@
+# dependencies
+node_modules
+
+# public & assets
+public
+
+#ts
+tsconfig.json
+tsconfig-paths.json
+
+#stylelint
+.stylelintrc.js
