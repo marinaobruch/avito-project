@@ -1,1 +1,2 @@
-export * from './button-in'
+export * from './buttons'
+export * from './logos'

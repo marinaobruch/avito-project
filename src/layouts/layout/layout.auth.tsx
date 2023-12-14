@@ -1,5 +1,5 @@
-import { ButtonIn } from './../../shared/button-in'
 import { Outlet } from 'react-router-dom';
+import { ButtonIn } from 'shared/buttons';
 
 export const LayoutAuth = () => {
 

@@ -3,7 +3,15 @@ export default {
       './src/**/*.{js,jsx,ts,tsx}',
     ],
     theme: {
-      extend: {},
+      extend: {
+        fontFamily: {
+          roboto: ['Roboto-Regular', 'sans-serif'],
+          robotoLight: ['Roboto-Light', 'sans-serif']
+        },
+        height: {
+          '450': '450px',
+        }
+      },
     },
     plugins: [],
   }

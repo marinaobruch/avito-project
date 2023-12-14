@@ -1,15 +1,11 @@
 import './App.css'
-import { Container, LayoutNoAuth } from './layouts'
+import { Container } from './layouts/container/container'
+import { Login } from './pages/login/login'
 
-function App() {
-
-  return (
-    <>
-      <Container>
-        <LayoutNoAuth/>
-      </Container>
-    </>
-  )
-}
+const App = () => (
+  <Container>
+    <Login />
+  </Container>
+)
 
 export default App

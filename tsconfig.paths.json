@@ -1,51 +1,48 @@
 {
     "compilerOptions": {
-        "baseUrl": "./",
+        "baseUrl": "src",
         "paths": {
-            "@/*": [
-                "./src/*"
+            "style/*": [
+                "style/*"
             ],
-            "@style/": [
-                "src/style/"
+            "shared/*": [
+                "shared/*"
             ],
-            "@shared/": [
-                "src/shared/"
+            "assets/*": [
+                "assets/*"
             ],
-            "@assets/*": [
-                "src/assets/*"
+            "components/*": [
+                "components/*"
             ],
-            "@components/": [
-                "src/components/"
+            "layouts/*": [
+                "layouts/*"
             ],
-            "@layouts/": [
-                "src/layouts/"
+            "pages/*": [
+                "pages/*"
             ],
-            "@pages/": [
-                "src/pages/"
+            "interface/*": [
+                "interface/*"
             ],
-            "@interface/": [
-                "./src/interface"
+            "context/*": [
+                "context/*"
             ],
-            "@context/": [
-                "./src/context"
+            "hook/*": [
+                "hook/*"
             ],
-            "@hook/": [
-                "./src/hook"
+            "hocs/*": [
+                "hocs/*"
             ],
-            "@hocs/": [
-                "./src/hocs"
+            "api/*": [
+                "api/*"
             ],
-            "@api/": [
-                "./src/api"
+            "utils/*": [
+                "utils/*"
             ],
-            "@utils/": [
-                "./src/utils"
+            "redux/*": [
+                "redux/*"
             ],
-            "@redux/": [
-                "./src/redux"
-            ],
-            "@database/": [
-                "./src/database"
+            "database/*": [
+                "database/*"
             ]
         }
     },

@@ -1,7 +1,10 @@
-import { Container } from "@layouts/"
+import { FormLogin } from "components/form"
+import { Container } from "layouts/container"
 
 export const Login = () => {
- <Container>
-    
- </Container>
+   return (
+      <Container>
+         <FormLogin/>
+      </Container>
+ )
 }

@@ -1,7 +1,7 @@
 import { Container } from "layouts/container"
 
-export const Register = () => {
+export const MainPage = () => {
  <Container>
-    
+    <div>MainLage</div>
  </Container>
 }
