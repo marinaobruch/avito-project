@@ -1,46 +1,62 @@
 import { ILoginRequest } from 'interface/login-interface';
 import {SubmitHandler, useForm} from 'react-hook-form'
+import { NavLink } from 'react-router-dom';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
+import { InputLogin } from 'shared/inputs';
 import { LogoSkyPro } from 'shared/logos';
 
 export const FormLogin = () => {
     const {
-        register,
         handleSubmit,
-        formState: {errors},
-        reset,
+        control,
+        register,
     } = useForm<ILoginRequest>({
-        mode:'onChange'
+        mode:'onChange',
     });
 
     const onSubmit:SubmitHandler<ILoginRequest> = (data) => {
-        alert(`Your email is ${data.email}`)
-        reset()
+        console.log(`Your email is ${data.email} and your password is ${data.password}`);
     }
 
     return (
-    <div className='w-full h-full fixed left-0 top-0 flex justify-center items-center bg-blue-500'>
-        <div className='w-96 h-450 bg-white flex flex-col justify-center items-center rounded-lg'>
+    <div className='w-full h-full fixed left-0 top-0 flex justify-center items-center bg-sky-500'>
+        <div className='w-96 h-450 bg-white flex flex-col justify-center items-center rounded-lg gap-12'>
         <LogoSkyPro />
-            <form className='flex flex-col justify-center items-center gap-14' onSubmit={handleSubmit(onSubmit)}>
-                <input 
-                    {...register('email', {
-                        required: 'Email is require to field!'
-                      })}
-                    type='email'
-                    placeholder='Email'
-                />
-                {errors.email && <div className='text-red-500'>{errors.email.message}</div>}
-                <input 
-                    {...register('password', {
-                        required: 'Password is require to field!'
-                    })}
-                    type='password'
-                    placeholder='Password'
-                />
-                {errors.password && <div className='text-red-500'>{errors.password.message}</div>}
-                <ButtonLogIn text='Войти'/>
-                <ButtonReg text='Зарегистрироваться'/>
+            <form
+                className='flex flex-col justify-center items-center gap-14' 
+                onSubmit={handleSubmit(onSubmit)}
+            >
+                <div className='flex flex-col gap-8'>
+                    <InputLogin
+                        {...register('email', {
+                            required: 'Email is require to field!'
+                        })}
+                        control={ control }
+                        name="email"
+                        placeholder="email"
+                        type="text"
+                    />
+                    <InputLogin 
+                        {...register('password', {
+                            required: 'Password is require to field!'
+                        })}
+                        control={ control }
+                        name="password"
+                        placeholder="password"
+                        type="password"
+                    />
+                </div>
+
+                <div className='flex flex-col gap-5'>
+                    <ButtonLogIn type='submit' text='Войти'/>
+                    <NavLink to={'/register'}>
+                        <ButtonReg
+                        type='button'
+                        text='Зарегистрироваться'
+                        />
+                    </NavLink>
+                </div>
+
             </form>
          </div>
     </div>
