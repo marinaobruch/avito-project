@@ -3,7 +3,6 @@ import { FC, HTMLProps } from 'react';
 
 interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   text: string;
-
 }
 
 export const ButtonLogIn: FC<IButtonProps> = ({text}) => (
