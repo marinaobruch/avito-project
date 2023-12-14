@@ -5,7 +5,7 @@ export const LayoutNoAuth = () => {
 
   return (
     <div>
-        <header className='bg-blue-500 flex items-center justify-end'>
+        <header className='bg-sky-500 flex items-center justify-end'>
              <nav className="h-20 flex items-center mr-11">                    
                 <ButtonIn text='Войти в личный кабинет' width={40} height={12}/>
             </nav>

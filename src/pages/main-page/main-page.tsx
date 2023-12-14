@@ -1,7 +1,9 @@
 import { Container } from "layouts/container"
 
 export const MainPage = () => {
- <Container>
-    <div>MainLage</div>
- </Container>
+   return (
+      <Container>
+         <div>MainPage</div>
+      </Container>
+ )
 }
