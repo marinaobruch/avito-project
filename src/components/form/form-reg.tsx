@@ -11,18 +11,20 @@ export const FormReg = () => {
         handleSubmit,
         control,
         register,
+        reset
     } = useForm<IRegRequest>({
         mode:'onChange',
     });
 
     const onSubmit:SubmitHandler<IRegRequest> = (data) => {
         console.log(`Your email is ${data.email} and your password is ${data.password}`);
+        reset()
     }
 
     return (
     <div className='w-full h-full fixed left-0 top-0 flex justify-center items-center bg-sky-500'>
         <div className='w-96 h-650 bg-white flex flex-col justify-center items-center rounded-lg gap-12'>
-            <div onClick={() => navigate('/login')}>
+            <div className='cursor-pointer' onClick={() => navigate('/login')}>
             <LogoSkyPro />
             </div>
         

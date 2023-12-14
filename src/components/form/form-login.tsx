@@ -10,12 +10,14 @@ export const FormLogin = () => {
         handleSubmit,
         control,
         register,
+        reset
     } = useForm<ILoginRequest>({
         mode:'onChange',
     });
 
     const onSubmit:SubmitHandler<ILoginRequest> = (data) => {
         console.log(`Your email is ${data.email} and your password is ${data.password}`);
+        reset()
     }
 
     return (
