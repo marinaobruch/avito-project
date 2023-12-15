@@ -1,4 +1,5 @@
 import { IRegRequest } from 'interface/login-interface';
+import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { ButtonLogIn } from 'shared/buttons';
@@ -16,6 +17,8 @@ export const FormReg = () => {
         mode:'onChange',
     });
 
+    const form = useId()
+
     const onSubmit:SubmitHandler<IRegRequest> = (data) => {
         console.log(`Your email is ${data.email} and your password is ${data.password}`);
         reset()
@@ -29,6 +32,7 @@ export const FormReg = () => {
             </div>
         
             <form
+                id={form}
                 className='flex flex-col justify-center items-center gap-14' 
                 onSubmit={handleSubmit(onSubmit)}
             >

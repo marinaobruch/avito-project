@@ -5,7 +5,7 @@ interface IContainerProps {
 }
 
 export const ContainerContent: FC<IContainerProps> = ({ children }) => (
-  <div className=' mt-12 w-1440 flex flex-col justify-center'>
+  <div className='w-full mt-12 flex justify-center'>
     { children }
   </div>
 );

@@ -1,4 +1,5 @@
 import { ILoginRequest } from 'interface/login-interface';
+import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { NavLink } from 'react-router-dom';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
@@ -15,6 +16,8 @@ export const FormLogin = () => {
         mode:'onChange',
     });
 
+    const form = useId();
+
     const onSubmit:SubmitHandler<ILoginRequest> = (data) => {
         console.log(`Your email is ${data.email} and your password is ${data.password}`);
         reset()
@@ -25,6 +28,7 @@ export const FormLogin = () => {
         <div className='w-96 h-450 bg-white flex flex-col justify-center items-center rounded-lg gap-12'>
         <LogoSkyPro />
             <form
+                id={form}
                 className='flex flex-col justify-center items-center gap-14' 
                 onSubmit={handleSubmit(onSubmit)}
             >

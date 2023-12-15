@@ -11,3 +11,10 @@ export interface IRegRequest {
     surname?: string;
     sity?: string
 }
+
+export interface IChangeForm {
+    name: string;
+    surname: string;
+    city: string;
+    number: string;
+}
