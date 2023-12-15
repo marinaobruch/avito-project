@@ -54,7 +54,9 @@ export const FormLogin = () => {
                 </div>
 
                 <div className='flex flex-col gap-5'>
-                    <ButtonLogIn type='submit' text='Войти'/>
+                    <NavLink to={'/profile'}>
+                        <ButtonLogIn type='submit' text='Войти'/>
+                    </NavLink>
                     <NavLink to={'/register'}>
                         <ButtonReg
                         type='button'

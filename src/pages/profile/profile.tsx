@@ -1,7 +1,9 @@
+import { ProductCard } from "components/product-card"
 import { IChangeForm } from "interface/login-interface"
 import { ContainerContent } from "layouts/container"
 import { useId } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { NavLink } from "react-router-dom"
 import { ButtonMain } from "shared/buttons"
 import { InputContent } from "shared/inputs/input-content"
 import { Logo } from "shared/logos"
@@ -36,13 +38,15 @@ export const Profile = () => {
                  <Logo />
               </div>
               <div className="col-span-7">
-                <ButtonMain text="Вернуться на главную" width="240px" />
+                <NavLink to={'/main'}>
+                    <ButtonMain text="Вернуться на главную" width="240px" />
+                </NavLink>
               </div>
            </div>
 
-           <h2 className="mt-12 text-4xl">Здравствуйте, Марина!</h2>
+           <h2 className="mt-16 text-4xl">Здравствуйте, Марина!</h2>
 
-            <div className="w-full mt-10 mb-16">
+            <div className="mt-10 mb-16">
                 <h3 className="text-3xl">Настройки профиля</h3>
                 <div className="flex justify-start items-start gap-10 mt-10">
 
@@ -105,8 +109,15 @@ export const Profile = () => {
                         
                         <ButtonMain text="Сохранить" width="154px" />
                     </form>
+                </div>            
+            </div>
 
-                </div>
+            <h3 className="text-3xl">Мои товары</h3>
+            <div className="grid grid-cols-8 gap-6 mt-5">
+               <ProductCard />
+               <ProductCard />
+               <ProductCard />
+               <ProductCard />
             </div>
         </div>
      </ContainerContent>
