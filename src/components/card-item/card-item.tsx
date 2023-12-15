@@ -1,4 +1,4 @@
-export const ProductCard = () => {
+export const CardItem = () => {
     return (
         <div className="col-span-2">
             <div className="w-72 h-72 bg-slate-200"></div>

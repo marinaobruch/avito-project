@@ -1,12 +1,10 @@
-import { ProductCard } from "components/product-card"
+import { CardItem } from "components/card-item"
 import { IChangeForm } from "interface/login-interface"
-import { ContainerContent } from "layouts/container"
+import { BackToMainPage, ContainerContent } from "layouts/container"
 import { useId } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { NavLink } from "react-router-dom"
 import { ButtonMain } from "shared/buttons"
 import { InputContent } from "shared/inputs/input-content"
-import { Logo } from "shared/logos"
 
 export const Profile = () => {
     const {
@@ -32,17 +30,8 @@ export const Profile = () => {
 
     return (
         <ContainerContent>
-        <div className="w-1440">
-           <div className="grid grid-cols-8 items-center">
-              <div className="col-span-1">
-                 <Logo />
-              </div>
-              <div className="col-span-7">
-                <NavLink to={'/main'}>
-                    <ButtonMain text="Вернуться на главную" width="240px" />
-                </NavLink>
-              </div>
-           </div>
+        <div className="w-1440 mx-10">
+           <BackToMainPage />
 
            <h2 className="mt-16 text-4xl">Здравствуйте, Марина!</h2>
 
@@ -64,7 +53,7 @@ export const Profile = () => {
                         >
                         <div className="col-span-2 flex gap-4">
                             <div>
-                                <label className="text-base text-gray-500">Имя</label>
+                                <label className="grey-add-text0">Имя</label>
                                 <InputContent
                                     control={control}
                                     name="name"
@@ -74,7 +63,7 @@ export const Profile = () => {
                                 />
                             </div>
                             <div>
-                                <label className="text-base text-gray-500">Фамилия</label>
+                                <label className="grey-add-text">Фамилия</label>
                                 <InputContent
                                     control={control}
                                     name="surname"
@@ -86,7 +75,7 @@ export const Profile = () => {
                         </div>
 
                         <div className="col-span-2">
-                            <label className="text-base text-gray-500">Город</label>
+                            <label className="grey-add-text">Город</label>
                             <InputContent
                                 control={control}
                                 name="city"
@@ -97,7 +86,7 @@ export const Profile = () => {
                         </div>
 
                         <div className="col-span-2">
-                            <label className="text-base text-gray-500">Номер</label>
+                            <label className="grey-add-text">Номер</label>
                             <InputContent
                                 control={control}
                                 name="number"
@@ -114,10 +103,10 @@ export const Profile = () => {
 
             <h3 className="text-3xl">Мои товары</h3>
             <div className="grid grid-cols-8 gap-6 mt-5">
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
             </div>
         </div>
      </ContainerContent>

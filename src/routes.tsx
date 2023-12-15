@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router"
 import { Login, MainPage, Profile, ProfileSeller, Register } from "./pages"
 import { LayoutAuth, LayoutNoAuth } from "./layouts"
+import { ProductCard } from "pages/product-card"
 
 export const AppRouter = () => (
     <Routes>
@@ -14,6 +15,7 @@ export const AppRouter = () => (
         <Route element= { <LayoutAuth /> }>
             <Route element= { <Profile /> } path="/profile"></Route>
             <Route element= { <ProfileSeller /> } path="/profile-seller"></Route>
+            <Route element= { <ProductCard /> } path="/product"></Route>
         </Route>
     </Routes>
 )

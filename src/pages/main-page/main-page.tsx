@@ -1,4 +1,4 @@
-import { ProductCard } from "components/product-card"
+import { CardItem } from "components/card-item"
 import { Search } from "components/search"
 import { ContainerContent } from "layouts/container"
 import { ButtonMain } from "shared/buttons"
@@ -7,7 +7,7 @@ import { Logo } from "shared/logos"
 export const MainPage = () => {
    return (
       <ContainerContent>
-         <div className="w-1440">
+         <div className="w-1440 mx-10">
             <div className="grid grid-cols-8">
                <div className="col-span-1">
                   <Logo />
@@ -21,16 +21,17 @@ export const MainPage = () => {
             <h2 className="mt-12 text-4xl">Объявления</h2>
 
             <div className="grid grid-cols-8 gap-6 mt-3">
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
             </div>
          </div>
       </ContainerContent>

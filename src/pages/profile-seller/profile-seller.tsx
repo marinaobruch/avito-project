@@ -1,8 +1,6 @@
-import { ProductCard } from "components/product-card"
-import { ContainerContent } from "layouts/container"
-import { NavLink } from "react-router-dom"
+import { CardItem } from "components/card-item"
+import { BackToMainPage, ContainerContent } from "layouts/container"
 import { ButtonMain } from "shared/buttons"
-import { Logo } from "shared/logos"
 
 export const ProfileSeller = () => {
 
@@ -10,17 +8,8 @@ export const ProfileSeller = () => {
 
     return (
         <ContainerContent>
-        <div className="w-1440">
-           <div className="grid grid-cols-8 items-center">
-              <div className="col-span-1">
-                 <Logo />
-              </div>
-              <div className="col-span-7">
-                <NavLink to={'/main'}>
-                    <ButtonMain text="Вернуться на главную" width="240px" />
-                </NavLink>
-              </div>
-           </div>
+        <div className="w-1440 mx-10">
+        <BackToMainPage />
 
            <h2 className="mt-16 text-4xl">Профиль продавца</h2>
 
@@ -35,8 +24,8 @@ export const ProfileSeller = () => {
 
                     <div className="flex flex-col gap-2">
                         <div className="text-xl">Марина Обруч</div>
-                        <div className="text-base text-gray-500">Екатеринбург</div>
-                        <div className="text-base text-gray-500">Продает товары с августа 2021</div>
+                        <div className="grey-add-text">Екатеринбург</div>
+                        <div className="grey-add-text">Продает товары с августа 2021</div>
                         <ButtonMain 
                         text= {phoneNumber}
                         width="214px"/>
@@ -46,10 +35,10 @@ export const ProfileSeller = () => {
 
             <h3 className="text-3xl">Товары продавца</h3>
             <div className="grid grid-cols-8 gap-6 mt-5">
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
-               <ProductCard />
+               <CardItem />
+               <CardItem />
+               <CardItem />
+               <CardItem />
             </div>
         </div>
      </ContainerContent>

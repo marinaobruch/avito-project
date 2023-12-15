@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.grey-add-text {
+    @apply text-base text-gray-500
+}
+
 @font-face {
     font-family: 'Roboto-Regular';
     font-style: normal;
