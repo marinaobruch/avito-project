@@ -1,15 +1,27 @@
-import { IAddNewAd } from "interface/common-interface";
 import { FC, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+
+import { IAddNewAd } from "interface/common-interface";
 import { ButtonMain } from "shared/buttons";
-import { InputContent, InputImg } from "shared/inputs";
+import { InputContent, InputImg, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
 
 interface INewAdd {
-    setOpenNewAd: (arg0:boolean)=>void;
+    setOpenModalRedactor: (arg0:boolean)=>void;
 }
 
-export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
+const someAdd = {
+    'name': 'Ракетка для большого тенниса Triumph Pro STС Б/У',
+    'description': 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae eveniet saepe dolorum eligendi! Sed molestiae deleniti porro?',
+    'photo1': '',
+    'photo2': '',
+    'photo3': '',
+    'photo4': '',
+    'photo5': '',
+    'price': '2200',
+}
+
+export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor}) => {
     const {
         handleSubmit,
         control,
@@ -17,14 +29,14 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     } = useForm<IAddNewAd>({
         mode:'onChange',
         defaultValues: {
-            name: '',
-            description: '',
+            name: someAdd.name,
+            description: someAdd.description,
             photo1: '',
             photo2: '',
             photo3: '',
             photo4: '',
             photo5: '',
-            price: '',
+            price: someAdd.price,
 
         }
     });
@@ -38,17 +50,17 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
 
     return (
         <div
-        onClick={() => setOpenNewAd(false)}
+        onClick={() => setOpenModalRedactor(false)}
         className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center">
             <form
             id={form}
             onSubmit={handleSubmit(handleChange)}
             onClick={e => e.stopPropagation()}
-            className="w-600 h-800 bg-white absolute rounded-lg p-10">
+            className="w-600 bg-white absolute rounded-lg p-10">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-4xl">Новое объявление</h2>
+                    <h2 className="text-4xl">Редактировать объявление</h2>
                     <div
-                    onClick={() => setOpenNewAd(false)}
+                    onClick={() => setOpenModalRedactor(false)}
                     className="text-gray-400 cursor-pointer"
                     >
                         <GrClose />
@@ -62,22 +74,24 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                             name="name"
                             placeholder="Введите название"
                             type="text"
+                            width="500px"
                         />
                     </div>
 
                     <div>
                         <h4 className="text-base pt-8 pb-1">Описание</h4>
-                        <InputContent
+                        <TextareaContent
                             control={control}
                             name="description"
                             placeholder="Введите описание"
-                            type="text"
+                            width="500px"
+                            height="200px"
                         />
                     </div>
 
                     <div className="pt-8 pb-1">
                         <div className="flex gap-3">
-                            <h4 className="text-base">Фотографии товаров</h4>
+                            <h4 className="text-base">Фотографии товара</h4>
                             <h5 className="grey-add-text">не более 5 фотографий</h5>
                         </div>
                         <div className="flex gap-2 pt-1">
@@ -131,7 +145,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
 
                     <ButtonMain
                         type="submit"
-                        text="Опубликовать" 
+                        text="Сохранить" 
                         width="181px"
                     />
                 </div>

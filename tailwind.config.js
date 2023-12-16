@@ -9,6 +9,7 @@ export default {
           robotoLight: ['Roboto-Light', 'sans-serif']
         },
         height: {
+          '200': '200px',
           '450': '450px',
           '480': '480px',
           '650': '650px',
@@ -16,6 +17,7 @@ export default {
         },
         width: {
           '480': '480px',
+          '500': '500px',
           '600': '600px',
           '614': '614px',
           '876': '876px',

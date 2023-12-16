@@ -31,22 +31,12 @@ export const ProfileSeller = () => {
                         <div className="text-xl">Марина Обруч</div>
                         <div className="grey-add-text">Екатеринбург</div>
                         <div className="grey-add-text">Продает товары с августа 2021</div>
-                        {hideNumber
-                        ?
                         <ButtonMain
                             type="button"
                             onClick={handleShowNumber}
-                            text= {phoneNumber}
+                            text= {hideNumber ? phoneNumber : phoneNumberHide}
                             width="214px"
                         />
-                        :
-                        <ButtonMain
-                            type="button"
-                            onClick={handleShowNumber}
-                            text= {phoneNumberHide}
-                            width="214px"
-                    />
-                        }
                     </div>
                 </div>            
             </div>

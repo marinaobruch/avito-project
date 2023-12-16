@@ -1,12 +1,33 @@
+import { ChangeAd } from "components/change-ad";
 import { BackToMainPage, ContainerContent } from "layouts/container"
+import { useState } from "react";
 import { NavLink } from "react-router-dom"
 import { ButtonMain } from "shared/buttons"
 
 export const ProductCard = () => {
 
-    const phoneNumber = '8 905 ХХХ ХХ ХХ'
+    const [hideNumber, setHideNumber] = useState<boolean>(false);
+    const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
+
+    const phoneNumberHide = '8 905 ХХХ ХХ ХХ'
+    const phoneNumber = '8 905 996 54 14'
+
     // const mode:string = 'user'
     const mode:string = 'creator'
+
+    const someAdd = {
+        'name': 'Ракетка для большого тенниса Triumph Pro STС Б/У',
+        'description': 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae eveniet saepe dolorum eligendi! Sed molestiae deleniti porro?',
+        'photo1': '',
+        'photo2': '',
+        'photo3': '',
+        'photo4': '',
+        'photo5': '',
+        'price': '2200',
+    }
+
+    const handleShowNumber = () => setHideNumber((prev) => !prev);
+    const handleOpenRedactor = () => setOpenModalRedactor(true);
 
     return (
         <ContainerContent>
@@ -40,30 +61,38 @@ export const ProductCard = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <div className="text-3xl pb-3 max-w-xl">Ракетка для большого тенниса Triumph Pro STС Б/У</div>
+                        <div className="text-3xl pb-3 max-w-xl">{someAdd.name}</div>
                         <div className="grey-add-text">Сегодня в 10:45</div>
                         <div className="grey-add-text">Санкт-Петербург</div>
                         <div className="text-base text-sky-500">23 отзыва</div>
-                        <div className="text-3xl pt-9 pb-5">2 200 ₽</div>
+                        <div className="text-3xl pt-9 pb-5">{someAdd.price} ₽</div>
                         {mode === 'user'
                         ?
-                            <ButtonMain
+                        <ButtonMain
                             type="button"
-                            text= {phoneNumber}
-                            width="214px"/>
+                            onClick={handleShowNumber}
+                            text= {hideNumber ? phoneNumber : phoneNumberHide}
+                            width="214px"
+                        />
                         :
-                            <div className="flex gap-2">
-                                <ButtonMain
+                        <div className="flex gap-2">
+                            <ButtonMain
+                                onClick={handleOpenRedactor}
                                 type="button"
                                 text= 'Редактировать'
-                                width="214px"/>
-                                <ButtonMain
+                                width="214px"
+                            />
+                            <ButtonMain
                                 type="button"
                                 text= 'Снять с публикации'
-                                width="214px"/>
-                            </div>
+                                width="214px"
+                            />
+                        </div>
                         }
-
+                        {openModalRedactor && 
+                        <ChangeAd 
+                            setOpenModalRedactor={setOpenModalRedactor}
+                        />}
                         <NavLink to={'/profile-seller'}>
                             <div className="pt-9 flex items-center gap-3">
                                 <div className="h-10 w-10 rounded-full bg-gray-200">
@@ -81,7 +110,7 @@ export const ProductCard = () => {
 
                    <div className="mt-16">
                     <h3 className="text-4xl mb-8">Описание товара</h3>
-                    <div className="text-base max-w-792">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae eveniet saepe dolorum eligendi! Sed molestiae deleniti porro? Quasi, ratione provident? Pariatur a quibusdam optio saepe quo dolor id molestiae, quisquam ut sapiente nostrum iste, exercitationem sequi repudiandae error nemo, cupiditate maxime incidunt. Blanditiis, assumenda reiciendis dignissimos similique soluta eum illo ducimus saepe? Et officia a cupiditate natus! Dolores corrupti consequatur quae dolor molestiae aliquam veritatis tempora quidem eius cupiditate mollitia consequuntur temporibus, vero, debitis, quod aut magni exercitationem in dolore velit porro? Veniam eum maiores soluta earum magnam praesentium quos odit. Repellat eius harum maiores quibusdam earum itaque suscipit tempore.</div>
+                    <div className="text-base max-w-792">{someAdd.description}</div>
                    </div>   
             </div>
         </div>

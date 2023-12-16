@@ -40,9 +40,6 @@
             ],
             "redux/*": [
                 "redux/*"
-            ],
-            "database/*": [
-                "database/*"
             ]
         }
     },

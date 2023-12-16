@@ -2,19 +2,18 @@ import { FC } from "react";
 import { Control, Controller } from "react-hook-form";
 
 
-interface IInputProps {
+interface ITextAreaProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: Control<any>;
     name: string;
-    type: string;
     placeholder: string;
     width?: string;
     addSymbol?: string
     height?: string
   }
 
-export const InputContent: FC<IInputProps> = ({
-    control, name, type, placeholder, width, addSymbol, height
+export const TextareaContent: FC<ITextAreaProps> = ({
+    control, name, placeholder, width, addSymbol, height
 }) => (
     <Controller
         control={ control }
@@ -25,12 +24,11 @@ export const InputContent: FC<IInputProps> = ({
           fieldState: { error }
         }) => (
       <div>
-        <input
+        <textarea
             className="border-2 rounded-lg h-16 placeholder:text-gray-300 placeholder:text-base px-4 focus:outline-none focus:border-sky-500 text-base"
             style={{width:`${width}`, height:`${height}`}}
             autoComplete="on"
             placeholder={ placeholder }
-            type={ type }
             value={ value }
             onBlur={ onBlur }
             onChange={ onChange }
