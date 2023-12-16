@@ -5,6 +5,8 @@ import { ButtonMain } from "shared/buttons"
 import { Logo } from "shared/logos"
 
 export const MainPage = () => {
+   const handleSearch = () => console.log("Searching");
+
    return (
       <ContainerContent>
          <div className="w-1440 mx-10">
@@ -14,7 +16,12 @@ export const MainPage = () => {
                </div>
                <form className="col-span-7 flex gap-4">
                   <Search />
-                  <ButtonMain text="Найти" width="158px" />
+                  <ButtonMain
+                     type="button"
+                     onClick={handleSearch}
+                     text="Найти"
+                     width="158px"
+                  />
                </form>
             </div>
 

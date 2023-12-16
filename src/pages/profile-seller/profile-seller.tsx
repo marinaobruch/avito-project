@@ -1,10 +1,15 @@
 import { CardItem } from "components/card-item"
 import { BackToMainPage, ContainerContent } from "layouts/container"
+import { useState } from "react"
 import { ButtonMain } from "shared/buttons"
 
 export const ProfileSeller = () => {
+    const [hideNumber, setHideNumber] = useState<boolean>(false);
 
-    const phoneNumber = '8 905 ХХХ ХХ ХХ'
+    const phoneNumberHide = '8 905 ХХХ ХХ ХХ'
+    const phoneNumber = '8 905 996 54 14'
+
+    const handleShowNumber = () => setHideNumber((prev) => !prev);
 
     return (
         <ContainerContent>
@@ -26,9 +31,22 @@ export const ProfileSeller = () => {
                         <div className="text-xl">Марина Обруч</div>
                         <div className="grey-add-text">Екатеринбург</div>
                         <div className="grey-add-text">Продает товары с августа 2021</div>
-                        <ButtonMain 
-                        text= {phoneNumber}
-                        width="214px"/>
+                        {hideNumber
+                        ?
+                        <ButtonMain
+                            type="button"
+                            onClick={handleShowNumber}
+                            text= {phoneNumber}
+                            width="214px"
+                        />
+                        :
+                        <ButtonMain
+                            type="button"
+                            onClick={handleShowNumber}
+                            text= {phoneNumberHide}
+                            width="214px"
+                    />
+                        }
                     </div>
                 </div>            
             </div>

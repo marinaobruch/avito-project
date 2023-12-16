@@ -1,5 +1,5 @@
 import { CardItem } from "components/card-item"
-import { IChangeForm } from "interface/login-interface"
+import { IChangeForm } from "interface/common-interface"
 import { BackToMainPage, ContainerContent } from "layouts/container"
 import { useId } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -96,7 +96,11 @@ export const Profile = () => {
                                 />
                         </div>
                         
-                        <ButtonMain text="Сохранить" width="154px" />
+                        <ButtonMain
+                            type="submit"
+                            text="Сохранить"
+                            width="154px"
+                        />
                     </form>
                 </div>            
             </div>

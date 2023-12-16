@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { Control, Controller } from "react-hook-form";
+import { PiPlusThin } from "react-icons/pi";
 
 interface IInputProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -7,27 +8,34 @@ interface IInputProps {
     name: string;
     type: string;
     placeholder: string;
+    id: string;
   }
 
-export const InputLogin: FC<IInputProps> = ({
-    control, name, type, placeholder,
-}) => (
+export const InputImg: FC<IInputProps> = ({
+    control, name, type, placeholder, id
+}) => {
+
+   return (
     <Controller
         control={ control }
         name={ name }
-        rules={{ required: 'Поле обязательно для заполнения' }}
-        render={ ({ field: { onChange, value, onBlur }, fieldState: { error } }) => (
+        render={ ({ field: { value, onBlur, onChange }, fieldState: { error } }) => (
       <div>
         <input
-            className="border-b placeholder:text-gray-300 placeholder:text-base" 
-            autoComplete="on"
-            error={ error || null }
+            id={id}
+            className="hidden"
             placeholder={ placeholder }
             type={ type }
             value={ value }
             onBlur={ onBlur }
             onChange={ onChange }
         />
+        <label
+            className="text-gray-300 text-4xl p-6 inline-block bg-gray-100 select-none cursor-pointer"
+            htmlFor={id}
+        >
+        <PiPlusThin />
+        </label>
         { error && (
           <div className="text-xs text-red-600">
             { error.message }
@@ -36,4 +44,4 @@ export const InputLogin: FC<IInputProps> = ({
       </div>
     ) }
   />
-)
+)}

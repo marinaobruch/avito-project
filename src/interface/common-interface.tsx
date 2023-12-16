@@ -9,7 +9,7 @@ export interface IRegRequest {
     passwordRepeat: string;
     name?: string;
     surname?: string;
-    sity?: string
+    city?: string
 }
 
 export interface IChangeForm {
@@ -17,4 +17,15 @@ export interface IChangeForm {
     surname: string;
     city: string;
     number: string;
+}
+
+export interface IAddNewAd {
+    name: string;
+    description: string;
+    photo1: string;
+    photo2: string;
+    photo3: string;
+    photo4: string;
+    photo5: string;
+    price: string;
 }

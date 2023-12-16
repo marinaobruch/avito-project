@@ -1,9 +1,10 @@
-import { IRegRequest } from 'interface/login-interface';
+import { IRegRequest } from 'interface/common-interface';
 import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { ButtonLogIn } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
+import { InputNotNessesary } from 'shared/inputs/input-not-ness';
 import { LogoSkyPro } from 'shared/logos';
 
 export const FormReg = () => {
@@ -11,10 +12,17 @@ export const FormReg = () => {
     const {
         handleSubmit,
         control,
-        register,
         reset
     } = useForm<IRegRequest>({
         mode:'onChange',
+        defaultValues: {
+            email: '',
+            password: '',
+            passwordRepeat: '',
+            name: '',
+            surname: '',
+            city: '',
+        }
     });
 
     const form = useId()
@@ -38,45 +46,36 @@ export const FormReg = () => {
             >
                 <div className='flex flex-col gap-8'>
                     <InputLogin
-                        {...register('email', {
-                            required: 'Email is require to field!'
-                        })}
                         control={ control }
                         name="email"
                         placeholder="email"
                         type="text"
                     />
                     <InputLogin 
-                        {...register('password', {
-                            required: 'Password is require to field!'
-                        })}
                         control={ control }
                         name="password"
                         placeholder="Пароль"
                         type="password"
                     />
                      <InputLogin 
-                        {...register('passwordRepeat', {
-                            required: 'Password is require to field!'
-                        })}
                         control={ control }
                         name="passwordRepeat"
                         placeholder="Повторите пароль"
                         type="password"
                     />
-                    <InputLogin
+                    <InputNotNessesary
                         control={ control }
                         name="name"
                         placeholder="Имя (необязательно)"
                         type="text"
                     />
-                    <InputLogin
+                    <InputNotNessesary
                         control={ control }
                         name="surname"
                         placeholder="Фамилия (необязательно)"
                         type="text"
                     />
-                    <InputLogin
+                    <InputNotNessesary
                         control={ control }
                         name="city"
                         placeholder="Город (необязательно)"
@@ -84,7 +83,10 @@ export const FormReg = () => {
                     />
                 </div>
                 <div className='flex flex-col gap-5'>
-                    <ButtonLogIn type='submit' text='Зарегистрироваться'/>
+                    <ButtonLogIn
+                        type='submit'
+                        text='Зарегистрироваться'
+                    />
                 </div>
             </form>
          </div>

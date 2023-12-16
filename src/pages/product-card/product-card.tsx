@@ -5,6 +5,8 @@ import { ButtonMain } from "shared/buttons"
 export const ProductCard = () => {
 
     const phoneNumber = '8 905 ХХХ ХХ ХХ'
+    // const mode:string = 'user'
+    const mode:string = 'creator'
 
     return (
         <ContainerContent>
@@ -43,9 +45,24 @@ export const ProductCard = () => {
                         <div className="grey-add-text">Санкт-Петербург</div>
                         <div className="text-base text-sky-500">23 отзыва</div>
                         <div className="text-3xl pt-9 pb-5">2 200 ₽</div>
-                        <ButtonMain 
+                        {mode === 'user'
+                        ?
+                            <ButtonMain
+                            type="button"
                             text= {phoneNumber}
                             width="214px"/>
+                        :
+                            <div className="flex gap-2">
+                                <ButtonMain
+                                type="button"
+                                text= 'Редактировать'
+                                width="214px"/>
+                                <ButtonMain
+                                type="button"
+                                text= 'Снять с публикации'
+                                width="214px"/>
+                            </div>
+                        }
 
                         <NavLink to={'/profile-seller'}>
                             <div className="pt-9 flex items-center gap-3">

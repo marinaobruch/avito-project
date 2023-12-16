@@ -9,13 +9,12 @@ interface IInputProps {
     placeholder: string;
   }
 
-export const InputLogin: FC<IInputProps> = ({
+export const InputNotNessesary: FC<IInputProps> = ({
     control, name, type, placeholder,
 }) => (
     <Controller
         control={ control }
         name={ name }
-        rules={{ required: 'Поле обязательно для заполнения' }}
         render={ ({ field: { onChange, value, onBlur }, fieldState: { error } }) => (
       <div>
         <input
