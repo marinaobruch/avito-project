@@ -29,3 +29,7 @@ export interface IAddNewAd {
     photo5: string;
     price: string;
 }
+
+export interface IComment {
+    review: string;
+}

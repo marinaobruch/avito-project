@@ -1,4 +1,4 @@
-import { ChangeAd } from "components/change-ad";
+import { ChangeAd, Comments } from "components/modal";
 import { BackToMainPage, ContainerContent } from "layouts/container"
 import { useState } from "react";
 import { NavLink } from "react-router-dom"
@@ -8,12 +8,13 @@ export const ProductCard = () => {
 
     const [hideNumber, setHideNumber] = useState<boolean>(false);
     const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
+    const [openModalComments, setOpenModalComments] = useState<boolean>(false);
 
-    const phoneNumberHide = '8 905 ХХХ ХХ ХХ'
+    const phoneNumberHide = '8 ХХХ ХХХ ХХ ХХ'
     const phoneNumber = '8 905 996 54 14'
 
-    // const mode:string = 'user'
-    const mode:string = 'creator'
+    const mode:string = 'user'
+    // const mode:string = 'creator'
 
     const someAdd = {
         'name': 'Ракетка для большого тенниса Triumph Pro STС Б/У',
@@ -28,6 +29,8 @@ export const ProductCard = () => {
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
     const handleOpenRedactor = () => setOpenModalRedactor(true);
+    const handleOpenComments = () => setOpenModalComments(true);
+    const handleDeleteAd = () => alert("Товар удален");
 
     return (
         <ContainerContent>
@@ -64,7 +67,11 @@ export const ProductCard = () => {
                         <div className="text-3xl pb-3 max-w-xl">{someAdd.name}</div>
                         <div className="grey-add-text">Сегодня в 10:45</div>
                         <div className="grey-add-text">Санкт-Петербург</div>
-                        <div className="text-base text-sky-500">23 отзыва</div>
+                        <div
+                            onClick={handleOpenComments}
+                            className="text-base text-sky-500 cursor-pointer">
+                            23 отзыва
+                        </div>
                         <div className="text-3xl pt-9 pb-5">{someAdd.price} ₽</div>
                         {mode === 'user'
                         ?
@@ -83,6 +90,7 @@ export const ProductCard = () => {
                                 width="214px"
                             />
                             <ButtonMain
+                                onClick={handleDeleteAd}
                                 type="button"
                                 text= 'Снять с публикации'
                                 width="214px"
@@ -109,11 +117,13 @@ export const ProductCard = () => {
                 </div>      
 
                    <div className="mt-16">
-                    <h3 className="text-4xl mb-8">Описание товара</h3>
-                    <div className="text-base max-w-792">{someAdd.description}</div>
+                        <h3 className="text-4xl mb-8">Описание товара</h3>
+                        <div className="text-base max-w-792">{someAdd.description}</div>
                    </div>   
             </div>
         </div>
+
+        {openModalComments && <Comments setOpenModalComments={setOpenModalComments} />}
      </ContainerContent>
     )
 }

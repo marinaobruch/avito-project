@@ -1,4 +1,5 @@
-import { AddNewAd } from 'components/new-ad';
+
+import { AddNewAd } from 'components/modal';
 import { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ButtonIn } from 'shared/buttons';

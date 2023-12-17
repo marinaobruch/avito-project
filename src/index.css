@@ -7,6 +7,15 @@
 }
 
 @font-face {
+    font-family: 'Roboto-Medium';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      url("src/assets/fonts/Roboto-Medium.ttf") format("truetype"),
+  }
+
+
+@font-face {
     font-family: 'Roboto-Regular';
     font-style: normal;
     font-weight: 400;

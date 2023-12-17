@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "@types/overlayscrollbars": "^1.12.5",
     "@types/react-router": "^5.1.20",
+    "overlayscrollbars": "^2.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",

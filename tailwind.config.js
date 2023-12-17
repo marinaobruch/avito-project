@@ -6,7 +6,9 @@ export default {
       extend: {
         fontFamily: {
           roboto: ['Roboto-Regular', 'sans-serif'],
-          robotoLight: ['Roboto-Light', 'sans-serif']
+          robotoLight: ['Roboto-Light', 'sans-serif'],
+          robotoMedium: ['Roboto-Medium', 'sans-serif'],
+
         },
         height: {
           '200': '200px',
@@ -25,6 +27,9 @@ export default {
         },
         maxWidth: {
           '792': '792px',
+        },
+        minHeight: {
+          '900': '900px'
         }
       },
     },
