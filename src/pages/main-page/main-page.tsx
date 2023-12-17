@@ -26,20 +26,7 @@ export const MainPage = () => {
             </div>
 
             <h2 className="mt-12 text-4xl">Объявления</h2>
-
-            <div className="grid grid-cols-8 gap-6 mt-3">
                <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
-            </div>
          </div>
       </ContainerContent>
  )

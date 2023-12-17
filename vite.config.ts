@@ -19,7 +19,7 @@ export default defineConfig({
       hocs: '/src/hocs',
       api: '/src/api',
       utils: '/src/utils',
-      redux: '/src/redux',
+      store: '/src/store',
       database: '/src/database',
     }
   }

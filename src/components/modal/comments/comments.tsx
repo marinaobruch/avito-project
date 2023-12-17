@@ -7,6 +7,7 @@ import { GrClose } from "react-icons/gr";
 import { ItemComment } from "./item-comment";
 import { useScrollbar } from "hooks/use-scrollbar";
 
+
 interface INewAdd {
     setOpenModalComments: (arg0:boolean)=>void;
 }

@@ -38,8 +38,8 @@
             "utils/*": [
                 "utils/*"
             ],
-            "redux/*": [
-                "redux/*"
+            "store/*": [
+                "store/*"
             ]
         }
     },

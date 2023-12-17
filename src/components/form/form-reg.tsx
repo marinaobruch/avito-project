@@ -1,4 +1,5 @@
-import { IRegRequest } from 'interface/common-interface';
+import { useAppDispatch } from 'hooks/use-api';
+import { IUser } from 'interface/api-interface';
 import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { ButtonLogIn } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { InputNotNessesary } from 'shared/inputs/input-not-ness';
 import { LogoSkyPro } from 'shared/logos';
+import { setUser } from 'store/slice';
 
 export const FormReg = () => {
     const navigate = useNavigate()
@@ -13,7 +15,7 @@ export const FormReg = () => {
         handleSubmit,
         control,
         reset
-    } = useForm<IRegRequest>({
+    } = useForm<IUser>({
         mode:'onChange',
         defaultValues: {
             email: '',
@@ -26,9 +28,11 @@ export const FormReg = () => {
     });
 
     const form = useId()
+    const dispatch = useAppDispatch();
 
-    const onSubmit:SubmitHandler<IRegRequest> = (data) => {
+    const onSubmit:SubmitHandler<IUser> = (data) => {
         console.log(`Your email is ${data.email} and your password is ${data.password}`);
+        dispatch(setUser(data));
         reset()
     }
 
@@ -49,7 +53,7 @@ export const FormReg = () => {
                         control={ control }
                         name="email"
                         placeholder="email"
-                        type="text"
+                        type="email"
                     />
                     <InputLogin 
                         control={ control }

@@ -1,17 +1,19 @@
-import { ILoginRequest } from 'interface/common-interface';
 import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { NavLink } from 'react-router-dom';
+import { setUser } from 'store/slice';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { LogoSkyPro } from 'shared/logos';
+import { IUser } from 'interface/api-interface';
+import { useAppDispatch } from 'hooks/use-api';
 
 export const FormLogin = () => {
     const {
         handleSubmit,
         control,
         reset
-    } = useForm<ILoginRequest>({
+    } = useForm<IUser>({
         mode:'onChange',
         defaultValues: {
             email: '',
@@ -20,10 +22,12 @@ export const FormLogin = () => {
     });
 
     const form = useId();
+    const dispatch = useAppDispatch();
 
-    const onSubmit:SubmitHandler<ILoginRequest> = (data) => {
+    const onSubmit:SubmitHandler<IUser> = (data) => {
         console.log(`Your email is ${data.email} and your password is ${data.password}`);
-        reset()
+        dispatch(setUser(data));
+        reset();
     }
 
     return (
@@ -40,7 +44,7 @@ export const FormLogin = () => {
                             control={ control }
                             name="email"
                             placeholder="email"
-                            type="text"
+                            type="email"
                         />
                         <InputLogin 
                             control={ control }
