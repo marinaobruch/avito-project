@@ -6,11 +6,30 @@ export default {
       extend: {
         fontFamily: {
           roboto: ['Roboto-Regular', 'sans-serif'],
-          robotoLight: ['Roboto-Light', 'sans-serif']
+          robotoLight: ['Roboto-Light', 'sans-serif'],
+          robotoMedium: ['Roboto-Medium', 'sans-serif'],
+
         },
         height: {
-          '450': '440px',
-          '650': '640px',
+          '200': '200px',
+          '450': '450px',
+          '480': '480px',
+          '650': '650px',
+          '800': '800px',
+        },
+        width: {
+          '480': '480px',
+          '500': '500px',
+          '600': '600px',
+          '614': '614px',
+          '876': '876px',
+          '1440': '1440px',
+        },
+        maxWidth: {
+          '792': '792px',
+        },
+        minHeight: {
+          '900': '900px'
         }
       },
     },

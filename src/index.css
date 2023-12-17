@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+.grey-add-text {
+    @apply text-base text-gray-500
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    font-style: normal;
+    font-weight: 400;
+    src:
+      url("src/assets/fonts/Roboto-Medium.ttf") format("truetype"),
+  }
+
+
 @font-face {
     font-family: 'Roboto-Regular';
     font-style: normal;
@@ -72,5 +85,11 @@
     input {
         outline: 0;
         outline-offset: 0;
+    }
+    
+    input[type="number"]::-webkit-inner-spin-button, 
+    input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
     }
 }

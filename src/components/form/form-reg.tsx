@@ -1,23 +1,38 @@
-import { IRegRequest } from 'interface/login-interface';
+import { useAppDispatch } from 'hooks/use-api';
+import { IUser } from 'interface/api-interface';
+import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { ButtonLogIn } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
+import { InputNotNessesary } from 'shared/inputs/input-not-ness';
 import { LogoSkyPro } from 'shared/logos';
+import { setUser } from 'store/slice';
 
 export const FormReg = () => {
     const navigate = useNavigate()
     const {
         handleSubmit,
         control,
-        register,
         reset
-    } = useForm<IRegRequest>({
+    } = useForm<IUser>({
         mode:'onChange',
+        defaultValues: {
+            email: '',
+            password: '',
+            passwordRepeat: '',
+            name: '',
+            surname: '',
+            city: '',
+        }
     });
 
-    const onSubmit:SubmitHandler<IRegRequest> = (data) => {
+    const form = useId()
+    const dispatch = useAppDispatch();
+
+    const onSubmit:SubmitHandler<IUser> = (data) => {
         console.log(`Your email is ${data.email} and your password is ${data.password}`);
+        dispatch(setUser(data));
         reset()
     }
 
@@ -29,50 +44,42 @@ export const FormReg = () => {
             </div>
         
             <form
+                id={form}
                 className='flex flex-col justify-center items-center gap-14' 
                 onSubmit={handleSubmit(onSubmit)}
             >
                 <div className='flex flex-col gap-8'>
                     <InputLogin
-                        {...register('email', {
-                            required: 'Email is require to field!'
-                        })}
                         control={ control }
                         name="email"
                         placeholder="email"
-                        type="text"
+                        type="email"
                     />
                     <InputLogin 
-                        {...register('password', {
-                            required: 'Password is require to field!'
-                        })}
                         control={ control }
                         name="password"
                         placeholder="Пароль"
                         type="password"
                     />
                      <InputLogin 
-                        {...register('passwordRepeat', {
-                            required: 'Password is require to field!'
-                        })}
                         control={ control }
                         name="passwordRepeat"
                         placeholder="Повторите пароль"
                         type="password"
                     />
-                    <InputLogin
+                    <InputNotNessesary
                         control={ control }
                         name="name"
                         placeholder="Имя (необязательно)"
                         type="text"
                     />
-                    <InputLogin
+                    <InputNotNessesary
                         control={ control }
                         name="surname"
                         placeholder="Фамилия (необязательно)"
                         type="text"
                     />
-                    <InputLogin
+                    <InputNotNessesary
                         control={ control }
                         name="city"
                         placeholder="Город (необязательно)"
@@ -80,7 +87,10 @@ export const FormReg = () => {
                     />
                 </div>
                 <div className='flex flex-col gap-5'>
-                    <ButtonLogIn type='submit' text='Зарегистрироваться'/>
+                    <ButtonLogIn
+                        type='submit'
+                        text='Зарегистрироваться'
+                    />
                 </div>
             </form>
          </div>

@@ -26,8 +26,8 @@
             "context/*": [
                 "context/*"
             ],
-            "hook/*": [
-                "hook/*"
+            "hooks/*": [
+                "hooks/*"
             ],
             "hocs/*": [
                 "hocs/*"
@@ -38,11 +38,8 @@
             "utils/*": [
                 "utils/*"
             ],
-            "redux/*": [
-                "redux/*"
-            ],
-            "database/*": [
-                "database/*"
+            "store/*": [
+                "store/*"
             ]
         }
     },

@@ -15,11 +15,11 @@ export default defineConfig({
       pages: '/src/pages',
       interface: '/src/interface',
       context: '/src/context',
-      hook: '/src/hook',
+      hooks: '/src/hooks',
       hocs: '/src/hocs',
       api: '/src/api',
       utils: '/src/utils',
-      redux: '/src/redux',
+      store: '/src/store',
       database: '/src/database',
     }
   }

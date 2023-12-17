@@ -15,6 +15,7 @@ export const InputLogin: FC<IInputProps> = ({
     <Controller
         control={ control }
         name={ name }
+        rules={{ required: 'Поле обязательно для заполнения' }}
         render={ ({ field: { onChange, value, onBlur }, fieldState: { error } }) => (
       <div>
         <input

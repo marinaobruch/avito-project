@@ -4,13 +4,17 @@ Implementation of an online classifieds site similar to Avito. The application a
 
 ## Stack
 
-The following technologies were used to develop this project:
+#The following technologies were used to develop this project:
 
 * TypeScript
 * React
 * TailWind
-* RTK Toolkit
+* Redux Toolkit
 * RTK Query
+
+#Local application
+* overlayscrollbars (scrollbar) 
+* redux-persist
 
 ## Demo Link
 
