@@ -16,7 +16,7 @@ export const createDate = (data: string) => {
         if (data === 1) {
             return "янв."
         } else if (data === 2) {
-            return "фев,"
+            return "фев."
         } else if (data === 3) {
             return "март"
         } else if (data === 4) {

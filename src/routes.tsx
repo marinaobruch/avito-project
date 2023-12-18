@@ -15,7 +15,7 @@ export const AppRouter = () => (
         <Route element= { <LayoutAuth /> }>
             <Route element= { <Profile /> } path="/profile"></Route>
             <Route element= { <ProfileSeller /> } path="/profile-seller"></Route>
-            <Route element= { <ProductCard /> } path="/product"></Route>
+            <Route element= { <ProductCard /> } path="/product/:id"></Route>
         </Route>
     </Routes>
 )

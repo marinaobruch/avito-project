@@ -6,7 +6,7 @@ export const avitoApi = createApi({
     reducerPath: 'avitoApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8090',
-        tagTypes: ['Ads'],
+        // tagTypes: ['Ads'],
         // prepareHeaders: (headers, {getState}) => {
         //     const token = getState().token.accessToken;
 
@@ -21,9 +21,14 @@ export const avitoApi = createApi({
     endpoints: (builder) => ({
         getAllAds: builder.query<IRequestAds[], number>({
             query: () => '/ads'
+        }),
+        getAdById: builder.query<IRequestAds, number>({
+            query: (id: number) => `/ads/${id}`
         })
     })
 })
 
-
-export const {useGetAllAdsQuery} = avitoApi;
+export const {
+    useGetAllAdsQuery,
+    useGetAdByIdQuery,
+} = avitoApi;

@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router"
+import { NoPhotoBig } from "shared/logos";
 import { useGetAllAdsQuery } from "store/services";
-import { createDate } from "utils/createDate";
+import { createDate } from "utils";
 
 export const CardItem = () => {
     const navigate = useNavigate();
     const {data, isLoading} = useGetAllAdsQuery(100);
-    const handleMoveToCard = () => navigate('/product')
+    console.log(data);
 
     return (
         <>
@@ -14,15 +15,16 @@ export const CardItem = () => {
         :
         <div className="grid grid-cols-8 gap-6 mt-3">
         {data?.map((item) => (
-        <div key={item.id} className="col-span-2" onClick={handleMoveToCard}>
+        <div key={item.id} className="col-span-2" onClick={() => navigate(`/product/${item.id}`)}>
             <div className="w-72 h-72 bg-slate-200 cursor-pointer">
             {item.images[0]
-            ?
-            <img
-            src={`http://localhost:8090/${item.images[0].url}`}
-            alt={item.title} />
-            :
-            null
+                ?
+                <img
+                className="w-72 h-72 object-cover"
+                src={`http://localhost:8090/${item.images[0].url}`}
+                alt={item.title} />
+                :
+                <NoPhotoBig />
             }
             </div>
             <div className="text-2xl text-sky-500 cursor-pointer">{item.title}</div>
