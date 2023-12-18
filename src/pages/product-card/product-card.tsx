@@ -15,9 +15,11 @@ export const ProductCard = () => {
     const [hideNumber, setHideNumber] = useState<boolean>(false);
     const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
     const [openModalComments, setOpenModalComments] = useState<boolean>(false);
+    const [currentImage, getCurrentImage] = useState<string>('');
+    
     const { id } = useParams();
     const toNumber = Number(id);
-    console.log(toNumber);
+    // console.log(toNumber);
 
     const { data: adById } = useGetAdByIdQuery(toNumber);
     console.log(adById);
@@ -45,23 +47,47 @@ export const ProductCard = () => {
 
                     <div className="flex flex-col items-center gap-8">
                         <div className="h-480 w-480 bg-gray-200">
-                            <img src="#" alt="" />
+                            <img
+                            className="h-480 w-480 object-cover"
+                            src={`http://localhost:8090/${adById.images[0].url}`}
+                            alt={adById.images[0].url}
+                            />
                         </div>
                         <div className="w-full flex items-center justify-between">
                             <div className="h-20 w-20 bg-gray-200">
-                                <img src="#" alt="" />
+                                {adById.images[0] &&
+                                <img className="h-20 w-20 object-cover"
+                                src={`http://localhost:8090/${adById.images[0].url}`}
+                                alt=""
+                                />} 
                             </div>
                             <div className="h-20 w-20 bg-gray-200">
-                                <img src="#" alt="" />
+                                {adById.images[1] &&
+                                <img className="h-20 w-20 object-cover"
+                                src={`http://localhost:8090/${adById.images[1].url}`}
+                                alt=""
+                                />} 
                             </div>
                             <div className="h-20 w-20 bg-gray-200">
-                                <img src="#" alt="" />
+                                {adById.images[2] &&
+                                <img className="h-20 w-20 object-cover"
+                                src={`http://localhost:8090/${adById.images[2].url}`}
+                                alt=""
+                                />} 
                             </div>
                             <div className="h-20 w-20 bg-gray-200">
-                                <img src="#" alt="" />
+                                {adById.images[3] &&
+                                <img className="h-20 w-20 object-cover"
+                                src={`http://localhost:8090/${adById.images[3].url}`}
+                                alt=""
+                                />} 
                             </div>
                             <div className="h-20 w-20 bg-gray-200">
-                                <img src="#" alt="" />
+                                {adById.images[4] &&
+                                <img className="h-20 w-20 object-cover"
+                                src={`http://localhost:8090/${adById.images[4].url}`}
+                                alt=""
+                                />} 
                             </div>
                         </div>
                     </div>
