@@ -16,6 +16,8 @@ Implementation of an online classifieds site similar to Avito. The application a
 * overlayscrollbars (scrollbar) 
 * redux-persist
 
+#Bundler Vite
+
 ## Demo Link
 
 Watch the demo of the project at

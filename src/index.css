@@ -6,12 +6,20 @@
     @apply text-base text-gray-500
 }
 
+.default-hover {
+    @apply hover:outline hover:outline-2 hover:outline-sky-500 hover:outline-offset-2  hover:rounded-lg
+}
+
+.easy-animation {
+    @apply transition-all duration-150 ease-in-out
+}
+
 @font-face {
     font-family: 'Roboto-Medium';
     font-style: normal;
     font-weight: 400;
     src:
-      url("src/assets/fonts/Roboto-Medium.ttf") format("truetype"),
+      url("src/assets/fonts/Roboto-Medium.ttf") format("ttf"),
   }
 
 
@@ -20,7 +28,7 @@
     font-style: normal;
     font-weight: 400;
     src:
-      url("src/assets/fonts/Roboto-Regular.ttf") format("truetype"),
+      url("src/assets/fonts/Roboto-Regular.ttf") format("ttf"),
   }
 
   @font-face {
@@ -28,12 +36,11 @@
     font-style: normal;
     font-weight: 400;
     src:
-      url("src/assets/fonts/Roboto-Light.ttf") format("truetype"),
+      url("src/assets/fonts/Roboto-Light.ttf") format("ttf"),
   }
 
 @layer base {
     html {
-        font-family: Roboto-Regular;
         background: rgb(250, 250, 250); 
     }
 

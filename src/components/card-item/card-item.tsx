@@ -6,16 +6,19 @@ import { createDate } from "utils";
 export const CardItem = () => {
     const navigate = useNavigate();
     const {data, isLoading} = useGetAllAdsQuery(100);
-    console.log(data);
 
     return (
         <>
         {isLoading
-        ? <div>Liadong</div>
+        ? <div>Loading...</div>
         :
-        <div className="grid grid-cols-8 gap-6 mt-3">
+        <div className="grid grid-cols-8 gap-6 mt-3 justify-items-center">
         {data?.map((item) => (
-        <div key={item.id} className="col-span-2" onClick={() => navigate(`/product/${item.id}`)}>
+        <div
+            key={item.id}
+            className="col-span-2 hover:border-sky-500 p-1 default-hover hover:scale-105 easy-animation"
+            onClick={() => navigate(`/product/${item.id}`)}
+        >
             <div className="w-72 h-72 bg-slate-200 cursor-pointer">
             {item.images[0]
                 ?

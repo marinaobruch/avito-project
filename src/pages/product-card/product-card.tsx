@@ -11,26 +11,31 @@ import { FaRegUserCircle } from "react-icons/fa";
 const mode:string = 'creator'
 
 export const ProductCard = () => {
-
-    const [hideNumber, setHideNumber] = useState<boolean>(false);
-    const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
-    const [openModalComments, setOpenModalComments] = useState<boolean>(false);
-    const [currentImage, getCurrentImage] = useState<string>('');
-    
     const { id } = useParams();
     const toNumber = Number(id);
     // console.log(toNumber);
 
     const { data: adById } = useGetAdByIdQuery(toNumber);
-    console.log(adById);
 
-    const phoneNumber = adById?.user.phone;
+    const [hideNumber, setHideNumber] = useState<boolean>(false);
+    const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
+    const [openModalComments, setOpenModalComments] = useState<boolean>(false);
+    const [currentImage, getCurrentImage] = useState<string>(adById?.images.length > 0 ? `http://localhost:8090/${adById.images[0].url}` :`https://voen-rubeg.ru/No_Image_Available.jpg`);
+
+    const phoneNumber = adById?.user?.phone;
     const phoneNumberHide = CreateHideNumber(phoneNumber);
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
     const handleOpenRedactor = () => setOpenModalRedactor(true);
     const handleOpenComments = () => setOpenModalComments(true);
     const handleDeleteAd = () => alert("Товар удален");
+
+    const handleChoiceImage = (id: number) => {
+        if(adById?.images[id]?.url !== undefined) {
+            getCurrentImage(`http://localhost:8090/${adById?.images[id]?.url}`);
+        }
+        return;
+    }
 
     const formatedDate = createDate(adById?.created_on);
     const periopOfSales = createSellerBy(adById?.created_on);
@@ -49,40 +54,40 @@ export const ProductCard = () => {
                         <div className="h-480 w-480 bg-gray-200">
                             <img
                             className="h-480 w-480 object-cover"
-                            src={`http://localhost:8090/${adById.images[0].url}`}
-                            alt={adById.images[0].url}
+                            src={currentImage}
+                            alt={'img'}
                             />
                         </div>
                         <div className="w-full flex items-center justify-between">
-                            <div className="h-20 w-20 bg-gray-200">
+                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(0)}>
                                 {adById.images[0] &&
                                 <img className="h-20 w-20 object-cover"
                                 src={`http://localhost:8090/${adById.images[0].url}`}
                                 alt=""
                                 />} 
                             </div>
-                            <div className="h-20 w-20 bg-gray-200">
+                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(1)}>
                                 {adById.images[1] &&
                                 <img className="h-20 w-20 object-cover"
                                 src={`http://localhost:8090/${adById.images[1].url}`}
                                 alt=""
                                 />} 
                             </div>
-                            <div className="h-20 w-20 bg-gray-200">
+                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(2)}>
                                 {adById.images[2] &&
                                 <img className="h-20 w-20 object-cover"
                                 src={`http://localhost:8090/${adById.images[2].url}`}
                                 alt=""
                                 />} 
                             </div>
-                            <div className="h-20 w-20 bg-gray-200">
+                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(3)}>
                                 {adById.images[3] &&
                                 <img className="h-20 w-20 object-cover"
                                 src={`http://localhost:8090/${adById.images[3].url}`}
                                 alt=""
                                 />} 
                             </div>
-                            <div className="h-20 w-20 bg-gray-200">
+                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(4)}>
                                 {adById.images[4] &&
                                 <img className="h-20 w-20 object-cover"
                                 src={`http://localhost:8090/${adById.images[4].url}`}
@@ -93,15 +98,17 @@ export const ProductCard = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <div className="text-3xl pb-3 max-w-xl">{adById?.title}</div>
-                        <div className="grey-add-text">{formatedDate}</div>
-                        <div className="grey-add-text">{adById?.user.city}</div>
+                        <div>
+                            <div className="text-3xl pb-3 max-w-xl font-robotoMedium">{adById?.title}</div>
+                            <div className="grey-add-text">{formatedDate}</div>
+                            <div className="grey-add-text">{adById?.user.city}</div>
+                        </div>
                         <div
                             onClick={handleOpenComments}
                             className="text-base text-sky-500 cursor-pointer">
                             23 отзыва
                         </div>
-                        <div className="text-3xl pt-9 pb-5">{adById?.price} ₽</div>
+                        <div className="text-3xl pt-9 pb-5 font-robotoMedium">{adById?.price} ₽</div>
                         {mode === 'user'
                         ?
                         <ButtonMain
@@ -140,7 +147,7 @@ export const ProductCard = () => {
                                     }
                                 </div>
                                 <div>
-                                    <div className="text-xl text-sky-500">{adById?.user.name}</div>
+                                    <div className="text-xl text-sky-500 font-robotoMedium">{adById?.user.name}</div>
                                     <div className="grey-add-text">Продает товары с {periopOfSales}</div>
                                 </div>
                             </div>
@@ -162,7 +169,7 @@ export const ProductCard = () => {
 
         {openModalComments && <Comments setOpenModalComments={setOpenModalComments} />}
             </div>
-            }
+        }
 
      </ContainerContent>
     )
