@@ -1,4 +1,4 @@
-export const CreateHideNumber = (data: string) => {
+export const CreateHideNumber = (data: string | undefined) => {
     if (data) {
     const phoneNumber = data;
     const splitNumber = phoneNumber?.split('')

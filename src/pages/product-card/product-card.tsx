@@ -6,6 +6,7 @@ import { ButtonMain } from "shared/buttons"
 import { useGetAdByIdQuery } from "store/services";
 import { CreateHideNumber, createDate, createSellerBy } from "utils";
 import { FaRegUserCircle } from "react-icons/fa";
+import { Carousel } from "components/card-item";
 
 // const mode:string = 'user'
 const mode:string = 'creator'
@@ -13,16 +14,15 @@ const mode:string = 'creator'
 export const ProductCard = () => {
     const { id } = useParams();
     const toNumber = Number(id);
-    // console.log(toNumber);
 
     const { data: adById } = useGetAdByIdQuery(toNumber);
 
     const [hideNumber, setHideNumber] = useState<boolean>(false);
     const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
     const [openModalComments, setOpenModalComments] = useState<boolean>(false);
-    const [currentImage, getCurrentImage] = useState<string>(adById?.images.length > 0 ? `http://localhost:8090/${adById.images[0].url}` :`https://voen-rubeg.ru/No_Image_Available.jpg`);
+    const [currentImage, getCurrentImage] = useState<string>(adById?.images[0] ? `http://localhost:8090/${adById.images[0].url}` :`https://voen-rubeg.ru/No_Image_Available.jpg`);
 
-    const phoneNumber = adById?.user?.phone;
+    const phoneNumber: string | undefined = adById?.user?.phone;
     const phoneNumberHide = CreateHideNumber(phoneNumber);
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
@@ -37,8 +37,8 @@ export const ProductCard = () => {
         return;
     }
 
-    const formatedDate = createDate(adById?.created_on);
-    const periopOfSales = createSellerBy(adById?.created_on);
+    const formatedDate: string = createDate(adById?.created_on);
+    const periopOfSales: string = createSellerBy(adById?.created_on);
 
     return (
         <ContainerContent>
@@ -50,52 +50,7 @@ export const ProductCard = () => {
             <div className="mt-10 mb-16">
                 <div className="flex justify-start items-start gap-10 mt-20">
 
-                    <div className="flex flex-col items-center gap-8">
-                        <div className="h-480 w-480 bg-gray-200">
-                            <img
-                            className="h-480 w-480 object-cover"
-                            src={currentImage}
-                            alt={'img'}
-                            />
-                        </div>
-                        <div className="w-full flex items-center justify-between">
-                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(0)}>
-                                {adById.images[0] &&
-                                <img className="h-20 w-20 object-cover"
-                                src={`http://localhost:8090/${adById.images[0].url}`}
-                                alt=""
-                                />} 
-                            </div>
-                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(1)}>
-                                {adById.images[1] &&
-                                <img className="h-20 w-20 object-cover"
-                                src={`http://localhost:8090/${adById.images[1].url}`}
-                                alt=""
-                                />} 
-                            </div>
-                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(2)}>
-                                {adById.images[2] &&
-                                <img className="h-20 w-20 object-cover"
-                                src={`http://localhost:8090/${adById.images[2].url}`}
-                                alt=""
-                                />} 
-                            </div>
-                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(3)}>
-                                {adById.images[3] &&
-                                <img className="h-20 w-20 object-cover"
-                                src={`http://localhost:8090/${adById.images[3].url}`}
-                                alt=""
-                                />} 
-                            </div>
-                            <div className="h-20 w-20 bg-gray-200" onClick={() => handleChoiceImage(4)}>
-                                {adById.images[4] &&
-                                <img className="h-20 w-20 object-cover"
-                                src={`http://localhost:8090/${adById.images[4].url}`}
-                                alt=""
-                                />} 
-                            </div>
-                        </div>
-                    </div>
+                    <Carousel images={adById.images} />
 
                     <div className="flex flex-col gap-2">
                         <div>
@@ -137,7 +92,7 @@ export const ProductCard = () => {
                         <ChangeAd setOpenModalRedactor={setOpenModalRedactor} />}
                         <NavLink to={'/profile-seller'}>
                             <div className="pt-9 flex items-center gap-3">
-                                <div className="h-10 w-10 rounded-full bg-gray-200">
+                                <div className="h-10 w-10 rounded-full bg-gray-200 reg-flex">
                                     {adById?.user?.avatar
                                     ? <img
                                         src={`http://localhost:8090/${adById.user.avatar}`}
