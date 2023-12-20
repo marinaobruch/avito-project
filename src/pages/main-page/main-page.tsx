@@ -3,9 +3,12 @@ import { Search } from "components/search"
 import { ContainerContent } from "layouts/container"
 import { ButtonMain } from "shared/buttons"
 import { Logo } from "shared/logos"
+import { useGetAllAdsQuery } from "store/services"
 
 export const MainPage = () => {
    const handleSearch = () => console.log("Searching");
+
+   const {data: allAds, isLoading} = useGetAllAdsQuery(100);
 
    return (
       <ContainerContent>
@@ -26,7 +29,10 @@ export const MainPage = () => {
             </div>
 
             <h2 className="mt-12 text-4xl">Объявления</h2>
-               <CardItem />
+               <CardItem
+                  allAds={allAds} 
+                  sLoading={isLoading}
+               />
          </div>
       </ContainerContent>
  )

@@ -44,9 +44,6 @@ export const ProfileSeller = () => {
             <h3 className="text-3xl">Товары продавца</h3>
             <div className="grid grid-cols-8 gap-6 mt-5">
                <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
             </div>
         </div>
      </ContainerContent>

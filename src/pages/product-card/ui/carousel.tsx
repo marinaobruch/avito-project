@@ -6,8 +6,6 @@ interface IProps {
 }
 
 export const Carousel:FC<IProps> = ({ images }) => {
-    console.log(images);
-
     const [currentImage, getCurrentImage] = useState<string>(
         images[0]
         ? `http://localhost:8090/${images[0].url}`

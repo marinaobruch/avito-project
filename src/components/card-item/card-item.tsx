@@ -1,19 +1,24 @@
+import { IRequestAds } from "interface/api-interface";
+import { FC } from "react";
 import { useNavigate } from "react-router"
 import { NoPhotoBig } from "shared/logos";
-import { useGetAllAdsQuery } from "store/services";
 import { createDate } from "utils";
 
-export const CardItem = () => {
+interface IProps {
+    allAds: IRequestAds[] | undefined ;
+    sLoading: boolean;
+}
+
+export const CardItem: FC<IProps> = ({allAds, sLoading}) => {
     const navigate = useNavigate();
-    const {data, isLoading} = useGetAllAdsQuery(100);
 
     return (
         <>
-        {isLoading
+        {sLoading
         ? <div>Loading...</div>
         :
         <div className="grid grid-cols-8 gap-6 mt-3 justify-items-center">
-        {data?.map((item) => (
+        {allAds?.map((item) => (
         <div
             key={item.id}
             className="col-span-2 hover:border-sky-500 p-1 default-hover hover:scale-105 easy-animation"
