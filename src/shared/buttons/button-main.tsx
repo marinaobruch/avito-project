@@ -2,7 +2,7 @@ import { FC, HTMLProps } from 'react';
 
 
 interface IButtonProps extends HTMLProps<HTMLButtonElement> {
-  text: string;
+  text: string | undefined;
   type: "button" | "reset" | "submit";
   width: string;
   onClick?: React.MouseEventHandler;

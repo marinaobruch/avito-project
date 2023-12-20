@@ -7,7 +7,11 @@
 }
 
 .default-hover {
-    @apply hover:outline hover:outline-2 hover:outline-sky-500 hover:outline-offset-2  hover:rounded-lg
+    @apply hover:outline hover:outline-2 hover:outline-sky-500 hover:outline-offset-2  hover:rounded-md
+}
+
+.carousel {
+    @apply h-20 w-20 bg-gray-200 default-hover hover:scale-105
 }
 
 .reg-flex {

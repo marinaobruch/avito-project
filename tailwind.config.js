@@ -8,7 +8,6 @@ export default {
           roboto: ['Roboto-Regular', 'sans-serif'],
           robotoLight: ['Roboto-Light', 'sans-serif'],
           robotoMedium: ['Roboto-Medium', 'sans-serif'],
-
         },
         height: {
           '200': '200px',

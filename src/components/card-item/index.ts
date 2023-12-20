@@ -1,2 +1,2 @@
 export * from './card-item';
-export * from './carousel';
+export * from '../../pages/product-card/ui/carousel';
