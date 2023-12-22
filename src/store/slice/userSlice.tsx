@@ -10,7 +10,7 @@ const initialState: IUser = {
     sells_from: null,
     phone: null,
     role: null,
-    surname: null,
+    surname: null
 };
 
 export const userSlice = createSlice({

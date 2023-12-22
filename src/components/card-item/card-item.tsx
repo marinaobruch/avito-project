@@ -6,7 +6,7 @@ import { createDate } from "utils";
 
 interface IProps {
     allAds: IRequestAds[] | undefined;
-    isLoading: boolean;
+    isLoading?: boolean;
 }
 
 export const CardItem: FC<IProps> = ({allAds, isLoading}) => {

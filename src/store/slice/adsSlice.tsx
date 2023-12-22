@@ -3,12 +3,10 @@ import { IRequestAds } from "interface/api-interface";
 
 export interface IAdsSlice {
     allAds: IRequestAds[];
-    currentAd: null;
   }
 
 const initialState: IAdsSlice = {
     allAds: [],
-    currentAd: null,
 };
 
 export const adsSlice = createSlice({

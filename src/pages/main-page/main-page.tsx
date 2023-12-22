@@ -1,31 +1,29 @@
 import { CardItem } from "components/card-item"
 import { Search } from "components/search"
+import { useAppDispatch } from "hooks/use-api"
 import { filterAds } from "hooks/use-filter"
 import { ContainerContent } from "layouts/container"
 import { useEffect, useState } from "react"
-import { ButtonMain } from "shared/buttons"
 import { Logo } from "shared/logos"
 import { useGetAllAdsQuery } from "store/services"
+import { getAllAds } from "store/slice"
 
 export const MainPage = () => {
    const {data: allAds, isLoading} = useGetAllAdsQuery(100);
+   const dispatch = useAppDispatch();
 
    const [searchTerm, setSearchTerm] = useState('');
    const [adsList, setAdsList] = useState(allAds);
 
    useEffect(() => {
       setAdsList(allAds)
+      dispatch(getAllAds(allAds));
    }, [allAds]);
 
    useEffect(() => {
       const filteredCars = filterAds(searchTerm, allAds);
       setAdsList(filteredCars);
-   }, [searchTerm])
-
-   // const handleSearch = () => {
-   //    const filteredCars = filterAds(searchTerm, allAds);
-   //    setAdsList(filteredCars);
-   // }
+   }, [searchTerm, allAds])
 
    return (
       <ContainerContent>
@@ -38,15 +36,7 @@ export const MainPage = () => {
                   <Logo />
                </div>
                <form className="col-span-7 flex gap-4">
-                  <Search
-                     setSearchTerm={setSearchTerm}
-                  />
-                  {/* <ButtonMain
-                     type="button"
-                     onClick={handleSearch}
-                     text="Найти"
-                     width="158px"
-                  /> */}
+                  <Search setSearchTerm={setSearchTerm} />
                </form>
             </div>
 

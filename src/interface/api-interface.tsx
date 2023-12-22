@@ -13,13 +13,13 @@ export interface IUser {
 }
 
 export interface IUserRequest {
-  id: number;
-  name: string;
-  email: string;
-  city: string;
-  avatar: string;
-  sells_from: string;
-  phone: string;
+    id: number;
+    name: string;
+    email: string;
+    city: string;
+    avatar: string;
+    sells_from: string;
+    phone: string;
   }
 
   export interface IImages {

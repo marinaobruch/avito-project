@@ -1,13 +1,22 @@
 import { CardItem } from "components/card-item"
+import { useAppSelector } from "hooks/use-api"
 import { BackToMainPage, ContainerContent } from "layouts/container"
 import { useState } from "react"
 import { ButtonMain } from "shared/buttons"
+import { CreateHideNumber } from "utils/createHideNumber"
+import { createSellerBy } from "utils/createSellerBy"
 
 export const ProfileSeller = () => {
+    const allAds = useAppSelector((state) => state.ads.allAds);
+    const userData = useAppSelector((state) => state.profile.choisenUser);
+
     const [hideNumber, setHideNumber] = useState<boolean>(false);
 
-    const phoneNumberHide = '8 905 ХХХ ХХ ХХ'
-    const phoneNumber = '8 905 996 54 14'
+    const phoneNumber: string | undefined = userData?.phone;
+    const phoneNumberHide = CreateHideNumber(phoneNumber);
+    const periopOfSales: string = createSellerBy(userData.sells_from);
+
+    const adsByUser = allAds.filter((ads) => ads.user.id === userData.id)
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
 
@@ -28,9 +37,9 @@ export const ProfileSeller = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <div className="text-xl">Марина Обруч</div>
-                        <div className="grey-add-text">Екатеринбург</div>
-                        <div className="grey-add-text">Продает товары с августа 2021</div>
+                        <div className="text-xl">{userData.name}</div>
+                        <div className="grey-add-text">{userData.city}</div>
+                        <div className="grey-add-text">Продает товары с {periopOfSales}</div>
                         <ButtonMain
                             type="button"
                             onClick={handleShowNumber}
@@ -42,9 +51,7 @@ export const ProfileSeller = () => {
             </div>
 
             <h3 className="text-3xl">Товары продавца</h3>
-            <div className="grid grid-cols-8 gap-6 mt-5">
-               <CardItem />
-            </div>
+            <CardItem allAds={adsByUser} />
         </div>
      </ContainerContent>
     )
