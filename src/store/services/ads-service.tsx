@@ -6,16 +6,16 @@ export const avitoApi = createApi({
     reducerPath: 'avitoApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8090',
-        // tagTypes: ['Ads'],
-        // prepareHeaders: (headers, {getState}) => {
-        //     const token = getState().token.accessToken;
+        tagTypes: ['Ads'],
+        prepareHeaders: (headers, {getState}) => {
+            const token = getState().token.accessToken;
 
-        //     if (token) {
-        //         headers.set("authorization", `Bearer ${token}`);
-        //       }
+            if (token) {
+                headers.set("authorization", `Bearer ${token}`);
+              }
         
-        //       return headers;
-        // },
+              return headers;
+        },
     }),
 
     endpoints: (builder) => ({
@@ -24,7 +24,7 @@ export const avitoApi = createApi({
         }),
         getAdById: builder.query<IRequestAds, number>({
             query: (id: number) => `/ads/${id}`
-        })
+        }),
     })
 })
 
