@@ -5,16 +5,16 @@ import { NoPhotoBig } from "shared/logos";
 import { createDate } from "utils";
 
 interface IProps {
-    allAds: IRequestAds[] | undefined ;
-    sLoading: boolean;
+    allAds: IRequestAds[] | undefined;
+    isLoading: boolean;
 }
 
-export const CardItem: FC<IProps> = ({allAds, sLoading}) => {
+export const CardItem: FC<IProps> = ({allAds, isLoading}) => {
     const navigate = useNavigate();
 
     return (
         <>
-        {sLoading
+        {isLoading
         ? <div>Loading...</div>
         :
         <div className="grid grid-cols-8 gap-6 mt-3 justify-items-center">

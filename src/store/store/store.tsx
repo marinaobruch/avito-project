@@ -12,10 +12,12 @@ import {
 import storage from 'redux-persist/lib/storage'
 
 import { userSlice } from '../slice';
+import { adsSlice } from '../slice';
 import { avitoApi } from '../services';
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
+  ads: adsSlice.reducer,
   [avitoApi.reducerPath]: avitoApi.reducer,
 })
 

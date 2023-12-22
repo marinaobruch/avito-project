@@ -1,39 +1,63 @@
 import { CardItem } from "components/card-item"
 import { Search } from "components/search"
+import { filterAds } from "hooks/use-filter"
 import { ContainerContent } from "layouts/container"
+import { useEffect, useState } from "react"
 import { ButtonMain } from "shared/buttons"
 import { Logo } from "shared/logos"
 import { useGetAllAdsQuery } from "store/services"
 
 export const MainPage = () => {
-   const handleSearch = () => console.log("Searching");
-
    const {data: allAds, isLoading} = useGetAllAdsQuery(100);
+
+   const [searchTerm, setSearchTerm] = useState('');
+   const [adsList, setAdsList] = useState(allAds);
+
+   useEffect(() => {
+      setAdsList(allAds)
+   }, [allAds]);
+
+   useEffect(() => {
+      const filteredCars = filterAds(searchTerm, allAds);
+      setAdsList(filteredCars);
+   }, [searchTerm])
+
+   // const handleSearch = () => {
+   //    const filteredCars = filterAds(searchTerm, allAds);
+   //    setAdsList(filteredCars);
+   // }
 
    return (
       <ContainerContent>
+         {isLoading
+         ? <div>Loading...</div>
+         :
          <div className="w-1440 mx-10">
             <div className="grid grid-cols-8">
                <div className="col-span-1">
                   <Logo />
                </div>
                <form className="col-span-7 flex gap-4">
-                  <Search />
-                  <ButtonMain
+                  <Search
+                     setSearchTerm={setSearchTerm}
+                  />
+                  {/* <ButtonMain
                      type="button"
                      onClick={handleSearch}
                      text="Найти"
                      width="158px"
-                  />
+                  /> */}
                </form>
             </div>
 
             <h2 className="mt-12 text-4xl">Объявления</h2>
                <CardItem
-                  allAds={allAds} 
-                  sLoading={isLoading}
+                  allAds={adsList} 
+                  isLoading={isLoading}
                />
          </div>
+         }
+
       </ContainerContent>
- )
+   )
 }
