@@ -19,13 +19,14 @@ export const Profile = () => {
     const [avatar, setAvatar] = useState('')
 
     const {data: currentUser, isLoading} = useGetCurrentUserQuery('');
-
+    console.log(currentUser);
     useEffect(() => {
         if(currentUser)
         dispatch(setUserData(currentUser));
     }, [currentUser]);
 
     const cashUser = useAppSelector((state) => state.user.userData);
+    console.log(cashUser);
     const {
         handleSubmit,
         control

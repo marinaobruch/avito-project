@@ -33,7 +33,7 @@ export const LayoutNoAuth = () => {
                 onClick={handlerMoveToProfile}
               />    
               <ButtonIn
-                text='Выйти'
+                text='Выход'
                 onClick={handleLogout}
               />        
              </nav>

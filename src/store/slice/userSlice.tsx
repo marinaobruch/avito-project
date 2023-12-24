@@ -10,7 +10,17 @@ interface IUserSlice {
 const initialState: IUserSlice = {
     email: '',
     allUsers: [],
-    userData: '',
+    userData: {
+      id: 0,
+      name: '',
+      email: '',
+      city: '',
+      avatar: '',
+      sells_from: '',
+      phone: '',
+      role: '',
+      surname: '',
+  },
 };
 
 export const userSlice = createSlice({
@@ -35,7 +45,20 @@ export const userSlice = createSlice({
 
     removeUser (state) {
       state.email = '';
+      state.allUsers = [];
+      state.userData = {
+          id: 0,
+          name: '',
+          email: '',
+          city: '',
+          avatar: '',
+          sells_from: '',
+          phone: '',
+          role: '',
+          surname: '',
+      },
       localStorage.removeItem('refresh_token');
+      localStorage.removeItem('access_token');
     },
   },
 });

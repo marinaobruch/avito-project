@@ -1,5 +1,5 @@
 import { IComment } from "interface/common-interface";
-import { FC, useEffect, useId } from "react";
+import { FC, useEffect, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
 import { TextareaContent } from "shared/inputs";
@@ -7,6 +7,8 @@ import { GrClose } from "react-icons/gr";
 import { ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { createDate } from "utils/createDate";
 import { useGetCommentsMutation, usePostCommentMutation } from "store/index";
+import { useAppSelector } from "hooks/use-api";
+import { useNavigate } from "react-router";
 
 
 interface INewAdd {
@@ -19,6 +21,10 @@ interface INewAdd {
 export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComments, adById}) => {
     const [getComments] = useGetCommentsMutation();
     const [postComment] = usePostCommentMutation();
+    const currentUser = useAppSelector((state) => state.user.userData);
+    const form = useId();
+    const navigate = useNavigate();
+    const [error, setError] = useState<string>('')
     
     useEffect(() => {
         loadComments();
@@ -31,6 +37,10 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComment
       }
     
       const handlePublishComment: SubmitHandler<IComment>  = async (data) => {
+        if(!currentUser.email) {
+            setError("Пожалуйста, зарегистрируйтесь >>>");
+            return;
+        }
         postComment({ id: adById.id, body: data.review }).then(() => {
           loadComments();
         }).catch((error) => console.log(error));
@@ -48,7 +58,7 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComment
         }
     });
 
-    const form = useId();
+    const handleToLogin = () => navigate('/login');
 
     return (
         <div
@@ -87,6 +97,14 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComment
                         width="181px"
                     />
                 </div>
+                {error &&
+                    <div className="flex items-center justify-center mt-4 gap-4 p-4">
+                        <div className=" text-sky-600 text-lg">{error}</div>
+                        <div
+                            className="text-lg text-sky-600 decoration-double cursor-pointer hover:text-green-500"
+                            onClick={handleToLogin}
+                        >Registration</div>
+                    </div>}
                 <div className="overflow-x-auto overflow-y-auto w-full h-75vh">
                     {comments.map((item) => (
                     <div key={item.id} className="pt-9 flex items-start gap-5">
