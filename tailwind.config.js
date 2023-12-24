@@ -26,6 +26,10 @@ export default {
         },
         maxWidth: {
           '792': '792px',
+          '152': '152px',
+        },
+        minWidth: {
+          '152': '152px',
         },
         minHeight: {
           '900': '900px'

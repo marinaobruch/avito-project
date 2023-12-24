@@ -2,7 +2,7 @@ export interface IChangeForm {
     name: string;
     surname: string;
     city: string;
-    number: string;
+    phone: string;
 }
 
 export interface IAddNewAd {

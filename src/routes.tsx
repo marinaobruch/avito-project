@@ -9,7 +9,7 @@ export const AppRouter = () => (
         <Route element= { <Register/> } path="/register"></Route>
 
         <Route element= { <LayoutNoAuth /> }>
-            <Route index element={ <MainPage/> } path='/main'></Route>
+            <Route index element={ <MainPage/> } path='/'></Route>
         </Route>
 
         <Route element= { <LayoutAuth /> }>

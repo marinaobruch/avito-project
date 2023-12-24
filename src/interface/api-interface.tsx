@@ -1,25 +1,34 @@
-export interface IUser {
-  id: number | null;
-  name?: string | null;
-  password?: string | null;
-  passwordRepeat?: string | null;
-  email: string | null;
-  city?: string | null;
-  avatar?: string | null;
-  sells_from?: string | null;
-  phone?: string | null;
-  role?: string | null;
-  surname?: string | null;
+export interface IUserReg {
+  email: string,
+  password: string,
+  passwordRepeat?: string,
+  name?: string,
+  surname?: string,
+  city?: string,
+}
+
+export interface IUserLogin {
+  email: string,
+  password: string,
+}
+
+export interface IUserPatch {
+  name?: string,
+  surname?: string,
+  city?: string,
+  phone?: string,
 }
 
 export interface IUserRequest {
     id: number;
     name: string;
     email: string;
-    city: string;
-    avatar: string;
-    sells_from: string;
-    phone: string;
+    city?: string;
+    avatar?: string;
+    sells_from?: string;
+    phone?: string;
+    role?: string;
+    surname?: string;
   }
 
   export interface IImages {

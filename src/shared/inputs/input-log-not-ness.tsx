@@ -10,7 +10,7 @@ interface IInputProps {
   }
 
 export const InputNotNessesary: FC<IInputProps> = ({
-    control, name, type, placeholder,
+    control, name, type, placeholder
 }) => (
     <Controller
         control={ control }
@@ -18,9 +18,8 @@ export const InputNotNessesary: FC<IInputProps> = ({
         render={ ({ field: { onChange, value, onBlur }, fieldState: { error } }) => (
       <div>
         <input
-            className="border-b placeholder:text-gray-300 placeholder:text-base" 
+            className="border-b placeholder:text-gray-300 placeholder:text-base"
             autoComplete="on"
-            error={ error || null }
             placeholder={ placeholder }
             type={ type }
             value={ value }

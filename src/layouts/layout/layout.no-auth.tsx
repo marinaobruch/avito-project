@@ -10,6 +10,8 @@ export const LayoutNoAuth = () => {
 
   
   const handleMoveToLogin = () => navigate('/login');
+  const handlerMoveToProfile = () => navigate('/profile');
+
   const handleLogout = () => {
     dispatch(removeUser());
     navigate('/login');
@@ -20,14 +22,22 @@ export const LayoutNoAuth = () => {
         <header className='bg-sky-500 flex items-center justify-end'>
              <nav className="h-20 flex items-center mr-11">
               {!currentUser
-              ?<ButtonIn
+              ? <ButtonIn
               text='Вход в личный кабинет'
               onClick={handleMoveToLogin}
            />
-              :<ButtonIn
-              text='Выйти'
-              onClick={handleLogout}
-           /> 
+              : 
+             <nav className="h-20 flex gap-2 justify-center items-center mr-11">   
+              <ButtonIn
+                text='Личный кабинет'
+                onClick={handlerMoveToProfile}
+              />    
+              <ButtonIn
+                text='Выйти'
+                onClick={handleLogout}
+              />        
+             </nav>
+
               }      
             </nav>
             </header>

@@ -1,39 +1,44 @@
-import { CardItem } from "components/card-item"
+import { useAppSelector } from "hooks/use-api"
 import { IChangeForm } from "interface/common-interface"
 import { BackToMainPage, ContainerContent } from "layouts/container"
 import { useId } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ButtonMain } from "shared/buttons"
-import { InputContent } from "shared/inputs/input-content"
+import { InputContentNotNess } from "shared/inputs"
+import { useGetAllUsersQuery, usePatchUserMutation } from "store/services"
+
 
 export const Profile = () => {
+    const cashUser = useAppSelector((state) => state.user.email);
+    const {data: allUsers} = useGetAllUsersQuery('');
+    const currentUser = allUsers?.find((user) => user.email === cashUser)
+
+    const [patchUser] = usePatchUserMutation();
+
     const {
         handleSubmit,
-        control,
-        reset
+        control
     } = useForm<IChangeForm>({
         mode:'onChange',
         defaultValues: {
-            name: 'Marina',
-            surname: 'Obruch',
-            city: 'Ekaterinburg',
-            number: '89999993122',
+            name: currentUser?.name ? currentUser?.name : '',
+            surname: currentUser?.surname ? currentUser?.surname : '',
+            city: currentUser?.city ? currentUser?.city : '',
+            phone: currentUser?.phone ? currentUser?.phone : '',
         }
     });
 
-    const form = useId()
+    const form = useId();
 
     const handleChange: SubmitHandler<IChangeForm> = (data) => {
-        console.log(data);
-        reset()
+        patchUser(data).then((res) => console.log(res));
     }
 
     return (
         <ContainerContent>
         <div className="w-1440 mx-10">
            <BackToMainPage />
-
-           <h2 className="mt-16 text-4xl">Здравствуйте, Марина!</h2>
+           <h2 className="mt-16 text-4xl">Здравствуйте, {currentUser?.email}</h2>
 
             <div className="mt-10 mb-16">
                 <h3 className="text-3xl">Настройки профиля</h3>
@@ -54,7 +59,7 @@ export const Profile = () => {
                         <div className="col-span-2 flex gap-4">
                             <div>
                                 <label className="grey-add-text0">Имя</label>
-                                <InputContent
+                                <InputContentNotNess
                                     control={control}
                                     name="name"
                                     placeholder="Имя"
@@ -64,36 +69,36 @@ export const Profile = () => {
                             </div>
                             <div>
                                 <label className="grey-add-text">Фамилия</label>
-                                <InputContent
+                                <InputContentNotNess
                                     control={control}
                                     name="surname"
                                     placeholder="Фамилия"
                                     type="text" 
                                     width='300px'
-                                    />
+                                />
                             </div>
                         </div>
 
                         <div className="col-span-2">
                             <label className="grey-add-text">Город</label>
-                            <InputContent
+                            <InputContentNotNess
                                 control={control}
                                 name="city"
                                 placeholder="Город"
                                 type="text" 
                                 width='300px'
-                                />
+                            />
                         </div>
 
                         <div className="col-span-2">
                             <label className="grey-add-text">Номер</label>
-                            <InputContent
+                            <InputContentNotNess
                                 control={control}
-                                name="number"
+                                name="phone"
                                 placeholder="Номер"
                                 type="number" 
                                 width='614px'
-                                />
+                            />
                         </div>
                         
                         <ButtonMain
@@ -107,10 +112,6 @@ export const Profile = () => {
 
             <h3 className="text-3xl">Мои товары</h3>
             <div className="grid grid-cols-8 gap-6 mt-5">
-               <CardItem />
-               <CardItem />
-               <CardItem />
-               <CardItem />
             </div>
         </div>
      </ContainerContent>

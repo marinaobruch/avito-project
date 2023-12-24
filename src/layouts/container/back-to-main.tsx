@@ -5,7 +5,7 @@ import { Logo } from "shared/logos"
 export const BackToMainPage = () => {
     const navigate = useNavigate();
 
-    const handleToGoMain = () => navigate('/main')
+    const handleToGoMain = () => navigate('/')
 
     return (
         <div className="grid grid-cols-8 items-center">
