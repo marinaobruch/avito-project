@@ -1,14 +1,17 @@
 import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { setUser } from 'store/slice';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { LogoSkyPro } from 'shared/logos';
 import { IUser } from 'interface/api-interface';
 import { useAppDispatch } from 'hooks/use-api';
+import { usePostLoginMutation } from 'store/services';
 
 export const FormLogin = () => {
+    const [postLogin] = usePostLoginMutation();
+
     const {
         handleSubmit,
         control,
@@ -23,9 +26,14 @@ export const FormLogin = () => {
 
     const form = useId();
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    const onSubmit:SubmitHandler<IUser> = (data) => {
-        console.log(`Your email is ${data.email} and your password is ${data.password}`);
+    const onSubmit:SubmitHandler<IUser> = async (data) => {
+        await postLogin(data).then((res) => {
+            console.log(res);
+            navigate('/main')
+        })
+
         dispatch(setUser(data));
         reset();
     }

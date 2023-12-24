@@ -1,16 +1,22 @@
 import { useAppDispatch } from 'hooks/use-api';
 import { IUser } from 'interface/api-interface';
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { ButtonLogIn } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { InputNotNessesary } from 'shared/inputs/input-not-ness';
 import { LogoSkyPro } from 'shared/logos';
+import { usePostLoginMutation, usePostRegMutation } from 'store/services';
 import { setUser } from 'store/slice';
 
 export const FormReg = () => {
-    const navigate = useNavigate()
+    const [postReg] = usePostRegMutation();
+    const [postLogin] = usePostLoginMutation();
+
+    const navigate = useNavigate();
+    const [error, setError] = useState<string>('')
+
     const {
         handleSubmit,
         control,
@@ -30,10 +36,19 @@ export const FormReg = () => {
     const form = useId()
     const dispatch = useAppDispatch();
 
-    const onSubmit:SubmitHandler<IUser> = (data) => {
-        console.log(`Your email is ${data.email} and your password is ${data.password}`);
+    const onSubmit:SubmitHandler<IUser> = async (data) => {
+        if(data.password !== data.passwordRepeat) {
+            setError("Пароли не совпадают");
+            return;
+        }
+        await postReg(data).then((res) => console.log(res));
+        await postLogin(data).then((res) => {
+            console.log(res);
+            navigate('/main')
+        })
+
         dispatch(setUser(data));
-        reset()
+        reset();
     }
 
     return (
@@ -67,6 +82,7 @@ export const FormReg = () => {
                         placeholder="Повторите пароль"
                         type="password"
                     />
+                    {error && <span className="text-xs text-red-600">{error}</span>}
                     <InputNotNessesary
                         control={ control }
                         name="name"

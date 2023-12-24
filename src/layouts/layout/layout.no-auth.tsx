@@ -1,18 +1,34 @@
+import {useAppDispatch, useAppSelector } from 'hooks/use-api';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { ButtonIn } from 'shared/buttons';
+import { removeUser } from 'store/slice';
 
 export const LayoutNoAuth = () => {
   const navigate = useNavigate();
-const handlerMoveToLogin = () => navigate('/login');
+  const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((state) => state.user.email);
+
+  
+  const handleMoveToLogin = () => navigate('/login');
+  const handleLogout = () => {
+    dispatch(removeUser());
+    navigate('/login');
+  }
 
   return (
     <div className='pb-10'>
         <header className='bg-sky-500 flex items-center justify-end'>
              <nav className="h-20 flex items-center mr-11">
-               <ButtonIn
-                  text='Вход в личный кабинет'
-                  onClick={handlerMoveToLogin}
-               />             
+              {!currentUser
+              ?<ButtonIn
+              text='Вход в личный кабинет'
+              onClick={handleMoveToLogin}
+           />
+              :<ButtonIn
+              text='Выйти'
+              onClick={handleLogout}
+           /> 
+              }      
             </nav>
             </header>
         <Outlet />
