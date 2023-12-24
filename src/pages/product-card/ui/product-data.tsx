@@ -2,7 +2,7 @@ import { ChangeAd, Comments } from "components/modal";
 import { ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { FC, useEffect, useState } from "react";
 import { ButtonMain } from "shared/buttons"
-import { useGetCommentsMutation, usePostCommentMutation } from "store/index";
+import { useGetCommentsMutation } from "store/index";
 import { CreateHideNumber, createDate } from "utils";
 
 interface IProps {
@@ -11,10 +11,13 @@ interface IProps {
 }
 
 export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
-    const [comments, setComments] = useState<ICommentsRequest[]>([]);
     const [getComments] = useGetCommentsMutation();
-    const [postComment] = usePostCommentMutation();
-    console.log(comments);
+
+    const [comments, setComments] = useState<ICommentsRequest[]>([]);
+
+    const [hideNumber, setHideNumber] = useState<boolean>(false);
+    const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
+    const [openModalComments, setOpenModalComments] = useState<boolean>(false);
 
     useEffect(() => {
         loadComments();
@@ -22,22 +25,9 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
 
     const loadComments = () => {
         getComments(adById.id).then((res) => {      
-          if (res.data) {
-            setComments(res.data);
-        }
+          if (res.data) setComments(res.data);
         }).catch((error) => console.log(error))
       }
-    
-      const handlePublishComment = async (event) => {
-        event.preventDefault()
-        postComment({ id: adById.id, body: { text: text }}).then(() => {
-          loadComments()
-        }).catch((error) => console.log(error))
-      }
-
-    const [hideNumber, setHideNumber] = useState<boolean>(false);
-    const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
-    const [openModalComments, setOpenModalComments] = useState<boolean>(false);
 
     const phoneNumber: string | undefined = adById?.user?.phone;
     const phoneNumberHide = CreateHideNumber(phoneNumber);
@@ -59,7 +49,7 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
             <div
                 onClick={handleOpenComments}
                 className="text-base text-sky-500 cursor-pointer">
-                23 отзыва
+                {comments.length} отзыва
             </div>
             <div className="text-3xl pt-9 pb-5 font-robotoMedium">{adById?.price} ₽</div>
             {mode === 'user'
@@ -87,9 +77,14 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
             </div>
             }
             {openModalRedactor && <ChangeAd setOpenModalRedactor={setOpenModalRedactor} />}
-            {openModalComments && <Comments
-            setOpenModalComments={setOpenModalComments}
-            comments={comments} />}
+            {openModalComments &&
+                <Comments
+                    setOpenModalComments={setOpenModalComments}
+                    comments={comments}
+                    setComments={setComments}
+                    adById={adById}
+                />
+            }
         </div>
     )
 }

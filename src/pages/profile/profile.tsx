@@ -14,19 +14,18 @@ export const Profile = () => {
     const [patchUser] = usePatchUserMutation();
     const [postAvatar] = usePostImgUserMutation();
     const form = useId();
+    
     const [image, setImage] = useState<string>('');
     const [avatar, setAvatar] = useState('')
-    console.log(image);
 
     const {data: currentUser, isLoading} = useGetCurrentUserQuery('');
 
     useEffect(() => {
         if(currentUser)
-        dispatch(setUserData(currentUser))
+        dispatch(setUserData(currentUser));
     }, [currentUser]);
 
-    const cashUser = useAppSelector((state) => state.user.userData)
-
+    const cashUser = useAppSelector((state) => state.user.userData);
     const {
         handleSubmit,
         control
@@ -41,8 +40,11 @@ export const Profile = () => {
     });
 
     const handleChange: SubmitHandler<IChangeForm> = (data) => {
-        patchUser(data).then((res) => console.log(res));
-    };
+        patchUser(data).then((res) => {
+            dispatch(setUserData(res.data));
+            console.log(res);
+            }
+        )};
 
     const uploadContent = (event) => {
         event.preventDefault();

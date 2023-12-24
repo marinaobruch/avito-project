@@ -5,7 +5,7 @@ import { RootState } from "..";
 
 export const avitoApi = createApi({
     reducerPath: 'avitoApi',
-    tagTypes: ['Users'],
+    tagTypes: ['Users', 'Comments'],
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8090',
         prepareHeaders: (headers, {getState}) => {
@@ -58,27 +58,27 @@ export const avitoApi = createApi({
             query: () => '/user/all',
             providesTags: ['Users']
         }), 
-
         getCurrentUser: build.query<IUserRequest, string>({
             query: () => '/user',
             providesTags: ['Users']
         }),  
         patchUser: build.mutation<IUserPatch, IUserPatch>({
-        query: (body) => ({
-            headers: {
-            'content-type': 'application/json'
-            },
-            url: '/user',
-            method: `PATCH`,
-            body: JSON.stringify({
-                name: body.name,
-                surname: body.surname,
-                city: body.city,
-                phone: body.phone,
-            }),
-            invalidatesTags: ['Users'],
+            query: (body) => ({
+                headers: {
+                'content-type': 'application/json'
+                },
+                url: '/user',
+                method: `PATCH`,
+                body: JSON.stringify({
+                    name: body.name,
+                    surname: body.surname,
+                    city: body.city,
+                    phone: body.phone,
+                }),
+                invalidatesTags: ['Users'],
             })
         }),
+        
         postImgUser: build.mutation<IUserImgPost, string>({
             query: (body) => ({
                 headers: {
@@ -93,7 +93,16 @@ export const avitoApi = createApi({
             }),
           }),
 
-
+          getComments: build.mutation({
+            query: (id) => ({
+              headers: {
+                'content-type': 'application/json'
+              },
+              url: `ads/${id}/comments`,
+              method: 'GET',
+            providesTags: ['Comments']
+            })
+          }),
           postComment: build.mutation({
             query: ({id, body}) => ({
               headers: {
@@ -102,18 +111,10 @@ export const avitoApi = createApi({
               url: `ads/${id}/comments`,
               method: 'POST',
               body: JSON.stringify({
-                text: body.text
-              })
+                text: body
+              }),
+              invalidatesTags: ['Comments'],
             }),
-          }),
-          getComments: build.mutation({
-            query: (id) => ({
-              headers: {
-                'content-type': 'application/json'
-              },
-              url: `ads/${id}/comments`,
-              method: 'GET',
-            })
           }),
     })
 })

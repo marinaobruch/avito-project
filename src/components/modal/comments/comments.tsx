@@ -1,21 +1,42 @@
 import { IComment } from "interface/common-interface";
-import { FC, useId, useRef } from "react";
+import { FC, useEffect, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
 import { TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { useScrollbar } from "hooks/use-scrollbar";
-import { ICommentsRequest } from "interface/api-interface";
+import { ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { createDate } from "utils/createDate";
+import { useGetCommentsMutation, usePostCommentMutation } from "store/index";
 
 
 interface INewAdd {
     setOpenModalComments: (arg0:boolean)=>void;
     comments: ICommentsRequest[],
+    setComments: (comments: ICommentsRequest[]) => void;
+    adById: IRequestAds;
 }
 
-export const Comments:FC<INewAdd> = ({setOpenModalComments, comments}) => {
-    console.log(comments);
+export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComments, adById}) => {
+    const [getComments] = useGetCommentsMutation();
+    const [postComment] = usePostCommentMutation();
+    
+    useEffect(() => {
+        loadComments();
+      }, [adById]);
+
+    const loadComments = () => {
+        getComments(adById.id).then((res) => {      
+          if (res.data) setComments(res.data);
+        }).catch((error) => console.log(error))
+      }
+    
+      const handlePublishComment: SubmitHandler<IComment>  = async (data) => {
+        postComment({ id: adById.id, body: data.review }).then(() => {
+          loadComments();
+        }).catch((error) => console.log(error));
+        reset();
+      }
+
     const {
         handleSubmit,
         control,
@@ -28,14 +49,6 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments}) => {
     });
 
     const form = useId();
-    const commentWrapper = useRef(null);
-
-    useScrollbar(commentWrapper);
-
-    const handleChange: SubmitHandler<IComment> = (data) => {
-        console.log(data);
-        reset()
-    }
 
     return (
         <div
@@ -43,7 +56,7 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments}) => {
         className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center">
             <form
             id={form}
-            onSubmit={handleSubmit(handleChange)}
+            onSubmit={handleSubmit(handlePublishComment)}
             onClick={e => e.stopPropagation()}
             className="w-600 min-h-900 max-h-40 bg-white absolute rounded-lg p-10">
                 
@@ -74,11 +87,9 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments}) => {
                         width="181px"
                     />
                 </div>
-                <div 
-                    style={{ marginTop: '1rem', maxHeight: '420px' }}
-                    ref={commentWrapper}>
-                {comments.map((item) => (
-                        <div key={item.id} className="pt-9 flex items-start gap-5">
+                <div className="overflow-x-auto overflow-y-auto w-full h-75vh">
+                    {comments.map((item) => (
+                    <div key={item.id} className="pt-9 flex items-start gap-5">
                             <div>
                                 <div className="w-10 h-10 bg-gray-200 rounded-full">
                                     <img src="" alt="" />
@@ -93,9 +104,8 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments}) => {
                                 <div className="text-base">{item.text} </div>
                             </div>
                         </div>
-                ))}
-                    </div>
-
+                    ))}
+            </div>
             </form>
         </div>
     )
