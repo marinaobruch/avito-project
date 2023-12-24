@@ -12,6 +12,10 @@ export interface IUserLogin {
   password: string,
 }
 
+export interface IUserImgPost {
+  file: string,
+}
+
 export interface IUserPatch {
   name?: string,
   surname?: string,
@@ -29,6 +33,13 @@ export interface IUserRequest {
     phone?: string;
     role?: string;
     surname?: string;
+  }
+
+  export interface ICommentsRequest {
+    author: IUserRequest,
+    created_on: string,
+    id: number,
+    text: string,
   }
 
   export interface IImages {

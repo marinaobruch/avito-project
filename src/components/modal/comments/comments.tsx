@@ -4,15 +4,18 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
 import { TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { ItemComment } from "./item-comment";
 import { useScrollbar } from "hooks/use-scrollbar";
+import { ICommentsRequest } from "interface/api-interface";
+import { createDate } from "utils/createDate";
 
 
 interface INewAdd {
     setOpenModalComments: (arg0:boolean)=>void;
+    comments: ICommentsRequest[],
 }
 
-export const Comments:FC<INewAdd> = ({setOpenModalComments}) => {
+export const Comments:FC<INewAdd> = ({setOpenModalComments, comments}) => {
+    console.log(comments);
     const {
         handleSubmit,
         control,
@@ -71,22 +74,28 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments}) => {
                         width="181px"
                     />
                 </div>
-
                 <div 
-                style={{ marginTop: '1rem', maxHeight: '420px' }}
-                ref={commentWrapper}>
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                    <ItemComment />
-                </div>
+                    style={{ marginTop: '1rem', maxHeight: '420px' }}
+                    ref={commentWrapper}>
+                {comments.map((item) => (
+                        <div key={item.id} className="pt-9 flex items-start gap-5">
+                            <div>
+                                <div className="w-10 h-10 bg-gray-200 rounded-full">
+                                    <img src="" alt="" />
+                                </div>
+                            </div>
+                            <div className="flex-col">
+                                <div className="flex items-center gap-4 pb-4">
+                                    <div className="text-base font-robotoMedium">{item.author.name}</div>
+                                    <div className="grey-add-text">{createDate(item.created_on)}</div>
+                                </div>
+                                <div className="text-base font-robotoMedium">Комментарий</div>
+                                <div className="text-base">{item.text} </div>
+                            </div>
+                        </div>
+                ))}
+                    </div>
+
             </form>
         </div>
     )

@@ -41,7 +41,10 @@ export const FormReg = () => {
             setError("Пароли не совпадают");
             return;
         }
-        await postReg(data).then((res) => console.log(res));
+        await postReg(data).then((res) => {
+            console.log(res);
+        });
+
         await postLogin(data).then((res) => {
             dispatch(setAccessToken(res.data.access_token));
             localStorage.setItem('refresh_token', res.data.refresh_token);

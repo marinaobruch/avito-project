@@ -7,12 +7,11 @@ interface IInputProps {
     control: Control<any>;
     name: string;
     type: string;
-    placeholder: string;
     id: string;
   }
 
 export const InputImg: FC<IInputProps> = ({
-    control, name, type, placeholder, id
+    control, name, type, id
 }) => {
 
    return (
@@ -24,7 +23,6 @@ export const InputImg: FC<IInputProps> = ({
         <input
             id={id}
             className="hidden"
-            placeholder={ placeholder }
             type={ type }
             value={ value }
             onBlur={ onBlur }

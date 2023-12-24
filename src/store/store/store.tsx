@@ -15,7 +15,6 @@ import { userSlice } from '../slice';
 import { adsSlice } from '../slice';
 import { profileSlice } from '../slice';
 import { tokenSlice } from '../slice';
-
 import { avitoApi } from '../services';
 
 const rootReducer = combineReducers({
@@ -23,15 +22,13 @@ const rootReducer = combineReducers({
   ads: adsSlice.reducer,
   profile: profileSlice.reducer,
   token: tokenSlice.reducer,
-
   [avitoApi.reducerPath]: avitoApi.reducer,
-  
 })
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['profile']
+  blacklist: ['avitoApi'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

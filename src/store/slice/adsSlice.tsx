@@ -3,10 +3,12 @@ import { IRequestAds } from "interface/api-interface";
 
 export interface IAdsSlice {
     allAds: IRequestAds[];
+    selected_ad: string;
   }
 
 const initialState: IAdsSlice = {
     allAds: [],
+    selected_ad: '',
 };
 
 export const adsSlice = createSlice({
@@ -16,8 +18,11 @@ export const adsSlice = createSlice({
   reducers: {
     getAllAds (state, action: PayloadAction<IRequestAds[]>) {
       const payload = action.payload ?? initialState;
-
       state.allAds = payload;
+    },
+
+    setSelectedAdd: (state, action) => {
+      state.selected_ad = action.payload
     },
 
   },

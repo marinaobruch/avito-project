@@ -5,11 +5,12 @@ import { useState } from "react"
 import { ButtonMain } from "shared/buttons"
 import { CreateHideNumber } from "utils/createHideNumber"
 import { createSellerBy } from "utils/createSellerBy"
+import { NoPhotoBig } from "shared/logos";
+
 
 export const ProfileSeller = () => {
     const allAds = useAppSelector((state) => state.ads.allAds);
     const userData = useAppSelector((state) => state.profile.choisenUser);
-
     const [hideNumber, setHideNumber] = useState<boolean>(false);
 
     const phoneNumber: string | undefined = userData?.phone;
@@ -32,7 +33,13 @@ export const ProfileSeller = () => {
 
                     <div className="flex flex-col items-center">
                         <div className="bg-gray-200 w-44 h-44 rounded-full mb-4">
-                            <img/>
+                            {userData.avatar
+                            ?<img
+                                className="w-44 h-44 object-cover"
+                                src={`http://localhost:8090/${userData.avatar}`}
+                            />
+                            : <NoPhotoBig />
+                        }
                         </div>
                     </div>
 

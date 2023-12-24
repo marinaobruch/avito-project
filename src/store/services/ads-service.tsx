@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
+import { IUserImgPost, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
 import { RootState } from "..";
 
 export const avitoApi = createApi({
     reducerPath: 'avitoApi',
+    tagTypes: ['Users'],
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8090',
         prepareHeaders: (headers, {getState}) => {
@@ -15,7 +16,6 @@ export const avitoApi = createApi({
             return headers;
           },
     }),
-    tagTypes: ['Users'],
     endpoints: (build) => ({
         getAllAds: build.query<IRequestAds[], number>({
             query: () => '/ads'
@@ -53,14 +53,15 @@ export const avitoApi = createApi({
                 }
             }),
           }),
+        
         getAllUsers: build.query<IUserRequest[], string>({
             query: () => '/user/all',
-            providesTags: ['Users'],
+            providesTags: ['Users']
         }), 
 
-        getCurrentUser: build.query<IUserRequest, number>({
+        getCurrentUser: build.query<IUserRequest, string>({
             query: () => '/user',
-            providesTags: ['Users'],
+            providesTags: ['Users']
         }),  
         patchUser: build.mutation<IUserPatch, IUserPatch>({
         query: (body) => ({
@@ -76,8 +77,44 @@ export const avitoApi = createApi({
                 phone: body.phone,
             }),
             invalidatesTags: ['Users'],
-        })
+            })
         }),
+        postImgUser: build.mutation<IUserImgPost, string>({
+            query: (body) => ({
+                headers: {
+                    'content-type': 'application/json',
+                },
+                url: 'user/avatar',
+                method: 'POST',
+                body: {
+                    file: body,
+                },
+                invalidatesTags: ['Users'],
+            }),
+          }),
+
+
+          postComment: build.mutation({
+            query: ({id, body}) => ({
+              headers: {
+                'content-type': 'application/json'
+              },
+              url: `ads/${id}/comments`,
+              method: 'POST',
+              body: JSON.stringify({
+                text: body.text
+              })
+            }),
+          }),
+          getComments: build.mutation({
+            query: (id) => ({
+              headers: {
+                'content-type': 'application/json'
+              },
+              url: `ads/${id}/comments`,
+              method: 'GET',
+            })
+          }),
     })
 })
 
@@ -91,4 +128,8 @@ export const {
     useGetAllUsersQuery,
     useGetCurrentUserQuery,
     usePatchUserMutation,
+    usePostImgUserMutation,
+
+    usePostCommentMutation,
+    useGetCommentsMutation,
 } = avitoApi;

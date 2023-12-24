@@ -1,7 +1,8 @@
 import { ChangeAd, Comments } from "components/modal";
-import { IRequestAds } from "interface/api-interface";
-import { FC, useState } from "react";
+import { ICommentsRequest, IRequestAds } from "interface/api-interface";
+import { FC, useEffect, useState } from "react";
 import { ButtonMain } from "shared/buttons"
+import { useGetCommentsMutation, usePostCommentMutation } from "store/index";
 import { CreateHideNumber, createDate } from "utils";
 
 interface IProps {
@@ -10,6 +11,30 @@ interface IProps {
 }
 
 export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
+    const [comments, setComments] = useState<ICommentsRequest[]>([]);
+    const [getComments] = useGetCommentsMutation();
+    const [postComment] = usePostCommentMutation();
+    console.log(comments);
+
+    useEffect(() => {
+        loadComments();
+      }, [adById]);
+
+    const loadComments = () => {
+        getComments(adById.id).then((res) => {      
+          if (res.data) {
+            setComments(res.data);
+        }
+        }).catch((error) => console.log(error))
+      }
+    
+      const handlePublishComment = async (event) => {
+        event.preventDefault()
+        postComment({ id: adById.id, body: { text: text }}).then(() => {
+          loadComments()
+        }).catch((error) => console.log(error))
+      }
+
     const [hideNumber, setHideNumber] = useState<boolean>(false);
     const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
     const [openModalComments, setOpenModalComments] = useState<boolean>(false);
@@ -62,7 +87,9 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
             </div>
             }
             {openModalRedactor && <ChangeAd setOpenModalRedactor={setOpenModalRedactor} />}
-            {openModalComments && <Comments setOpenModalComments={setOpenModalComments} />}
+            {openModalComments && <Comments
+            setOpenModalComments={setOpenModalComments}
+            comments={comments} />}
         </div>
     )
 }

@@ -1,6 +1,4 @@
-import { Comments } from "components/modal";
 import { BackToMainPage, ContainerContent } from "layouts/container"
-import { useState } from "react";
 import { useParams } from "react-router-dom"
 import { useGetAdByIdQuery } from "store/services";
 import { Carousel, ProductAdData, UserAdData } from "./ui";
@@ -13,8 +11,6 @@ export const ProductCard = () => {
     const toNumber = Number(id);
 
     const { data: adById } = useGetAdByIdQuery(toNumber);
-
-    const [openModalComments, setOpenModalComments] = useState<boolean>(false);
 
     return (
         <ContainerContent>
@@ -42,7 +38,7 @@ export const ProductCard = () => {
             </div>
         </div>
 
-        {openModalComments && <Comments setOpenModalComments={setOpenModalComments} />}
+
             </div>
         }
 
