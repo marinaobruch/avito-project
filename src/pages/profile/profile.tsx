@@ -5,28 +5,28 @@ import { useEffect, useId, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ButtonMain } from "shared/buttons"
 import { InputContentNotNess } from "shared/inputs"
-import { useGetCurrentUserQuery, usePatchUserMutation, usePostImgUserMutation } from "store/services"
+import { useGetCurrentUserQuery, usePatchUserMutation } from "store/services"
 import { setUserData } from "store/slice"
+import { UserAvatar } from "."
 
 
 export const Profile = () => {
     const dispatch = useAppDispatch();
     const [patchUser] = usePatchUserMutation();
-    const [postAvatar] = usePostImgUserMutation();
+    const {data: getUser} = useGetCurrentUserQuery('');
     const form = useId();
-    
-    const [image, setImage] = useState<string>('');
-    const [avatar, setAvatar] = useState('')
 
+    const [profileImage, setProfileImage] = useState<File | null>(null);
+    console.log(profileImage);
     const {data: currentUser, isLoading} = useGetCurrentUserQuery('');
-    console.log(currentUser);
+
     useEffect(() => {
         if(currentUser)
         dispatch(setUserData(currentUser));
     }, [currentUser]);
 
     const cashUser = useAppSelector((state) => state.user.userData);
-    console.log(cashUser);
+
     const {
         handleSubmit,
         control
@@ -44,41 +44,8 @@ export const Profile = () => {
         patchUser(data).then((res) => {
             dispatch(setUserData(res.data));
             console.log(res);
-            }
-        )};
-
-    const uploadContent = (event) => {
-        event.preventDefault();
-        event.target.files[0] && setImage(event.target.files[0]);
-    }
-
-    const sendContent = (event) => {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('file', image);
-
-        postAvatar(formData).then(res => {
-            // dispatch(personalInfo(res.data))
-            console.log(res);
-            setAvatar(`http://localhost:8090/${res.data.avatar}`)
-            console.log(res);
-        }).catch (error => {
-            console.log(error);
-        })
-
-        // axios.post('http://localhost:8090/user/avatar', formData, {
-        //     headers: {
-        //         'Content-type': 'multipart/form-data',
-        //         'authorization': `Bearer ${token.userToken}`
-        //     }
-        // }).then(res => {
-        //     dispatch(personalInfo(res.data))
-        //     setAvatar(`http://localhost:8090/${res.data.avatar}`)
-        //     console.log(res);
-        // }).catch (error => {
-        //     console.log(error);
-        // })
-    }
+        }
+    )};
 
     return (
         <ContainerContent>
@@ -94,31 +61,13 @@ export const Profile = () => {
                 <h3 className="text-3xl">Настройки профиля</h3>
                 <div className="flex justify-start items-start gap-10 mt-10">
 
-                    <div className="flex flex-col items-center">
-                        <div
-                            className="bg-gray-200 w-44 h-44 rounded-full mb-4"
-                        >
-                            <img src={avatar} alt="profileImg"/>
-                        </div>
-                        <label
-                            htmlFor='avatar'
-                            onClick={(e) => sendContent(e)}
-                            className="text-lg text-sky-500 hover:text-sky-800 hover:cursor-pointer">
-                            Заменить
-                        </label>
-                        <input
-                            onChange={(e) => uploadContent(e)}
-                            className="hidden"
-                            type="file"
-                            id='avatar'
-                        />
-                    </div>
+                    <UserAvatar setProfileImage={setProfileImage} getUser={getUser}/>
 
                     <form 
                         id={form}
                         onSubmit={handleSubmit(handleChange)}
                         className="w-614 grid grid-cols-2 gap-4"
-                        >
+                    >
                         <div className="col-span-2 flex gap-4">
                             <div>
                                 <label className="grey-add-text">Имя</label>

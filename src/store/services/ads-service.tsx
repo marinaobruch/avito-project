@@ -17,13 +17,29 @@ export const avitoApi = createApi({
           },
     }),
     endpoints: (build) => ({
+        //ADS
         getAllAds: build.query<IRequestAds[], number>({
             query: () => '/ads'
         }),
         getAdById: build.query<IRequestAds, number>({
             query: (id: number) => `/ads/${id}`
+        }),          
+        postAdv: build.mutation({
+          query: (body) => ({
+            headers: {
+              'content-type': 'application/json'
+            },
+            url: '/adstext',
+            method: 'POST',
+            body: {
+              title: body.title,
+              description: body.description,
+              price: body.price,
+            }
+          })
         }),
 
+        // AUTH/REG
         postReg: build.mutation<IUserReg, IUserReg>({
             query: (body) => ({
                 headers: {
@@ -54,6 +70,7 @@ export const avitoApi = createApi({
             }),
           }),
         
+        // USER/AUTH/REG
         getAllUsers: build.query<IUserRequest[], string>({
             query: () => '/user/all',
             providesTags: ['Users']
@@ -78,21 +95,23 @@ export const avitoApi = createApi({
                 invalidatesTags: ['Users'],
             })
         }),
-        
-        postImgUser: build.mutation<IUserImgPost, string>({
-            query: (body) => ({
+
+        // IMGES
+        postImgUser: build.mutation<IUserImgPost, object>({
+            query: (formData) => ({
                 headers: {
                     'content-type': 'application/json',
                 },
                 url: 'user/avatar',
                 method: 'POST',
                 body: {
-                    file: body,
+                    file: formData,
                 },
                 invalidatesTags: ['Users'],
             }),
           }),
 
+          //COMMENTS
           getComments: build.mutation({
             query: (id) => ({
               headers: {

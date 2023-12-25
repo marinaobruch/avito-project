@@ -1,16 +1,17 @@
 import { useId } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setAccessToken, setUser } from 'store/slice';
+import { setAccessToken, setUser, setUserData } from 'store/slice';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { LogoSkyPro } from 'shared/logos';
 import { useAppDispatch } from 'hooks/use-api';
-import { usePostLoginMutation } from 'store/services';
+import { useGetCurrentUserQuery, usePostLoginMutation } from 'store/services';
 import { IUserLogin } from 'interface/api-interface';
 
 export const FormLogin = () => {
     const [postLogin] = usePostLoginMutation();
+    const {data: currentUser} = useGetCurrentUserQuery('');
 
     const {
         handleSubmit,
@@ -32,7 +33,8 @@ export const FormLogin = () => {
         await postLogin(data).then((res) => {
             dispatch(setAccessToken(res.data.access_token));
             localStorage.setItem('refresh_token', res.data.refresh_token);
-            navigate('/')
+            if(currentUser) dispatch(setUserData(currentUser));
+            navigate('/');
         })
 
         dispatch(setUser(data));
