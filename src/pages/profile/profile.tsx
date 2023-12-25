@@ -17,7 +17,6 @@ export const Profile = () => {
     const form = useId();
 
     const [profileImage, setProfileImage] = useState<File | null>(null);
-    console.log(profileImage);
     const {data: currentUser, isLoading} = useGetCurrentUserQuery('');
 
     useEffect(() => {

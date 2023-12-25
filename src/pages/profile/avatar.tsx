@@ -1,5 +1,5 @@
 import { IUserRequest } from "interface/api-interface";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { usePostImgUserMutation } from "store/index";
 
 interface IPrors {
@@ -8,23 +8,23 @@ interface IPrors {
 }
 
 export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
-    console.log(getUser);
     const [postAvatar] = usePostImgUserMutation();
-    const [image, setImage] = useState('')
 
-    const handleAvatarUpload = (file: File) => {
-        const formData = new FormData();
-        if (file) {
-        console.log(formData);
-        formData.append('file', file);
-        console.log(formData);
-        postAvatar(formData).then((data) => console.log(data));
+    const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        console.log(files);
+        if (files) {
+            const formData = new FormData()
+            formData.append('myFile', files[0])
+            setProfileImage(files[0]);
+
+            postAvatar(formData).then((data) => console.log(data))
         }
-    }
-
-    const handleSaveProfileAvatar = () => {
+      }
+    
+      const handleSaveProfileAvatar = () => {
         console.log('done');
-    }
+      }
 
     return (
         <div className="flex flex-col items-center">
@@ -37,24 +37,15 @@ export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
                 </a>
             </div>
             <input
-                className="hidden"
-                type="file"
-                id='file-upload'
-                accept="image/*"
-                onChange={(event) => {
-                    event.preventDefault();
-                    const file = event.target.files?.[0];
-                    console.log(file);
-                    if (file) {
-                        setProfileImage(file)
-                        handleAvatarUpload(file)
-                    }
-                }} 
+                // className="hidden"
+                type="file" 
+                id='file-upload' 
+                onChange={(event) => {handleAvatarUpload(event)}}
             />
             <a
+                className="text-lg text-sky-500 hover:text-sky-800 hover:cursor-pointer"    
                 target="_self"
                 onClick={handleSaveProfileAvatar}
-                className="text-lg text-sky-500 hover:text-sky-800 hover:cursor-pointer"
             >
                 Заменить
             </a>
