@@ -6,7 +6,7 @@ export interface IChangeForm {
 }
 
 export interface IAddNewAd {
-    name: string;
+    title: string;
     description: string;
     photo1: string;
     photo2: string;

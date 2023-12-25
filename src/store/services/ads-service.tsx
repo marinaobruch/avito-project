@@ -5,7 +5,7 @@ import { RootState } from "..";
 
 export const avitoApi = createApi({
     reducerPath: 'avitoApi',
-    tagTypes: ['Users', 'Comments'],
+    tagTypes: ['Users', 'Comments', 'Ads'],
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8090',
         prepareHeaders: (headers, {getState}) => {
@@ -19,10 +19,12 @@ export const avitoApi = createApi({
     endpoints: (build) => ({
         //ADS
         getAllAds: build.query<IRequestAds[], number>({
-            query: () => '/ads'
+            query: () => '/ads',
+            providesTags: ['Ads']
         }),
         getAdById: build.query<IRequestAds, number>({
-            query: (id: number) => `/ads/${id}`
+            query: (id: number) => `/ads/${id}`,
+            providesTags: ['Ads']
         }),          
         postAdv: build.mutation({
           query: (body) => ({
@@ -34,8 +36,9 @@ export const avitoApi = createApi({
             body: {
               title: body.title,
               description: body.description,
-              price: body.price,
-            }
+              price: Number(body.price),
+            },
+            invalidatesTags: ['Ads']
           })
         }),
 
@@ -141,6 +144,7 @@ export const avitoApi = createApi({
 export const {
     useGetAllAdsQuery,
     useGetAdByIdQuery,
+    usePostAdvMutation,
 
     usePostRegMutation,
     usePostLoginMutation,

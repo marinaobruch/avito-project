@@ -4,12 +4,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
 import { InputContent, InputImg } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
+import { usePostAdvMutation } from "store/index";
 
 interface INewAdd {
     setOpenNewAd: (arg0:boolean)=>void;
 }
 
 export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
+    const [postAd] = usePostAdvMutation();
+
     const {
         handleSubmit,
         control,
@@ -17,7 +20,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     } = useForm<IAddNewAd>({
         mode:'onChange',
         defaultValues: {
-            name: '',
+            title: '',
             description: '',
             photo1: '',
             photo2: '',
@@ -32,8 +35,9 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     const form = useId()
 
     const handleChange: SubmitHandler<IAddNewAd> = (data) => {
+        postAd(data).then((res) => console.log(res));
         console.log(data);
-        reset()
+        reset();
     }
 
     return (
@@ -59,7 +63,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                         <h4 className="text-base pt-8 pb-1">Название</h4>
                         <InputContent
                             control={control}
-                            name="name"
+                            name="title"
                             placeholder="Введите название"
                             type="text"
                             width="500px"
