@@ -58,3 +58,14 @@ export interface IUserRequest {
     created_on: string;
     user: IUserRequest;
   }
+
+  export interface IPostAdv {
+    title: string,
+    description: string,
+    photo1?: string,
+    photo2?: string,
+    photo3?: string,
+    photo4?: string,
+    photo5?: string,
+    price: number,
+  }

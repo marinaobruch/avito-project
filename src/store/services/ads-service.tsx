@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IUserImgPost, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
+import { IPostAdv, IUserImgPost, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
 import { RootState } from "..";
 
@@ -26,8 +26,8 @@ export const avitoApi = createApi({
             query: (id: number) => `/ads/${id}`,
             providesTags: ['Ads']
         }),          
-        postAdv: build.mutation({
-          query: (body) => ({
+        postAdv: build.mutation<IPostAdv, IRequestAds>({
+          query: (body: IPostAdv) => ({
             headers: {
               'content-type': 'application/json'
             },
@@ -41,6 +41,13 @@ export const avitoApi = createApi({
             invalidatesTags: ['Ads']
           })
         }),
+        deleteAdv: build.mutation<number, number>({
+            query: (id) => ({
+                url: `ads/${id}`,
+                method: 'DELETE',
+                invalidatesTags: ['Ads']
+            })
+          }),
 
         // AUTH/REG
         postReg: build.mutation<IUserReg, IUserReg>({
@@ -145,6 +152,7 @@ export const {
     useGetAllAdsQuery,
     useGetAdByIdQuery,
     usePostAdvMutation,
+    useDeleteAdvMutation,
 
     usePostRegMutation,
     usePostLoginMutation,

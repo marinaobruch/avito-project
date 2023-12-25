@@ -1,9 +1,11 @@
 import { ChangeAd, Comments } from "components/modal";
+import { useAppSelector } from "hooks/use-api";
 import { ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { FC, useEffect, useState } from "react";
 import { ButtonMain } from "shared/buttons"
 import { useGetCommentsMutation } from "store/index";
 import { CreateHideNumber, createDate } from "utils";
+import { ModalCardDelete, ModalCardWarning } from "../modals-card";
 
 interface IProps {
     mode: string;
@@ -12,12 +14,18 @@ interface IProps {
 
 export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
     const [getComments] = useGetCommentsMutation();
+    const currentUserData = useAppSelector((state) => state.user.userData);
+    const adUser = adById.user;
+    const adId = adById.id;
 
     const [comments, setComments] = useState<ICommentsRequest[]>([]);
 
     const [hideNumber, setHideNumber] = useState<boolean>(false);
     const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
     const [openModalComments, setOpenModalComments] = useState<boolean>(false);
+    const [openModalWarning, setOpenModalWarning] = useState<boolean>(false);
+    const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
+    const [textWarning, setTextWarning] = useState<string>('');
 
     useEffect(() => {
         loadComments();
@@ -33,9 +41,24 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
     const phoneNumberHide = CreateHideNumber(phoneNumber);
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
-    const handleOpenRedactor = () => setOpenModalRedactor(true);
+    const handleOpenRedactor = () => {
+        if(currentUserData.email === adUser.email) {
+            setOpenModalRedactor(true);
+        } else {
+            setOpenModalWarning(true);
+            setTextWarning('Это не Ваше объявление!');
+        }
+    }
     const handleOpenComments = () => setOpenModalComments(true);
-    const handleDeleteAd = () => alert("Товар удален");
+    const handleDeleteAd = () => {
+        if(currentUserData.email === adUser.email) {
+            setOpenModalDelete(true);
+        } else {
+            setOpenModalWarning(true);
+            setTextWarning('Это не Ваше объявление!');
+        }
+
+    }
 
     const formatedDate: string = createDate(adById?.created_on);
 
@@ -77,6 +100,18 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
             </div>
             }
             {openModalRedactor && <ChangeAd setOpenModalRedactor={setOpenModalRedactor} />}
+            {openModalDelete &&
+                <ModalCardDelete
+                    setOpenModalDelete={setOpenModalDelete}
+                    adId={adId}
+            />}
+            {openModalWarning &&
+                <ModalCardWarning
+                    setOpenModalWarning={setOpenModalWarning}
+                    text={textWarning}
+                />
+            }
+            
             {openModalComments &&
                 <Comments
                     setOpenModalComments={setOpenModalComments}

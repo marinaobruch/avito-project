@@ -27,7 +27,7 @@ export const ProductCard = () => {
                         <ProductAdData mode={mode} adById={adById}/>
                         <UserAdData adById={adById}/>
                     </div>
-                </div>      
+                </div>
                 <div className="mt-16">
                     <h3 className="text-4xl mb-8">Описание товара</h3>
                     {adById?.description

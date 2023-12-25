@@ -12,7 +12,7 @@ import { useNavigate } from "react-router";
 
 
 interface INewAdd {
-    setOpenModalComments: (arg0:boolean)=>void;
+    setOpenModalComments: (arg: boolean) => void;
     comments: ICommentsRequest[],
     setComments: (comments: ICommentsRequest[]) => void;
     adById: IRequestAds;

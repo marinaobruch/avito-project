@@ -7,7 +7,7 @@ import { InputContent, InputImg, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
 
 interface INewAdd {
-    setOpenModalRedactor: (arg0:boolean)=>void;
+    setOpenModalRedactor: (arg: boolean) => void;
 }
 
 const someAdd = {
@@ -98,35 +98,30 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor}) => {
                             <InputImg
                                 control={control}
                                 name="photo1"
-                                placeholder="Введите описание"
                                 type="file"
                                 id="picture1"
                             />
                             <InputImg
                                 control={control}
                                 name="photo2"
-                                placeholder="Введите описание"
                                 type="file"
                                 id="picture2"
                             />
                             <InputImg
                                 control={control}
                                 name="photo3"
-                                placeholder="Введите описание"
                                 type="file"
                                 id="picture3"
                             />
                             <InputImg
                                 control={control}
                                 name="photo4"
-                                placeholder="Введите описание"
                                 type="file"
                                 id="picture4"
                             />
                             <InputImg
                                 control={control}
                                 name="photo5"
-                                placeholder="Введите описание"
                                 type="file"
                                 id="picture5"
                             /> 

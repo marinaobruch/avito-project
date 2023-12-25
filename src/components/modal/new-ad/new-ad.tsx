@@ -5,6 +5,7 @@ import { ButtonMain } from "shared/buttons";
 import { InputContent, InputImg } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
 import { usePostAdvMutation } from "store/index";
+import { useNavigate } from "react-router";
 
 interface INewAdd {
     setOpenNewAd: (arg0:boolean)=>void;
@@ -12,6 +13,7 @@ interface INewAdd {
 
 export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     const [postAd] = usePostAdvMutation();
+    const navigate = useNavigate();
 
     const {
         handleSubmit,
@@ -37,6 +39,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     const handleChange: SubmitHandler<IAddNewAd> = (data) => {
         postAd(data).then((res) => console.log(res));
         console.log(data);
+        navigate('/');
         reset();
     }
 
