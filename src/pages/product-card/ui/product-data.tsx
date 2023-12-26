@@ -8,15 +8,15 @@ import { CreateHideNumber, createDate } from "utils";
 import { ModalCardDelete, ModalCardWarning } from "../modals-card";
 
 interface IProps {
-    mode: string;
     adById: IRequestAds;
 }
 
-export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
+export const ProductAdData: FC<IProps> = ({ adById }) => {
     const [getComments] = useGetCommentsMutation();
     const currentUserData = useAppSelector((state) => state.user.userData);
     const adUser = adById.user;
     const adId = adById.id;
+    const model = adUser.email === currentUserData.email ? 'creator' : 'user'
 
     const [comments, setComments] = useState<ICommentsRequest[]>([]);
 
@@ -37,8 +37,8 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
         }).catch((error) => console.log(error))
       }
 
-    const phoneNumber: string | undefined = adById?.user?.phone;
-    const phoneNumberHide = CreateHideNumber(phoneNumber);
+    const phoneNumber: string | undefined = adById?.user?.phone ? adById?.user?.phone : 'нет номера';
+    const phoneNumberHide = adById?.user?.phone ? CreateHideNumber(phoneNumber) : 'нет номера';
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
     const handleOpenRedactor = () => {
@@ -75,7 +75,7 @@ export const ProductAdData: FC<IProps> = ({ mode, adById }) => {
                 {comments.length} отзыва
             </div>
             <div className="text-3xl pt-9 pb-5 font-robotoMedium">{adById?.price} ₽</div>
-            {mode === 'user'
+            {model === 'user'
             ?
             <ButtonMain
                 type="button"

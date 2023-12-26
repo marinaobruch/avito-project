@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom"
 import { useGetAdByIdQuery } from "store/services";
 import { Carousel, ProductAdData, UserAdData } from "./ui";
 
-// const mode:string = 'user'
-const mode: string = 'creator'
 
 export const ProductCard = () => {
     const { id } = useParams();
@@ -24,7 +22,7 @@ export const ProductCard = () => {
 
                     <Carousel images={adById.images} />
                     <div>
-                        <ProductAdData mode={mode} adById={adById}/>
+                        <ProductAdData adById={adById}/>
                         <UserAdData adById={adById}/>
                     </div>
                 </div>
