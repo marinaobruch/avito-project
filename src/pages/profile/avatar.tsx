@@ -14,10 +14,11 @@ export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
         const files = event.target.files;
         console.log(files);
         if (files) {
-            const formData = new FormData()
-            formData.append('myFile', files[0])
+            const formData = new FormData();
+            formData.append('myFile', files[0]);
             setProfileImage(files[0]);
 
+            console.log(formData);
             postAvatar(formData).then((data) => console.log(data))
         }
       }

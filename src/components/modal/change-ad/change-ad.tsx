@@ -1,27 +1,21 @@
 import { FC, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { IAddNewAd } from "interface/common-interface";
+import { IAddNewAd, IPatchAd } from "interface/common-interface";
 import { ButtonMain } from "shared/buttons";
 import { InputContent, InputImg, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
+import { IRequestAds } from "interface/api-interface";
+import { usePatchAdvMutation } from "store/index";
 
 interface INewAdd {
     setOpenModalRedactor: (arg: boolean) => void;
+    adById: IRequestAds;
 }
 
-const someAdd = {
-    'name': 'Ракетка для большого тенниса Triumph Pro STС Б/У',
-    'description': 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae eveniet saepe dolorum eligendi! Sed molestiae deleniti porro?',
-    'photo1': '',
-    'photo2': '',
-    'photo3': '',
-    'photo4': '',
-    'photo5': '',
-    'price': '2200',
-}
+export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
 
-export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor}) => {
+    const [patchAdv] = usePatchAdvMutation();
     const {
         handleSubmit,
         control,
@@ -29,24 +23,31 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor}) => {
     } = useForm<IAddNewAd>({
         mode:'onChange',
         defaultValues: {
-            name: someAdd.name,
-            description: someAdd.description,
+            title: adById?.title,
+            description: adById?.description,
             photo1: '',
             photo2: '',
             photo3: '',
             photo4: '',
             photo5: '',
-            price: someAdd.price,
+            price: Number(adById?.price),
 
         }
     });
 
-    const form = useId()
-
-    const handleChange: SubmitHandler<IAddNewAd> = (data) => {
-        console.log(data);
-        reset()
-    }
+    const form = useId();
+    const handleChange: SubmitHandler<IPatchAd> = async (data) => {
+        const postData = data;
+        console.log(postData);
+        await patchAdv({
+            id: adById.id,
+            body: data,
+          }).then((res) => console.log(res))
+            .catch((error) => console.log(error));
+          
+        reset();
+        setOpenModalRedactor(false);
+    };
 
     return (
         <div
@@ -71,7 +72,7 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor}) => {
                         <h4 className="text-base pt-8 pb-1">Название</h4>
                         <InputContent
                             control={control}
-                            name="name"
+                            name="title"
                             placeholder="Введите название"
                             type="text"
                             width="500px"

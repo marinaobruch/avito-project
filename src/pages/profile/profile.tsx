@@ -5,19 +5,21 @@ import { useEffect, useId, useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ButtonMain } from "shared/buttons"
 import { InputContentNotNess } from "shared/inputs"
-import { useGetCurrentUserQuery, usePatchUserMutation } from "store/services"
+import { useGetCurrentUserQuery, useGetUserAdsQuery, usePatchUserMutation } from "store/services"
 import { setUserData } from "store/slice"
 import { UserAvatar } from "."
+import { CardItem } from "components/card-item"
 
 
 export const Profile = () => {
     const dispatch = useAppDispatch();
     const [patchUser] = usePatchUserMutation();
     const {data: getUser} = useGetCurrentUserQuery('');
+    const {data: getUserAds, isLoading: isLoadingAdsUser} = useGetUserAdsQuery('');
+    const {data: currentUser, isLoading: isLoadingcurrentUser} = useGetCurrentUserQuery('');
     const form = useId();
 
     const [profileImage, setProfileImage] = useState<File | null>(null);
-    const {data: currentUser, isLoading} = useGetCurrentUserQuery('');
 
     useEffect(() => {
         if(currentUser)
@@ -50,7 +52,7 @@ export const Profile = () => {
         <ContainerContent>
         <div className="w-1440 mx-10">
            <BackToMainPage />
-           {isLoading
+           {isLoadingcurrentUser
            ? <div>Loading...</div>
             :
             <div>
@@ -124,6 +126,7 @@ export const Profile = () => {
             <h3 className="text-3xl">Мои товары</h3>
             <div className="grid grid-cols-8 gap-6 mt-5">
             </div>
+            <CardItem allAds={getUserAds} isLoading={isLoadingAdsUser}/>
            </div>
            }
 

@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from "react";
 import { ButtonMain } from "shared/buttons"
 import { useGetCommentsMutation } from "store/index";
 import { CreateHideNumber, createDate } from "utils";
-import { ModalCardDelete, ModalCardWarning } from "../modals-card";
+import { ModalCardDelete } from "../modals-card";
 
 interface IProps {
     adById: IRequestAds;
@@ -23,9 +23,7 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
     const [hideNumber, setHideNumber] = useState<boolean>(false);
     const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false);
     const [openModalComments, setOpenModalComments] = useState<boolean>(false);
-    const [openModalWarning, setOpenModalWarning] = useState<boolean>(false);
     const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
-    const [textWarning, setTextWarning] = useState<string>('');
 
     useEffect(() => {
         loadComments();
@@ -41,24 +39,9 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
     const phoneNumberHide = adById?.user?.phone ? CreateHideNumber(phoneNumber) : 'нет номера';
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
-    const handleOpenRedactor = () => {
-        if(currentUserData.email === adUser.email) {
-            setOpenModalRedactor(true);
-        } else {
-            setOpenModalWarning(true);
-            setTextWarning('Это не Ваше объявление!');
-        }
-    }
+    const handleOpenRedactor = () => setOpenModalRedactor(true);
     const handleOpenComments = () => setOpenModalComments(true);
-    const handleDeleteAd = () => {
-        if(currentUserData.email === adUser.email) {
-            setOpenModalDelete(true);
-        } else {
-            setOpenModalWarning(true);
-            setTextWarning('Это не Ваше объявление!');
-        }
-
-    }
+    const handleDeleteAd = () => setOpenModalDelete(true);
 
     const formatedDate: string = createDate(adById?.created_on);
 
@@ -99,19 +82,16 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
                 />
             </div>
             }
-            {openModalRedactor && <ChangeAd setOpenModalRedactor={setOpenModalRedactor} />}
+            {openModalRedactor &&
+                <ChangeAd
+                    setOpenModalRedactor={setOpenModalRedactor}
+                    adById={adById}
+                />}
             {openModalDelete &&
                 <ModalCardDelete
                     setOpenModalDelete={setOpenModalDelete}
                     adId={adId}
             />}
-            {openModalWarning &&
-                <ModalCardWarning
-                    setOpenModalWarning={setOpenModalWarning}
-                    text={textWarning}
-                />
-            }
-            
             {openModalComments &&
                 <Comments
                     setOpenModalComments={setOpenModalComments}
