@@ -16,13 +16,17 @@ export const MainPage = () => {
    const [adsList, setAdsList] = useState(allAds);
 
    useEffect(() => {
-      setAdsList(allAds)
-      dispatch(getAllAds(allAds));
+      setAdsList(allAds);
+      if(allAds) {
+         dispatch(getAllAds(allAds));
+      }
    }, [allAds]);
 
    useEffect(() => {
-      const filteredCars = filterAds(searchTerm, allAds);
-      setAdsList(filteredCars);
+      if(allAds) {
+         const filteredCars = filterAds(searchTerm, allAds);
+         setAdsList(filteredCars);
+      }
    }, [searchTerm, allAds])
 
    return (

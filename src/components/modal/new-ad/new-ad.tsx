@@ -43,11 +43,6 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
         console.log(data);
         postAd(data).then((res) => {
             console.log(res);
-            const formData = new FormData();
-            formData.append('file', data?.photo1);
-            console.log(data?.photo1);
-            // postImg(formData, res.data.id).then((res) => console.log(res));
-
         });
         navigate('/');
         reset();

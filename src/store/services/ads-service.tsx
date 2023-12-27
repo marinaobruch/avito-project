@@ -19,9 +19,9 @@ export const avitoApi = createApi({
     }),
     endpoints: (build) => ({
         //ADS
-        getAllAds: build.query<IRequestAds[], void>({
+        getAllAds: build.query<IRequestAds[], number>({
             query: () => '/ads',
-            providesTags: ['Ads']
+            providesTags: ['Ads'],
         }),
         getAdById: build.query<IRequestAds, number>({
             query: (id: number) => `/ads/${id}`,
@@ -38,15 +38,15 @@ export const avitoApi = createApi({
                     description: body.description,
                     price: Number(body.price),
                 },
-                invalidatesTags: ['Ads']
-            })
+            }),
+            invalidatesTags: ['Ads'],
         }),
         deleteAdv: build.mutation<number, number>({
             query: (id) => ({
                 url: `ads/${id}`,
                 method: 'DELETE',
-                invalidatesTags: ['Ads']
-            })
+            }),
+            invalidatesTags: ['Ads'],
           }),
         getUserAds: build.query<IRequestAds[], string>({
             query: () => '/ads/me',
@@ -69,8 +69,8 @@ export const avitoApi = createApi({
                     photo5: body?.photo5,
                     price: Number(body.price),
                 },
-                providesTags: ['Ads'],
-            })
+            }),
+            invalidatesTags: ['Ads'],
           }),
 
         // AUTH/REG
@@ -107,11 +107,11 @@ export const avitoApi = createApi({
         // USER/AUTH/REG
         getAllUsers: build.query<IUserRequest[], string>({
             query: () => '/user/all',
-                providesTags: ['Users']
+                providesTags: ['Users'],
         }), 
         getCurrentUser: build.query<IUserRequest, string>({
             query: () => '/user',
-                providesTags: ['Users']
+                providesTags: ['Users'],
         }),  
         patchUser: build.mutation<IUserPatch, IUserPatch>({
             query: (body) => ({
