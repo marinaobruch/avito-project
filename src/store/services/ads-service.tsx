@@ -26,7 +26,7 @@ export const avitoApi = createApi({
         getAdById: build.query<IRequestAds, number>({
             query: (id: number) => `/ads/${id}`,
         }),          
-        postAdv: build.mutation<IPostAdv, IRequestAds>({
+        postAdv: build.mutation<IPostAdv, IPostAdv>({
             query: (body: IPostAdv) => ({
                 headers: {
                 'content-type': 'application/json'
@@ -130,7 +130,7 @@ export const avitoApi = createApi({
             })
         }),
 
-        // IMGES
+        // IMAGES
           postImgUser: build.mutation<IUserImgPost, object>({
             query: (formData: object) => ({
               url: 'user/avatar',
@@ -138,6 +138,14 @@ export const avitoApi = createApi({
               body: formData,
             }),
             invalidatesTags: ['Users'],
+          }),
+          postImgInAdv: build.mutation({
+            query: ({id, body}) => ({
+                url: `ads/${id}/image`,
+                method: 'POST',
+                body: body,
+                invalidatesTags: ['Ads'],
+            }),
           }),
 
           //COMMENTS
@@ -181,7 +189,9 @@ export const {
     useGetAllUsersQuery,
     useGetCurrentUserQuery,
     usePatchUserMutation,
+
     usePostImgUserMutation,
+    usePostImgInAdvMutation,
 
     usePostCommentMutation,
     useGetCommentsMutation,

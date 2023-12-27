@@ -1,11 +1,11 @@
 import { FC, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { IAddNewAd, IPatchAd } from "interface/common-interface";
+import { IPatchAd } from "interface/common-interface";
 import { ButtonMain } from "shared/buttons";
 import { InputContent, InputImg, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { IRequestAds } from "interface/api-interface";
+import { IPostAdv, IRequestAds } from "interface/api-interface";
 import { usePatchAdvMutation } from "store/index";
 
 interface INewAdd {
@@ -20,7 +20,7 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
         handleSubmit,
         control,
         reset
-    } = useForm<IAddNewAd>({
+    } = useForm<IPostAdv>({
         mode:'onChange',
         defaultValues: {
             title: adById?.title,
@@ -37,8 +37,6 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
 
     const form = useId();
     const handleChange: SubmitHandler<IPatchAd> = async (data) => {
-        const postData = data;
-        console.log(postData);
         await patchAdv({
             id: adById.id,
             body: data,

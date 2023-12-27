@@ -14,12 +14,9 @@ export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
         const formData = new FormData()
         if (file) {
           formData.append('file', file);
+          console.log(file);
           postAvatar(formData).then((data) => console.log(data))
         }
-      }
-    
-      const handleSaveProfileAvatar = () => {
-        console.log('done');
       }
 
     return (

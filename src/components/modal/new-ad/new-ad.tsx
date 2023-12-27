@@ -1,11 +1,11 @@
-import { IAddNewAd } from "interface/common-interface";
 import { FC, useId } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
 import { InputContent, InputImg } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { usePostAdvMutation } from "store/index";
+import { usePostAdvMutation, usePostImgInAdvMutation } from "store/index";
 import { useNavigate } from "react-router";
+import { IPostAdv } from "interface/api-interface";
 
 interface INewAdd {
     setOpenNewAd: (arg0:boolean)=>void;
@@ -13,13 +13,15 @@ interface INewAdd {
 
 export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     const [postAd] = usePostAdvMutation();
+    const [postImg] = usePostImgInAdvMutation();
     const navigate = useNavigate();
+
 
     const {
         handleSubmit,
         control,
         reset
-    } = useForm<IAddNewAd>({
+    } = useForm<IPostAdv>({
         mode:'onChange',
         defaultValues: {
             title: '',
@@ -29,23 +31,41 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
             photo3: '',
             photo4: '',
             photo5: '',
-            price: '',
+            price: 0,
 
         }
     });
 
     const form = useId()
 
-    const handleChange: SubmitHandler<IAddNewAd> = (data) => {
-        postAd(data).then((res) => console.log(res));
+    const handleChange: SubmitHandler<IPostAdv> = (data) => {
+
         console.log(data);
+        postAd(data).then((res) => {
+            console.log(res);
+            const formData = new FormData();
+            formData.append('file', data?.photo1);
+            console.log(data?.photo1);
+            // postImg(formData, res.data.id).then((res) => console.log(res));
+
+        });
         navigate('/');
         reset();
     }
 
+    const handleImgUpload = (file: File) => {
+        const formData = new FormData();
+        if (file) {
+          formData.append('file', file);
+          console.log(file);
+          postImg({id: 20, body: formData}).then((data) => console.log(data))
+        }
+      }
+
+
     return (
         <div
-        onClick={() => setOpenNewAd(false)}
+        // onClick={() => setOpenNewAd(false)}
         className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center">
             <form
             id={form}
@@ -141,6 +161,19 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                     />
                 </div>
             </form>
+            <input
+                // className="hidden"
+                className="text-gray-300 text-4xl p-6 inline-block bg-gray-100 select-none cursor-pointer absolute"
+                type="file" 
+                id='file'
+                onChange={(event) => {
+                    event.preventDefault()
+                    const file = event.target.files?.[0];
+                    if (file) {
+                      handleImgUpload(file)
+                    }
+                  }}
+            />
         </div>
     )
 }
