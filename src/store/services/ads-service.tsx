@@ -50,7 +50,7 @@ export const avitoApi = createApi({
           }),
         getUserAds: build.query<IRequestAds[], string>({
             query: () => '/ads/me',
-                providesTags: ['Ads']
+            providesTags: ['Ads']
         }),
         patchAdv: build.mutation<IPatchAd, IPatchAd>({
             query: ({ id, body }) => ({
@@ -107,11 +107,11 @@ export const avitoApi = createApi({
         // USER/AUTH/REG
         getAllUsers: build.query<IUserRequest[], string>({
             query: () => '/user/all',
-                providesTags: ['Users'],
+            providesTags: ['Users'],
         }), 
         getCurrentUser: build.query<IUserRequest, string>({
             query: () => '/user',
-                providesTags: ['Users'],
+            providesTags: ['Users'],
         }),  
         patchUser: build.mutation<IUserPatch, IUserPatch>({
             query: (body) => ({
@@ -126,8 +126,8 @@ export const avitoApi = createApi({
                     city: body.city,
                     phone: body.phone,
                 },
-                invalidatesTags: ['Users'],
-            })
+            }),
+            invalidatesTags: ['Users'],
         }),
 
         // IMAGES
@@ -146,6 +146,7 @@ export const avitoApi = createApi({
                 body: body,
                 invalidatesTags: ['Ads'],
             }),
+            invalidatesTags: ['Ads'],
           }),
 
           //COMMENTS
@@ -156,8 +157,7 @@ export const avitoApi = createApi({
                 },
                 url: `ads/${id}/comments`,
                 method: 'GET',
-                providesTags: ['Comments']
-            })
+            }),
           }),
           postComment: build.mutation({
             query: ({id, body}) => ({
@@ -169,8 +169,8 @@ export const avitoApi = createApi({
                 body: {
                     text: body
                 },
-                invalidatesTags: ['Comments'],
             }),
+            invalidatesTags: ['Comments'],
           }),
     })
 })
