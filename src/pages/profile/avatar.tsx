@@ -10,16 +10,11 @@ interface IPrors {
 export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
     const [postAvatar] = usePostImgUserMutation();
 
-    const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        console.log(files);
-        if (files) {
-            const formData = new FormData();
-            formData.append('myFile', files[0]);
-            setProfileImage(files[0]);
-
-            console.log(formData);
-            postAvatar(formData).then((data) => console.log(data))
+    const handleAvatarUpload = (file: File) => {
+        const formData = new FormData()
+        if (file) {
+          formData.append('file', file);
+          postAvatar(formData).then((data) => console.log(data))
         }
       }
     
@@ -30,26 +25,30 @@ export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
     return (
         <div className="flex flex-col items-center">
             <div className="bg-gray-200 w-44 h-44 rounded-full mb-4">
-                <a href="#" target="_self">
+                <div>
                     {getUser?.avatar
-                    ? <img src={`http://localhost:8090/${getUser?.avatar}`} alt="" />
+                    ? <img className="w-44 h-44 object-cover" src={`http://localhost:8090/${getUser?.avatar}`} alt="" />
                     : null
                     }
-                </a>
+                </div>
             </div>
             <input
-                // className="hidden"
+                className="hidden"
                 type="file" 
-                id='file-upload' 
-                onChange={(event) => {handleAvatarUpload(event)}}
+                id='file-upload'
+                onChange={(event) => {
+                    event.preventDefault()
+                    const file = event.target.files?.[0];
+                    if (file) {
+                      setProfileImage(file)
+                      handleAvatarUpload(file)
+                    }
+                  }}
             />
-            <a
-                className="text-lg text-sky-500 hover:text-sky-800 hover:cursor-pointer"    
-                target="_self"
-                onClick={handleSaveProfileAvatar}
-            >
-                Заменить
-            </a>
+            <div
+                className="text-lg text-sky-500 hover:text-sky-800 hover:cursor-pointer"
+                onClick={() => document.getElementById('file-upload')?.click()}
+            > Заменить </div>
         </div>
     )
 }

@@ -19,13 +19,12 @@ export const avitoApi = createApi({
     }),
     endpoints: (build) => ({
         //ADS
-        getAllAds: build.query<IRequestAds[], number>({
+        getAllAds: build.query<IRequestAds[], void>({
             query: () => '/ads',
             providesTags: ['Ads']
         }),
         getAdById: build.query<IRequestAds, number>({
             query: (id: number) => `/ads/${id}`,
-            providesTags: ['Ads']
         }),          
         postAdv: build.mutation<IPostAdv, IRequestAds>({
             query: (body: IPostAdv) => ({
@@ -132,18 +131,13 @@ export const avitoApi = createApi({
         }),
 
         // IMGES
-        postImgUser: build.mutation<IUserImgPost, object>({
-            query: (formData) => ({
-                // headers: {
-                //     'content-type': 'multipart/form-data',
-                // },
-                url: 'user/avatar',
-                method: 'POST',
-                body: {
-                    file: formData,
-                },
-                invalidatesTags: ['Users'],
+          postImgUser: build.mutation<IUserImgPost, object>({
+            query: (formData: object) => ({
+              url: 'user/avatar',
+              method: 'POST',
+              body: formData,
             }),
+            invalidatesTags: ['Users'],
           }),
 
           //COMMENTS

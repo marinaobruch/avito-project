@@ -13,7 +13,7 @@ export interface IUserLogin {
 }
 
 export interface IUserImgPost {
-  file: string,
+  body: object,
 }
 
 export interface IUserPatch {
