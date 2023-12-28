@@ -17,8 +17,8 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     const [postAd] = usePostAdvMutation();
     const [postImg] = usePostImgInAdvMutation();
     const navigate = useNavigate();
-    const [currentImg, setCurrentImg] = useState<object>();
-
+    const [currentImg, setCurrentImg] = useState<object[]>([]);
+    console.log(currentImg);
 
     const {
         handleSubmit,
@@ -40,7 +40,9 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
         postAd(data).then((res) => {
             // передаю картинки
             if(currentImg) {
-                addImgInRequest(res.data.id, currentImg)
+                for (let i = 0; i < 5; i++) {
+                    addImgInRequest(res.data.id, currentImg[i])
+                }
             }
         });
         navigate('/');
@@ -62,7 +64,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
             if (file) {
                 formData.append('file', file);
                 console.log(file);
-                setCurrentImg(formData);
+                setCurrentImg((currentImg) => [...currentImg, formData]);
             }
         }
     }
