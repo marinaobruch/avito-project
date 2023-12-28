@@ -1,20 +1,23 @@
-import { FC, useId } from "react";
+import { FC, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
-import { InputContent, InputImg } from "shared/inputs";
+import { InputContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { usePostAdvMutation, usePostImgInAdvMutation } from "store/index";
+import { useGetAllAdsQuery, usePostAdvMutation, usePostImgInAdvMutation } from "store/index";
 import { useNavigate } from "react-router";
 import { IPostAdv } from "interface/api-interface";
+import { PiPlusThin } from "react-icons/pi";
 
 interface INewAdd {
-    setOpenNewAd: (arg0:boolean)=>void;
+    setOpenNewAd: (arg: boolean) => void;
 }
 
 export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
+    const {data: allAds} = useGetAllAdsQuery(0);
     const [postAd] = usePostAdvMutation();
     const [postImg] = usePostImgInAdvMutation();
     const navigate = useNavigate();
+    const [currentImg, setCurrentImg] = useState<object>();
 
 
     const {
@@ -26,41 +29,48 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
         defaultValues: {
             title: '',
             description: '',
-            photo1: '',
-            photo2: '',
-            photo3: '',
-            photo4: '',
-            photo5: '',
             price: 0,
-
         }
     });
 
     const form = useId()
 
     const handleChange: SubmitHandler<IPostAdv> = (data) => {
-
         console.log(data);
         postAd(data).then((res) => {
-            console.log(res);
+            // передаю картинки
+            if(currentImg) {
+                addImgInRequest(res.data.id, currentImg)
+            }
         });
         navigate('/');
         reset();
     }
 
-    const handleImgUpload = (file: File) => {
-        const formData = new FormData();
-        if (file) {
-          formData.append('file', file);
-          console.log(file);
-          postImg({id: 20, body: formData}).then((data) => console.log(data))
+    const addImgInRequest = (newIdAd: number, formData: object) => {
+        if(allAds) {
+            postImg({id: newIdAd, body: formData})
+            .then((data) => console.log(data))
         }
-      }
+    }
+
+    const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        const file = event.target.files?.[0];
+        if (file) {
+            const formData = new FormData();
+            if (file) {
+                formData.append('file', file);
+                console.log(file);
+                setCurrentImg(formData);
+            }
+        }
+    }
 
 
     return (
         <div
-        // onClick={() => setOpenNewAd(false)}
+        onClick={() => setOpenNewAd(false)}
         className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center">
             <form
             id={form}
@@ -106,36 +116,61 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                             <h5 className="grey-add-text">не более 5 фотографий</h5>
                         </div>
                         <div className="flex gap-2 pt-1">
-                            <InputImg
-                                control={control}
-                                name="photo1"
-                                type="file"
-                                id="picture1"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo2"
-                                type="file"
-                                id="picture2"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo3"
-                                type="file"
-                                id="picture3"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo4"
-                                type="file"
-                                id="picture4"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo5"
-                                type="file"
-                                id="picture5"
-                            /> 
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_1'
+                                    onChange={handleAvatar}
+                                />
+                                <label className="label-img" htmlFor='file_1'>   
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_2'
+                                    onChange={handleAvatar}
+                                />
+                                <label className="label-img" htmlFor='file_2'>
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_3'
+                                    onChange={handleAvatar}
+                                />
+                                <label className="label-img" htmlFor='file_3'>   
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_4'
+                                    onChange={handleAvatar}
+                                />
+                                <label className="label-img" htmlFor='file_4'>
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_5'
+                                    onChange={handleAvatar}
+                                />
+                                <label className="label-img" htmlFor='file_5'>
+                                    <PiPlusThin />
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div className="pb-8">
@@ -156,19 +191,23 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                     />
                 </div>
             </form>
-            <input
-                // className="hidden"
-                className="text-gray-300 text-4xl p-6 inline-block bg-gray-100 select-none cursor-pointer absolute"
-                type="file" 
-                id='file'
-                onChange={(event) => {
-                    event.preventDefault()
-                    const file = event.target.files?.[0];
-                    if (file) {
-                      handleImgUpload(file)
-                    }
-                  }}
-            />
         </div>
     )
 }
+
+
+    // const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     event.preventDefault()
+    //     const file = event.target.files?.[0];
+    //     if (file) {
+    //         const formData = new FormData();
+    //         if (file) {
+    //             formData.append('file', file);
+    //             console.log(file);
+    //             if(allAds) {
+    //                 postImg({id: allAds?.length + 1, body: formData})
+    //                 .then((data) => console.log(data))
+    //             }
+    //         }
+    //     }
+    // }

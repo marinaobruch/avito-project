@@ -10,12 +10,18 @@ interface IPrors {
 export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
     const [postAvatar] = usePostImgUserMutation();
 
-    const handleAvatarUpload = (file: File) => {
-        const formData = new FormData()
+      const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        const file = event.target.files?.[0];
         if (file) {
-          formData.append('file', file);
-          console.log(file);
-          postAvatar(formData).then((data) => console.log(data))
+          setProfileImage(file);
+
+          const formData = new FormData()
+          if (file) {
+            formData.append('file', file);
+            console.log(file);
+            postAvatar(formData).then((data) => console.log(data))
+          }
         }
       }
 
@@ -33,14 +39,7 @@ export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
                 className="hidden"
                 type="file" 
                 id='file-upload'
-                onChange={(event) => {
-                    event.preventDefault()
-                    const file = event.target.files?.[0];
-                    if (file) {
-                      setProfileImage(file)
-                      handleAvatarUpload(file)
-                    }
-                  }}
+                onChange={handleAvatar}
             />
             <div
                 className="text-lg text-sky-500 hover:text-sky-800 hover:cursor-pointer"
