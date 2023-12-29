@@ -7,6 +7,7 @@ import { useGetAllAdsQuery, usePostAdvMutation, usePostImgInAdvMutation } from "
 import { useNavigate } from "react-router";
 import { IPostAdv } from "interface/api-interface";
 import { PiPlusThin } from "react-icons/pi";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 
 interface INewAdd {
     setOpenNewAd: (arg: boolean) => void;
@@ -125,8 +126,13 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     id='file_1'
                                     onChange={handleImgUpload}
                                 />
-                                <label className="label-img" htmlFor='file_1'>   
-                                    <PiPlusThin />
+                                <label className="label-img" htmlFor='file_1'>
+                                    {currentImg.length > 0
+                                    ?   <div className="text-green-500">
+                                        <IoCheckmarkDoneCircleOutline />
+                                        </div>
+                                    :   <PiPlusThin />
+                                    } 
                                 </label>
                             </div>
                             <div>
@@ -137,7 +143,12 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_2'>
-                                    <PiPlusThin />
+                                    {currentImg.length > 1
+                                    ?   <div className="text-green-500">
+                                        <IoCheckmarkDoneCircleOutline />
+                                        </div>
+                                    :   <PiPlusThin />
+                                    } 
                                 </label>
                             </div>
                             <div>
@@ -148,7 +159,12 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_3'>   
-                                    <PiPlusThin />
+                                    {currentImg.length > 2
+                                    ?   <div className="text-green-500">
+                                        <IoCheckmarkDoneCircleOutline />
+                                        </div>
+                                    :   <PiPlusThin />
+                                    } 
                                 </label>
                             </div>
                             <div>
@@ -159,7 +175,12 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_4'>
-                                    <PiPlusThin />
+                                    {currentImg.length > 3
+                                    ?   <div className="text-green-500">
+                                        <IoCheckmarkDoneCircleOutline />
+                                        </div>
+                                    :   <PiPlusThin />
+                                    } 
                                 </label>
                             </div>
                             <div>
@@ -170,7 +191,12 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_5'>
-                                    <PiPlusThin />
+                                    {currentImg.length > 4
+                                    ?   <div className="text-green-500">
+                                        <IoCheckmarkDoneCircleOutline />
+                                        </div>
+                                    :   <PiPlusThin />
+                                    } 
                                 </label>
                             </div>
                         </div>
