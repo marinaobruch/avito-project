@@ -15,6 +15,7 @@ interface INewAdd {
 }
 
 export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
+    console.log(adById);
 
     const [patchAdv] = usePatchAdvMutation();
     const [currentImg, setCurrentImg] = useState<object[]>([]);
@@ -112,9 +113,15 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                     id='file_1'
                                     onChange={handleImgUpload}
                                 />
-                                <label className="label-img" htmlFor='file_1'>   
-                                    <PiPlusThin />
-                                </label>
+                                {
+                                adById.images[0]
+                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_1'>
+                                        <img alt="" src={`http://localhost:8090/${adById.images[0]?.url}`} className="w-20 h-20 object-cover p-1"/>
+                                    </label>
+                                :   <label className="label-img" htmlFor='file_1'>
+                                        <PiPlusThin />
+                                    </label>
+                                }
                             </div>
                             <div>
                                 <input
@@ -123,9 +130,15 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                     id='file_2'
                                     onChange={handleImgUpload}
                                 />
-                                <label className="label-img" htmlFor='file_2'>
-                                    <PiPlusThin />
-                                </label>
+                                {
+                                adById.images[1]
+                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_2'>
+                                        <img alt="" src={`http://localhost:8090/${adById.images[1]?.url}`} className="w-20 h-20 object-cover p-1"/>
+                                    </label>
+                                :   <label className="label-img" htmlFor='file_2'>
+                                        <PiPlusThin />
+                                    </label>
+                                }
                             </div>
                             <div>
                                 <input
@@ -134,9 +147,15 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                     id='file_3'
                                     onChange={handleImgUpload}
                                 />
-                                <label className="label-img" htmlFor='file_3'>   
-                                    <PiPlusThin />
-                                </label>
+                                {
+                                adById.images[2]
+                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_3'>
+                                        <img alt="" src={`http://localhost:8090/${adById.images[2]?.url}`} className="w-20 h-20 object-cover p-1"/>
+                                    </label>
+                                :   <label className="label-img" htmlFor='file_3'>
+                                        <PiPlusThin />
+                                    </label>
+                                }
                             </div>
                             <div>
                                 <input
@@ -145,9 +164,15 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                     id='file_4'
                                     onChange={handleImgUpload}
                                 />
-                                <label className="label-img" htmlFor='file_4'>
-                                    <PiPlusThin />
-                                </label>
+                                {
+                                adById.images[3]
+                                ?   <label className="w-20 h-20 bg-gray-20 cursor-pointer" htmlFor='file_4'>
+                                        <img alt="" src={`http://localhost:8090/${adById.images[3]?.url}`} className="w-20 h-20 object-cover p-1"/>
+                                    </label>
+                                :   <label className="label-img" htmlFor='file_4'>
+                                        <PiPlusThin />
+                                    </label>
+                                }
                             </div>
                             <div>
                                 <input
@@ -156,9 +181,15 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                     id='file_5'
                                     onChange={handleImgUpload}
                                 />
-                                <label className="label-img" htmlFor='file_5'>
-                                    <PiPlusThin />
-                                </label>
+                                {
+                                adById.images[4]
+                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_5'>
+                                        <img alt="" src={`http://localhost:8090/${adById.images[4]?.url}`} className="w-20 h-20 object-cover p-1"/>
+                                    </label>
+                                :   <label className="label-img" htmlFor='file_5'>
+                                        <PiPlusThin />
+                                    </label>
+                                }
                             </div>
                         </div>
                     </div>
