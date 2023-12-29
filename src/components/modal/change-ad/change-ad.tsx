@@ -1,12 +1,13 @@
-import { FC, useId } from "react";
+import { FC, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { IPatchAd } from "interface/common-interface";
+import { IBodyForPatchAd } from "interface/common-interface";
 import { ButtonMain } from "shared/buttons";
-import { InputContent, InputImg, TextareaContent } from "shared/inputs";
+import { InputContent, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { IPostAdv, IRequestAds } from "interface/api-interface";
+import { IRequestAds } from "interface/api-interface";
 import { usePatchAdvMutation } from "store/index";
+import { PiPlusThin } from "react-icons/pi";
 
 interface INewAdd {
     setOpenModalRedactor: (arg: boolean) => void;
@@ -16,27 +17,24 @@ interface INewAdd {
 export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
 
     const [patchAdv] = usePatchAdvMutation();
+    const [currentImg, setCurrentImg] = useState<object[]>([]);
+    console.log(currentImg);
     const {
         handleSubmit,
         control,
         reset
-    } = useForm<IPostAdv>({
+    } = useForm<IBodyForPatchAd>({
         mode:'onChange',
         defaultValues: {
             title: adById?.title,
             description: adById?.description,
-            photo1: '',
-            photo2: '',
-            photo3: '',
-            photo4: '',
-            photo5: '',
             price: Number(adById?.price),
 
         }
     });
 
     const form = useId();
-    const handleChange: SubmitHandler<IPatchAd> = async (data) => {
+    const handleChange: SubmitHandler<IBodyForPatchAd> = async (data) => {
         await patchAdv({
             id: adById.id,
             body: data,
@@ -46,6 +44,19 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
         reset();
         setOpenModalRedactor(false);
     };
+
+    const handleImgUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        const file = event.target.files?.[0];
+        if (file) {
+            const formData = new FormData();
+            if (file) {
+                formData.append('file', file);
+                console.log(file);
+                setCurrentImg((currentImg) => [...currentImg, formData]);
+            }
+        }
+    }
 
     return (
         <div
@@ -94,36 +105,61 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                             <h5 className="grey-add-text">не более 5 фотографий</h5>
                         </div>
                         <div className="flex gap-2 pt-1">
-                            <InputImg
-                                control={control}
-                                name="photo1"
-                                type="file"
-                                id="picture1"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo2"
-                                type="file"
-                                id="picture2"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo3"
-                                type="file"
-                                id="picture3"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo4"
-                                type="file"
-                                id="picture4"
-                            />
-                            <InputImg
-                                control={control}
-                                name="photo5"
-                                type="file"
-                                id="picture5"
-                            /> 
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_1'
+                                    onChange={handleImgUpload}
+                                />
+                                <label className="label-img" htmlFor='file_1'>   
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_2'
+                                    onChange={handleImgUpload}
+                                />
+                                <label className="label-img" htmlFor='file_2'>
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_3'
+                                    onChange={handleImgUpload}
+                                />
+                                <label className="label-img" htmlFor='file_3'>   
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_4'
+                                    onChange={handleImgUpload}
+                                />
+                                <label className="label-img" htmlFor='file_4'>
+                                    <PiPlusThin />
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    className="hidden"
+                                    type="file" 
+                                    id='file_5'
+                                    onChange={handleImgUpload}
+                                />
+                                <label className="label-img" htmlFor='file_5'>
+                                    <PiPlusThin />
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div className="pb-8">

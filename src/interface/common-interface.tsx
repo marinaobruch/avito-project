@@ -1,5 +1,3 @@
-import { IPostAdv } from ".";
-
 export interface IChangeForm {
     name: string;
     surname: string;
@@ -7,10 +5,17 @@ export interface IChangeForm {
     phone: string;
 }
 
+export interface IBodyForPatchAd {
+    title: string,
+    description: string,
+    price: number,
+}
+
 export interface IPatchAd {
     id: number;
-    body: IPostAdv;
+    body: IBodyForPatchAd;
 }
+
 
 export interface IComment {
     review: string;

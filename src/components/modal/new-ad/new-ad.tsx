@@ -56,7 +56,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
         }
     }
 
-    const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImgUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
         const file = event.target.files?.[0];
         if (file) {
@@ -123,7 +123,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     className="hidden"
                                     type="file" 
                                     id='file_1'
-                                    onChange={handleAvatar}
+                                    onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_1'>   
                                     <PiPlusThin />
@@ -134,7 +134,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     className="hidden"
                                     type="file" 
                                     id='file_2'
-                                    onChange={handleAvatar}
+                                    onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_2'>
                                     <PiPlusThin />
@@ -145,7 +145,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     className="hidden"
                                     type="file" 
                                     id='file_3'
-                                    onChange={handleAvatar}
+                                    onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_3'>   
                                     <PiPlusThin />
@@ -156,7 +156,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     className="hidden"
                                     type="file" 
                                     id='file_4'
-                                    onChange={handleAvatar}
+                                    onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_4'>
                                     <PiPlusThin />
@@ -167,7 +167,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                                     className="hidden"
                                     type="file" 
                                     id='file_5'
-                                    onChange={handleAvatar}
+                                    onChange={handleImgUpload}
                                 />
                                 <label className="label-img" htmlFor='file_5'>
                                     <PiPlusThin />
@@ -198,7 +198,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
 }
 
 
-    // const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // const handleImgUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     //     event.preventDefault()
     //     const file = event.target.files?.[0];
     //     if (file) {

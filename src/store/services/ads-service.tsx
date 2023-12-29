@@ -25,7 +25,12 @@ export const avitoApi = createApi({
         }),
         getAdById: build.query<IRequestAds, number>({
             query: (id: number) => `/ads/${id}`,
-        }),          
+            providesTags: ['Ads'],
+        }),  
+        getUserAds: build.query<IRequestAds[], string>({
+            query: () => '/ads/me',
+            providesTags: ['Ads']
+        }),        
         postAdv: build.mutation<IPostAdv, IPostAdv>({
             query: (body: IPostAdv) => ({
                 headers: {
@@ -41,17 +46,6 @@ export const avitoApi = createApi({
             }),
             invalidatesTags: ['Ads'],
         }),
-        deleteAdv: build.mutation<number, number>({
-            query: (id) => ({
-                url: `ads/${id}`,
-                method: 'DELETE',
-            }),
-            invalidatesTags: ['Ads'],
-          }),
-        getUserAds: build.query<IRequestAds[], string>({
-            query: () => '/ads/me',
-            providesTags: ['Ads']
-        }),
         patchAdv: build.mutation<IPatchAd, IPatchAd>({
             query: ({ id, body }) => ({
                 headers: {
@@ -62,13 +56,15 @@ export const avitoApi = createApi({
                 body: {
                     title: body.title,
                     description: body.description,
-                    photo1: body?.photo1,
-                    photo2: body?.photo2,
-                    photo3: body?.photo3,
-                    photo4: body?.photo4,
-                    photo5: body?.photo5,
                     price: Number(body.price),
                 },
+            }),
+            invalidatesTags: ['Ads'],
+        }),
+        deleteAdv: build.mutation<number, number>({
+            query: (id) => ({
+                url: `ads/${id}`,
+                method: 'DELETE',
             }),
             invalidatesTags: ['Ads'],
           }),
@@ -178,10 +174,10 @@ export const avitoApi = createApi({
 export const {
     useGetAllAdsQuery,
     useGetAdByIdQuery,
-    usePostAdvMutation,
-    useDeleteAdvMutation,
     useGetUserAdsQuery,
+    usePostAdvMutation,
     usePatchAdvMutation,
+    useDeleteAdvMutation,
 
     usePostRegMutation,
     usePostLoginMutation,
@@ -193,6 +189,6 @@ export const {
     usePostImgUserMutation,
     usePostImgInAdvMutation,
 
-    usePostCommentMutation,
     useGetCommentsMutation,
+    usePostCommentMutation,
 } = avitoApi;
