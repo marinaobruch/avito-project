@@ -6,14 +6,16 @@ interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   type: "button" | "reset" | "submit";
   width: string;
   onClick?: React.MouseEventHandler;
+  disabled?:boolean
 }
 
-export const ButtonMain: FC<IButtonProps> = ({text, width, onClick, type}) => (
+export const ButtonMain: FC<IButtonProps> = ({text, width, onClick, type, disabled}) => (
   <button
     onClick={onClick}
-    className='rounded-lg text-white text-base h-12 p-2 bg-sky-500 font-robotoLight hover:bg-sky-700 active:bg-sky-900 '
+    className={`rounded-lg text-base h-12 p-2 text-white bg-sky-500 ${!disabled && 'bg-gray-300'} font-robotoLight hover:bg-sky-700 active:bg-sky-900`}
     style={{width:`${width}`}}
     type={type}
+    disabled={!disabled}
   >
     {text}
   </button>

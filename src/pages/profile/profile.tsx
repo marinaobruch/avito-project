@@ -19,8 +19,6 @@ export const Profile = () => {
     const {data: currentUser, isLoading: isLoadingcurrentUser} = useGetCurrentUserQuery('');
     const form = useId();
 
-    const [profileImage, setProfileImage] = useState<File | null>(null);
-
     useEffect(() => {
         if(currentUser)
         dispatch(setUserData(currentUser));
@@ -30,7 +28,8 @@ export const Profile = () => {
 
     const {
         handleSubmit,
-        control
+        control,
+        watch
     } = useForm<IChangeForm>({
         mode:'onChange',
         defaultValues: {
@@ -38,8 +37,19 @@ export const Profile = () => {
             surname: cashUser?.surname,
             city: cashUser?.city,
             phone: cashUser?.phone,
-        }
+        },
     });
+
+    const name = watch('name')
+    const surname = watch('surname')
+    const city = watch('city')
+    const phone = watch('phone')
+    console.log(`${name}, ${surname}, ${city}, ${phone}`);
+
+    const isValid = name !==cashUser?.name ||
+                    surname !==cashUser?.surname ||
+                    city !==cashUser?.city ||
+                    phone !== cashUser?.phone
 
     const handleChange: SubmitHandler<IChangeForm> = (data) => {
         patchUser(data).then((res) => {
@@ -62,7 +72,7 @@ export const Profile = () => {
                 <h3 className="text-3xl">Настройки профиля</h3>
                 <div className="flex justify-start items-start gap-10 mt-10">
 
-                    <UserAvatar setProfileImage={setProfileImage} getUser={getUser}/>
+                    <UserAvatar getUser={getUser}/>
 
                     <form 
                         id={form}
@@ -118,6 +128,7 @@ export const Profile = () => {
                             type="submit"
                             text="Сохранить"
                             width="154px"
+                            disabled={isValid}
                         />
                     </form>
                 </div>            

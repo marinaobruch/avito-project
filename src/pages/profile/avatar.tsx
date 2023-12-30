@@ -3,19 +3,16 @@ import { FC } from "react";
 import { usePostImgUserMutation } from "store/index";
 
 interface IPrors {
-    setProfileImage: (e: File) => void;
     getUser: IUserRequest | undefined;
 }
 
-export const UserAvatar: FC<IPrors> = ({setProfileImage, getUser}) => {
+export const UserAvatar: FC<IPrors> = ({getUser}) => {
     const [postAvatar] = usePostImgUserMutation();
 
       const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
         const file = event.target.files?.[0];
         if (file) {
-          setProfileImage(file);
-
           const formData = new FormData()
           if (file) {
             formData.append('file', file);
