@@ -11,7 +11,7 @@ const initialState: IToken = {
 };
 
 export const tokenSlice = createSlice({
-  name: "user",
+  name: "token",
   initialState: initialState,
 
   reducers: {

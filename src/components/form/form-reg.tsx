@@ -16,11 +16,11 @@ export const FormReg = () => {
 
     const navigate = useNavigate();
     const [error, setError] = useState<string>('')
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     const {
         handleSubmit,
         control,
-        reset
     } = useForm<IUserReg>({
         mode:'onChange',
         defaultValues: {
@@ -41,18 +41,32 @@ export const FormReg = () => {
             setError("Пароли не совпадают");
             return;
         }
-        await postReg(data).then((res) => {
-            console.log(res);
-        });
-
-        await postLogin(data).then((res) => {
-            dispatch(setAccessToken(res.data.access_token));
-            localStorage.setItem('refresh_token', res.data.refresh_token);
-            navigate('/')
+        await postReg(data)
+        .unwrap()
+        .then((fulfilled) => {
+            console.log(fulfilled);
+            dispatch(setUser(data));
+            navigate('/profile')
         })
+        .catch((rejected) => {
+            if (rejected.status === 400) {
+                setErrorMessage('Такой пользователь уже существует')
+                return;
+            }
+            setErrorMessage('Что-то пошло не так, попробуйте позже')
+            return;
+          })
+          console.log(errorMessage);
 
-        dispatch(setUser(data));
-        reset();
+          {errorMessage.length > 0 && 
+            await postLogin(data)
+            .unwrap()
+            .then((fulfilled) => {
+                dispatch(setAccessToken(fulfilled.access_token));
+                localStorage.setItem('refresh_token', fulfilled.refresh_token);
+                navigate('/profile')
+            })
+        }
     }
 
     return (
@@ -113,6 +127,7 @@ export const FormReg = () => {
                     />
                 </div>
             </form>
+            <div className='text-xl text-red-500'>{errorMessage}</div>
          </div>
     </div>
     )
