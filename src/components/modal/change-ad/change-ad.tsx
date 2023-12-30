@@ -1,7 +1,7 @@
 import { FC, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IBodyForPatchAd } from "interface/common-interface";
-import { ButtonMain } from "shared/buttons";
+import {    ButtonMainDisabled } from "shared/buttons";
 import { InputContent, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
 import { IRequestAds } from "interface/api-interface";
@@ -23,11 +23,11 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
     const [imgForDelete, setImgForDelete] = useState<string>('');
     const [deleteModal, setDeleteModal] = useState<boolean>(false);
 
-
     const {
         handleSubmit,
         control,
-        reset
+        reset,
+        watch
     } = useForm<IBodyForPatchAd>({
         mode:'onChange',
         defaultValues: {
@@ -37,6 +37,14 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
 
         }
     });
+
+    const title = watch('title')
+    const description = watch('description')
+    const price = watch('price')
+
+    const isValid = title !== adById?.title ||
+                    description !== adById?.description ||
+                    price !== Number(adById?.price)
 
     const form = useId();
     const handleChange: SubmitHandler<IBodyForPatchAd> = async (data) => {
@@ -260,6 +268,7 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                 }
                             </div>
                         </div>
+                        <div className="text-xs pt-4 text-sky-500">Фото изменяются автоматически после удаления/добавления</div>
                     </div>
                     <div className="pb-8">
                         <h4 className="text-base pt-8 pb-1">Цена</h4>
@@ -272,10 +281,11 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                         />
                     </div>
 
-                    <ButtonMain
+                    <ButtonMainDisabled
                         type="submit"
-                        text="Сохранить" 
+                        text="Сохранить"
                         width="181px"
+                        disabled={isValid}
                     />
                 </div>
             </form>

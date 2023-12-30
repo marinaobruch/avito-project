@@ -1,7 +1,7 @@
 import { FC, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
-import { InputContent } from "shared/inputs";
+import { InputContent, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
 import { useGetAllAdsQuery, usePostAdvMutation, usePostImgInAdvMutation } from "store/index";
 import { useNavigate } from "react-router";
@@ -103,11 +103,10 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
 
                     <div>
                         <h4 className="text-base pt-8 pb-1">Описание</h4>
-                        <InputContent
+                        <TextareaContent
                             control={control}
                             name="description"
                             placeholder="Введите описание"
-                            type="text"
                             width="500px"
                             height="200px"
                         />

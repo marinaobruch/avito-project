@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from "hooks/use-api"
 import { IChangeForm } from "interface/common-interface"
 import { BackToMainPage, ContainerContent } from "layouts/container"
-import { useEffect, useId, useState } from "react"
+import { useEffect, useId } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { ButtonMain } from "shared/buttons"
+import { ButtonMainDisabled } from "shared/buttons"
 import { InputContentNotNess } from "shared/inputs"
 import { useGetCurrentUserQuery, useGetUserAdsQuery, usePatchUserMutation } from "store/services"
 import { setUserData } from "store/slice"
@@ -44,7 +44,6 @@ export const Profile = () => {
     const surname = watch('surname')
     const city = watch('city')
     const phone = watch('phone')
-    console.log(`${name}, ${surname}, ${city}, ${phone}`);
 
     const isValid = name !==cashUser?.name ||
                     surname !==cashUser?.surname ||
@@ -124,7 +123,7 @@ export const Profile = () => {
                             />
                         </div>
                         
-                        <ButtonMain
+                        <ButtonMainDisabled
                             type="submit"
                             text="Сохранить"
                             width="154px"
