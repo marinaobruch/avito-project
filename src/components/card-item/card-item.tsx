@@ -2,7 +2,7 @@ import { IRequestAds } from "interface/api-interface";
 import { FC } from "react";
 import { useNavigate } from "react-router"
 import { NoPhotoBig } from "shared/logos";
-import { createDate } from "utils";
+import { createDate, numberWithSpaces } from "utils";
 
 interface IProps {
     allAds: IRequestAds[] | undefined;
@@ -36,7 +36,7 @@ export const CardItem: FC<IProps> = ({allAds, isLoading}) => {
             }
             </div>
             <div className="text-2xl text-sky-500 cursor-pointer">{item.title}</div>
-            <div className="text-2xl">{item.price} ₽</div>
+            <div className="text-2xl">{numberWithSpaces(item.price)} ₽</div>
             <div className="text-lg text-gray-400">{item.user.city}</div>
             <div className="text-lg text-gray-400">{createDate(item.created_on)}</div>
         </div>

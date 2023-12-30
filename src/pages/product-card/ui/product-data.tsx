@@ -4,7 +4,7 @@ import { ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { FC, useEffect, useState } from "react";
 import { ButtonMain } from "shared/buttons"
 import { useGetCommentsMutation } from "store/index";
-import { CreateHideNumber, createDate } from "utils";
+import { CreateHideNumber, createDate, numberWithSpaces } from "utils";
 
 interface IProps {
     adById: IRequestAds;
@@ -56,7 +56,7 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
                 className="text-base text-sky-500 cursor-pointer">
                 {comments.length} отзыва
             </div>
-            <div className="text-3xl pt-9 pb-5 font-robotoMedium">{adById?.price} ₽</div>
+            <div className="text-3xl pt-9 pb-5 font-robotoMedium">{numberWithSpaces(adById?.price)} ₽</div>
             {model === 'user'
             ?
             <ButtonMain
