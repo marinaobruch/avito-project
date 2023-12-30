@@ -1,11 +1,10 @@
-import { ChangeAd, Comments } from "components/modal";
+import { ChangeAd, Comments, ModalCardDelete } from "components/modal";
 import { useAppSelector } from "hooks/use-api";
 import { ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { FC, useEffect, useState } from "react";
 import { ButtonMain } from "shared/buttons"
 import { useGetCommentsMutation } from "store/index";
 import { CreateHideNumber, createDate } from "utils";
-import { ModalCardDelete } from "../modals-card";
 
 interface IProps {
     adById: IRequestAds;

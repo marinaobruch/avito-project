@@ -4,6 +4,8 @@ import { IRequestAds } from "interface/api-interface";
 import { RootState } from "..";
 import { IPatchAd } from "interface/common-interface";
 
+
+
 export const avitoApi = createApi({
     reducerPath: 'avitoApi',
     tagTypes: ['Users', 'Comments', 'Ads'],
@@ -68,6 +70,15 @@ export const avitoApi = createApi({
             }),
             invalidatesTags: ['Ads'],
           }),
+        deleteImg: build.mutation({
+            query: ({ id, file_url}) => ({
+                url: `ads/${id}/image`,
+                params: `file_url=${file_url}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Ads'],
+        }),
+
 
         // AUTH/REG
         postReg: build.mutation<IUserReg, IUserReg>({
@@ -178,6 +189,7 @@ export const {
     usePostAdvMutation,
     usePatchAdvMutation,
     useDeleteAdvMutation,
+    useDeleteImgMutation,
 
     usePostRegMutation,
     usePostLoginMutation,

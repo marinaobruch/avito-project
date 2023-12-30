@@ -69,3 +69,14 @@ export interface IUserRequest {
     photo5?: string,
     price: number,
   }
+
+  export interface IDeleteImgRequest {
+    id: number;
+    file_url: string
+  }
+
+  export interface IImgResponse {
+    ad_id: number;
+    id: number;
+    url: string;
+  }

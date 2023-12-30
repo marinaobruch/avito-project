@@ -23,7 +23,16 @@
 }
 
 .label-img {
-    @apply text-gray-300 text-4xl p-6 inline-block bg-gray-100 select-none cursor-pointer
+    @apply flex items-center justify-center text-gray-300 text-4xl bg-gray-100 select-none cursor-pointer w-24 h-24
+}
+
+.delete-img {
+    @apply flex items-center justify-center w-24 h-24 absolute
+    top-0 left-0 hover:bg-gray-300/50 hover:text-4xl hover:text-red-700
+}
+
+.opacity-move {
+    @apply transition-opacity duration-150 ease-in-out cursor-pointer
 }
 
 @font-face {

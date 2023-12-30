@@ -1,13 +1,14 @@
 import { FC, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
 import { IBodyForPatchAd } from "interface/common-interface";
 import { ButtonMain } from "shared/buttons";
 import { InputContent, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
 import { IRequestAds } from "interface/api-interface";
-import { usePatchAdvMutation } from "store/index";
+import { usePatchAdvMutation, usePostImgInAdvMutation } from "store/index";
 import { PiPlusThin } from "react-icons/pi";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { ModalImgDelete } from "..";
 
 interface INewAdd {
     setOpenModalRedactor: (arg: boolean) => void;
@@ -15,11 +16,14 @@ interface INewAdd {
 }
 
 export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
-    console.log(adById);
 
     const [patchAdv] = usePatchAdvMutation();
-    const [currentImg, setCurrentImg] = useState<object[]>([]);
-    console.log(currentImg);
+    const [postImg] = usePostImgInAdvMutation();
+
+    const [imgForDelete, setImgForDelete] = useState<string>('');
+    const [deleteModal, setDeleteModal] = useState<boolean>(false);
+
+
     const {
         handleSubmit,
         control,
@@ -53,10 +57,16 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
             const formData = new FormData();
             if (file) {
                 formData.append('file', file);
-                console.log(file);
-                setCurrentImg((currentImg) => [...currentImg, formData]);
+                postImg({id: adById.id, body: formData})
+                .then((data) => console.log(data))
             }
         }
+    }
+
+    const handleClickToDeleteImg = (e: React.MouseEvent<HTMLDivElement>, urlId: string ) => {
+        e.stopPropagation();
+        setDeleteModal(true);
+        setImgForDelete(urlId);
     }
 
     return (
@@ -115,12 +125,30 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                 />
                                 {
                                 adById.images[0]
-                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_1'>
-                                        <img alt="" src={`http://localhost:8090/${adById.images[0]?.url}`} className="w-20 h-20 object-cover p-1"/>
-                                    </label>
-                                :   <label className="label-img" htmlFor='file_1'>
+                                ?   <div
+                                        className="relative"
+                                        onClick={(e) => handleClickToDeleteImg(e, adById.images[0].url)}
+                                    >  
+                                        <label className="w-24 h-24 bg-gray-200 cursor-pointer" htmlFor='file_1'>
+                                            <img alt="" src={`http://localhost:8090/${adById.images[0]?.url}`} className="w-24 h-24 object-cover p-1 bg-gray-100"/>
+                                        </label>
+                                        <span className="delete-img easy-animation">
+                                            <div className="opacity-0 opacity-move hover:opacity-100">
+                                                <MdOutlineDeleteOutline />
+                                            </div>
+                                        </span>
+                                        {deleteModal && 
+                                            <ModalImgDelete 
+                                                setOpenModalDelete={setDeleteModal}
+                                                adId={adById.id}
+                                                file_url={imgForDelete}
+                                            />
+                                        }
+                                    </div>
+                                :   <label className="label-img w-24 h-24" htmlFor='file_1'>
                                         <PiPlusThin />
                                     </label>
+                                    
                                 }
                             </div>
                             <div>
@@ -132,10 +160,20 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                 />
                                 {
                                 adById.images[1]
-                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_2'>
-                                        <img alt="" src={`http://localhost:8090/${adById.images[1]?.url}`} className="w-20 h-20 object-cover p-1"/>
-                                    </label>
-                                :   <label className="label-img" htmlFor='file_2'>
+                                ?   <div
+                                        className="relative"
+                                        onClick={(e) => handleClickToDeleteImg(e, adById.images[1].url)}
+                                    >
+                                        <label className="w-24 h-24 bg-gray-200 cursor-pointer" htmlFor='file_2'>
+                                            <img alt="" src={`http://localhost:8090/${adById.images[1]?.url}`} className="w-24 h-24 object-cover p-1 bg-gray-100"/>
+                                        </label>
+                                        <span className="delete-img easy-animation">
+                                            <div className="opacity-0 opacity-move hover:opacity-100">
+                                                <MdOutlineDeleteOutline />
+                                            </div>
+                                        </span>
+                                    </div>
+                                :   <label className="label-img w-24 h-24" htmlFor='file_2'>
                                         <PiPlusThin />
                                     </label>
                                 }
@@ -149,10 +187,20 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                 />
                                 {
                                 adById.images[2]
-                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_3'>
-                                        <img alt="" src={`http://localhost:8090/${adById.images[2]?.url}`} className="w-20 h-20 object-cover p-1"/>
-                                    </label>
-                                :   <label className="label-img" htmlFor='file_3'>
+                                ?   <div
+                                        className="relative"
+                                        onClick={(e) => handleClickToDeleteImg(e, adById.images[2].url)}
+                                    >
+                                        <label className="w-24 h-24 bg-gray-200 cursor-pointer" htmlFor='file_3'>
+                                            <img alt="" src={`http://localhost:8090/${adById.images[2]?.url}`} className="w-24 h-24 object-cover p-1 bg-gray-100"/>
+                                        </label>
+                                        <span className="delete-img easy-animation">
+                                            <div className="opacity-0 opacity-move hover:opacity-100">
+                                                <MdOutlineDeleteOutline />
+                                            </div>
+                                        </span>
+                                    </div>
+                                :   <label className="label-img w-24 h-24" htmlFor='file_3'>
                                         <PiPlusThin />
                                     </label>
                                 }
@@ -166,10 +214,20 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                 />
                                 {
                                 adById.images[3]
-                                ?   <label className="w-20 h-20 bg-gray-20 cursor-pointer" htmlFor='file_4'>
-                                        <img alt="" src={`http://localhost:8090/${adById.images[3]?.url}`} className="w-20 h-20 object-cover p-1"/>
-                                    </label>
-                                :   <label className="label-img" htmlFor='file_4'>
+                                ?   <div
+                                        className="relative"
+                                        onClick={(e) => handleClickToDeleteImg(e, adById.images[3].url)}
+                                    >
+                                        <label className="w-24 h-24 bg-gray-20 cursor-pointer" htmlFor='file_4'>
+                                            <img alt="" src={`http://localhost:8090/${adById.images[3]?.url}`} className="w-24 h-24 object-cover p-1 bg-gray-100"/>
+                                        </label>
+                                        <span className="delete-img easy-animation">
+                                            <div className="opacity-0 opacity-move hover:opacity-100">
+                                                <MdOutlineDeleteOutline />
+                                            </div>
+                                        </span>
+                                    </div>
+                                :   <label className="label-img w-24 h-24" htmlFor='file_4'>
                                         <PiPlusThin />
                                     </label>
                                 }
@@ -183,10 +241,20 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                                 />
                                 {
                                 adById.images[4]
-                                ?   <label className="w-20 h-20 bg-gray-200 cursor-pointer" htmlFor='file_5'>
-                                        <img alt="" src={`http://localhost:8090/${adById.images[4]?.url}`} className="w-20 h-20 object-cover p-1"/>
-                                    </label>
-                                :   <label className="label-img" htmlFor='file_5'>
+                                ?   <div
+                                        className="relative"
+                                        onClick={(e) => handleClickToDeleteImg(e, adById.images[4].url)}
+                                    >
+                                        <label className="w-24 h-24 bg-gray-200 cursor-pointer" htmlFor='file_5'>
+                                            <img alt="" src={`http://localhost:8090/${adById.images[4]?.url}`} className="w-24 h-24 object-cover p-1 bg-gray-100"/>
+                                        </label>
+                                        <span className="delete-img easy-animation">
+                                            <div className="opacity-0 opacity-move hover:opacity-100">
+                                                <MdOutlineDeleteOutline />
+                                            </div>
+                                        </span>
+                                    </div>
+                                :   <label className="label-img w-24 h-24" htmlFor='file_5'>
                                         <PiPlusThin />
                                     </label>
                                 }
