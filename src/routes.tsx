@@ -7,19 +7,21 @@ import { NotFoundPage } from "pages/not-found"
 
 export const AppRouter = () => (
     <Routes>
-        <Route element={ <RequireAuth /> } path="/">
+
+
             <Route element= { <LayoutNoAuth /> }>
                 <Route index element={ <MainPage/> } path='/' />
             </Route>
 
             <Route element= { <LayoutAuth /> }>
-                <Route element= { <Profile /> } path="/profile" />
+                <Route element={ <RequireAuth /> } path="/">
+                    <Route element= { <Profile /> } path="/profile" />
+                </Route>
                 <Route element= { <ProfileSeller /> } path="/profile-seller/:id" />
                 <Route element= { <ProductCard /> } path="/product/:id" />
             </Route>
 
             <Route element={ <NotFoundPage /> } path="*" />
-        </Route>
 
         <Route element= { <Login/> } path="/login" />
         <Route element= { <Register/> } path="/register" />
