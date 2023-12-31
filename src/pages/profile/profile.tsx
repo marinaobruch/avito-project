@@ -10,6 +10,9 @@ import { setUserData } from "store/slice"
 import { UserAvatar } from "."
 import { CardItem } from "components/card-item"
 
+import {Puff} from 'react-loader-spinner';
+
+
 
 export const Profile = () => {
     const dispatch = useAppDispatch();
@@ -62,7 +65,17 @@ export const Profile = () => {
         <div className="w-1440 mx-10">
            <BackToMainPage />
            {isLoadingcurrentUser
-           ? <div>Loading...</div>
+           ? <div>
+                <Puff
+                visible={true}
+                height="80"
+                width="80"
+                color="#0ea5e9"
+                ariaLabel="puff-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                />
+           </div>
             :
             <div>
            <h2 className="mt-16 text-4xl">Здравствуйте, {currentUser?.email} !</h2>

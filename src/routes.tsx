@@ -7,8 +7,6 @@ import { NotFoundPage } from "pages/not-found"
 
 export const AppRouter = () => (
     <Routes>
-
-
             <Route element= { <LayoutNoAuth /> }>
                 <Route index element={ <MainPage/> } path='/' />
             </Route>

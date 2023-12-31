@@ -1,8 +1,10 @@
 import { IRequestAds } from "interface/api-interface";
 import { FC } from "react";
 import { useNavigate } from "react-router"
-import { NoPhotoBig } from "shared/logos";
 import { createDate, numberWithSpaces } from "utils";
+
+import { NoPhotoBig } from "shared/logos";
+import {Puff} from 'react-loader-spinner';
 
 interface IProps {
     allAds: IRequestAds[] | undefined;
@@ -15,7 +17,17 @@ export const CardItem: FC<IProps> = ({allAds, isLoading}) => {
     return (
         <>
         {isLoading
-        ? <div>Loading...</div>
+        ? <div>
+            <Puff
+               visible={true}
+               height="80"
+               width="80"
+               color="#0ea5e9"
+               ariaLabel="puff-loading"
+               wrapperStyle={{}}
+               wrapperClass=""
+            />
+        </div>
         :
         <div className="grid grid-cols-8 gap-6 mt-3 justify-items-center">
         {allAds?.map((item) => (

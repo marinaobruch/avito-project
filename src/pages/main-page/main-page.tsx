@@ -8,6 +8,9 @@ import { Logo } from "shared/logos"
 import { useGetAllAdsQuery } from "store/services"
 import { getAllAds } from "store/slice"
 
+import {Puff} from 'react-loader-spinner';
+
+
 export const MainPage = () => {
    const {data: allAds, isLoading} = useGetAllAdsQuery(100);
    const dispatch = useAppDispatch();
@@ -32,7 +35,17 @@ export const MainPage = () => {
    return (
       <ContainerContent>
          {isLoading
-         ? <div>Loading...</div>
+         ? <div>
+            <Puff
+               visible={true}
+               height="80"
+               width="80"
+               color="#0ea5e9"
+               ariaLabel="puff-loading"
+               wrapperStyle={{}}
+               wrapperClass=""
+            />
+         </div>
          :
          <div className="w-1440 mx-10">
             <div className="grid grid-cols-8">
