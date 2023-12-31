@@ -6,20 +6,22 @@ import { ButtonMain } from "shared/buttons"
 import { CreateHideNumber } from "utils/createHideNumber"
 import { createSellerBy } from "utils/createSellerBy"
 import { NoPhotoBig } from "shared/logos";
+import { useGetAdByUserIdQuery } from "store/index"
 
 
 export const ProfileSeller = () => {
-    const allAds = useAppSelector((state) => state.ads.allAds);
+
     const userData = useAppSelector((state) => state.profile.choisenUser);
+    const {data: getAdsByUserId} = useGetAdByUserIdQuery(userData.id);
+
     const [hideNumber, setHideNumber] = useState<boolean>(false);
 
     const phoneNumber: string | undefined = userData?.phone;
     const phoneNumberHide = CreateHideNumber(phoneNumber);
     const periopOfSales: string = createSellerBy(userData.sells_from);
 
-    const adsByUser = allAds.filter((ads) => ads.user.id === userData.id)
-
     const handleShowNumber = () => setHideNumber((prev) => !prev);
+
 
     return (
         <ContainerContent>
@@ -58,7 +60,7 @@ export const ProfileSeller = () => {
             </div>
 
             <h3 className="text-3xl">Товары продавца</h3>
-            <CardItem allAds={adsByUser} />
+            <CardItem allAds={getAdsByUserId} />
         </div>
      </ContainerContent>
     )

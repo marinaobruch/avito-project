@@ -15,6 +15,7 @@ export const LayoutNoAuth = () => {
   const handleLogout = () => {
     dispatch(removeUser());
     navigate('/login');
+    window.location.reload()
   }
 
   return (

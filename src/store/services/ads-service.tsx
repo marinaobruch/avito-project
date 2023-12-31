@@ -28,6 +28,10 @@ export const avitoApi = createApi({
         getAdById: build.query<IRequestAds, number>({
             query: (id: number) => `/ads/${id}`,
             providesTags: ['Ads'],
+        }),
+        getAdByUserId: build.query({
+            query: (userId) => `/ads?user_id=${userId}`,
+            providesTags: ['Ads'],
         }),  
         getUserAds: build.query<IRequestAds[], string>({
             query: () => '/ads/me',
@@ -72,8 +76,8 @@ export const avitoApi = createApi({
           }),
         deleteImg: build.mutation({
             query: ({ id, file_url}) => ({
-                url: `ads/${id}/image`,
-                params: `file_url=${file_url}`,
+                url: `ads/${id}/image/file_url=${file_url}`,
+                // params: `file_url=${file_url}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Ads'],
@@ -185,6 +189,7 @@ export const avitoApi = createApi({
 export const {
     useGetAllAdsQuery,
     useGetAdByIdQuery,
+    useGetAdByUserIdQuery,
     useGetUserAdsQuery,
     usePostAdvMutation,
     usePatchAdvMutation,

@@ -19,6 +19,7 @@ const handlerMoveToProfile = () => navigate('/profile');
 const handleLogout = () => {
   dispatch(removeUser());
   navigate('/login');
+  window.location.reload()
 }
 
   return (
