@@ -1,9 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IPostAdv, IUserImgPost, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
+import { ICommemtRequest, IDeleteImgRequest, IPatchAd, IPostAdv, IPostComment, IPostImgInAdv, IToken, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
 import { RootState } from "..";
-import { IPatchAd } from "interface/common-interface";
-
 
 
 export const avitoApi = createApi({
@@ -20,7 +18,7 @@ export const avitoApi = createApi({
           },
     }),
     endpoints: (build) => ({
-        //ADS
+    //ADS
         getAllAds: build.query<IRequestAds[], number>({
             query: () => '/ads',
             providesTags: ['Ads'],
@@ -29,15 +27,15 @@ export const avitoApi = createApi({
             query: (id: number) => `/ads/${id}`,
             providesTags: ['Ads'],
         }),
-        getAdByUserId: build.query({
+        getAdByUserId: build.query<IRequestAds[], number>({
             query: (userId) => `/ads?user_id=${userId}`,
             providesTags: ['Ads'],
-        }),  
+        }),
         getUserAds: build.query<IRequestAds[], string>({
             query: () => '/ads/me',
             providesTags: ['Ads']
-        }),        
-        postAdv: build.mutation<IPostAdv, IPostAdv>({
+        }),
+        postAdv: build.mutation<IRequestAds, IPostAdv>({
             query: (body: IPostAdv) => ({
                 headers: {
                 'content-type': 'application/json'
@@ -52,7 +50,7 @@ export const avitoApi = createApi({
             }),
             invalidatesTags: ['Ads'],
         }),
-        patchAdv: build.mutation<IPatchAd, IPatchAd>({
+        patchAdv: build.mutation<IRequestAds, IPatchAd>({
             query: ({ id, body }) => ({
                 headers: {
                     'content-type': 'application/json'
@@ -67,24 +65,55 @@ export const avitoApi = createApi({
             }),
             invalidatesTags: ['Ads'],
         }),
-        deleteAdv: build.mutation<number, number>({
+        deleteAdv: build.mutation<string, number>({
             query: (id) => ({
                 url: `ads/${id}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Ads'],
           }),
-        deleteImg: build.mutation({
-            query: ({ id, file_url}) => ({
-                url: `ads/${id}/image/file_url=${file_url}`,
-                // params: `file_url=${file_url}`,
-                method: 'DELETE',
+    // IMAGES
+        postImgInAdv: build.mutation<IRequestAds, IPostImgInAdv>({
+            query: ({id, body}) => ({
+                url: `ads/${id}/image`,
+                method: 'POST',
+                body: body,
+                invalidatesTags: ['Ads'],
             }),
             invalidatesTags: ['Ads'],
         }),
+        deleteImg: build.mutation<IRequestAds ,IDeleteImgRequest>({
+            query: ({ id, file_url}) => ({
+                url: `ads/${id}/image/file_url=${file_url}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Ads'],
+    }),
+    //COMMENTS
+        getComments: build.mutation<ICommemtRequest, number>({
+            query: (id) => ({
+                headers: {
+                'content-type': 'application/json'
+                },
+                url: `ads/${id}/comments`,
+                method: 'GET',
+            }),
+        }),
+        postComment: build.mutation<ICommemtRequest, IPostComment>({
+            query: ({id, body}) => ({
+                headers: {
+                'content-type': 'application/json'
+                },
+                url: `ads/${id}/comments`,
+                method: 'POST',
+                body: {
+                    text: body
+                },
+            }),
+            invalidatesTags: ['Comments'],
+        }),
 
-
-        // AUTH/REG
+     // AUTH/REG
         postReg: build.mutation<IUserReg, IUserReg>({
             query: (body) => ({
                 headers: {
@@ -101,7 +130,7 @@ export const avitoApi = createApi({
                 }
             })
         }),
-        postLogin: build.mutation<IUserLogin, IUserLogin>({
+        postLogin: build.mutation<IToken, IUserLogin>({
             query: (body) => ({
                 headers: {
                     'content-type': 'application/json',
@@ -115,7 +144,7 @@ export const avitoApi = createApi({
             }),
           }),
         
-        // USER/AUTH/REG
+    // USER
         getAllUsers: build.query<IUserRequest[], string>({
             query: () => '/user/all',
             providesTags: ['Users'],
@@ -124,7 +153,7 @@ export const avitoApi = createApi({
             query: () => '/user',
             providesTags: ['Users'],
         }),  
-        patchUser: build.mutation<IUserPatch, IUserPatch>({
+        patchUser: build.mutation<IUserRequest, IUserPatch>({
             query: (body) => ({
                 headers: {
                 'content-type': 'application/json'
@@ -140,48 +169,13 @@ export const avitoApi = createApi({
             }),
             invalidatesTags: ['Users'],
         }),
-
-        // IMAGES
-          postImgUser: build.mutation<IUserImgPost, object>({
+        postImgUser: build.mutation<IUserRequest, object>({
             query: (formData: object) => ({
               url: 'user/avatar',
               method: 'POST',
               body: formData,
             }),
             invalidatesTags: ['Users'],
-          }),
-          postImgInAdv: build.mutation({
-            query: ({id, body}) => ({
-                url: `ads/${id}/image`,
-                method: 'POST',
-                body: body,
-                invalidatesTags: ['Ads'],
-            }),
-            invalidatesTags: ['Ads'],
-          }),
-
-          //COMMENTS
-          getComments: build.mutation({
-            query: (id) => ({
-                headers: {
-                'content-type': 'application/json'
-                },
-                url: `ads/${id}/comments`,
-                method: 'GET',
-            }),
-          }),
-          postComment: build.mutation({
-            query: ({id, body}) => ({
-                headers: {
-                'content-type': 'application/json'
-                },
-                url: `ads/${id}/comments`,
-                method: 'POST',
-                body: {
-                    text: body
-                },
-            }),
-            invalidatesTags: ['Comments'],
           }),
     })
 })

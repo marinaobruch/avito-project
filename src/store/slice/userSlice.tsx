@@ -33,9 +33,9 @@ export const userSlice = createSlice({
       state.allUsers = payload;
     },
 
-    setUser (state, action: PayloadAction<IUserSlice>) {
+    setUser (state, action: PayloadAction<string>) {
       const payload = action.payload ?? initialState;
-      state.email = payload.email;
+      state.email = payload;
     },
 
     setUserData (state, action: PayloadAction<IUserRequest>) {

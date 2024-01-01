@@ -1,10 +1,9 @@
 import { FC, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IBodyForPatchAd } from "interface/common-interface";
 import {    ButtonMainDisabled } from "shared/buttons";
 import { InputContent, TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { IRequestAds } from "interface/api-interface";
+import { IBodyForPatchAd, IRequestAds } from "interface/api-interface";
 import { usePatchAdvMutation, usePostImgInAdvMutation } from "store/index";
 import { PiPlusThin } from "react-icons/pi";
 import { MdOutlineDeleteOutline } from "react-icons/md";

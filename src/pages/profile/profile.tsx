@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "hooks/use-api"
-import { IChangeForm } from "interface/common-interface"
 import { BackToMainPage, ContainerContent } from "layouts/container"
 import { useEffect, useId } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
@@ -11,6 +10,7 @@ import { UserAvatar } from "."
 import { CardItem } from "components/card-item"
 
 import {Puff} from 'react-loader-spinner';
+import { IChangeForm } from "interface/api-interface"
 
 
 

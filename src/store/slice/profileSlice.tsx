@@ -6,7 +6,17 @@ interface IProfileSlice {
 }
 
 const initialState: IProfileSlice = {
-    choisenUser: [],
+    choisenUser: {
+      id: 0,
+      name: '',
+      email: '',
+      city: '',
+      avatar: '',
+      sells_from: '',
+      phone: '',
+      role: '',
+      surname: '',
+  },
 };
 
 export const profileSlice = createSlice({

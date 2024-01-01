@@ -45,7 +45,7 @@ export const FormReg = () => {
         .unwrap()
         .then((fulfilled) => {
             console.log(fulfilled);
-            dispatch(setUser(data));
+            dispatch(setUser(data.email));
             navigate('/profile')
         })
         .catch((rejected) => {

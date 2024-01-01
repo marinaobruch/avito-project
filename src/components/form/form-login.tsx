@@ -39,7 +39,6 @@ export const FormLogin = () => {
             navigate('/profile')
         })
         .catch((rejected) => {
-            console.log(rejected);
             if ( rejected.status === 401 && rejected.data.detail === 'Incorrect password' )
                 {
                     setErrorMessage('Неправильный пароль');
@@ -54,7 +53,7 @@ export const FormLogin = () => {
             return
           })
 
-        dispatch(setUser(data));
+        dispatch(setUser(data.email));
     }
 
     return (

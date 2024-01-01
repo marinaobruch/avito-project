@@ -1,10 +1,10 @@
-import { IComment } from "interface/common-interface";
+
 import { FC, useEffect, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
 import { TextareaContent } from "shared/inputs";
 import { GrClose } from "react-icons/gr";
-import { ICommentsRequest, IRequestAds } from "interface/api-interface";
+import { IComment, ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { createDate } from "utils/createDate";
 import { useGetCommentsMutation, usePostCommentMutation } from "store/index";
 import { useAppSelector } from "hooks/use-api";
