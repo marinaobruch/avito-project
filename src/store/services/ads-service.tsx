@@ -1,22 +1,91 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ICommemtRequest, IDeleteImgRequest, IPatchAd, IPostAdv, IPostComment, IPostImgInAdv, IToken, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
-import { RootState } from "..";
+import { clearTokens, setAccessToken, setRefreshToken } from "..";
+
+// const baseQueryWithReauth = async (args, api, extraOptions) => {
+
+//     const baseQuery = fetchBaseQuery({
+//         baseUrl: 'http://localhost:8090',
+//         prepareHeaders: (headers) => {
+//             const token = localStorage.getItem('access_token')
+//             console.debug('Использую токен из стора', { token })
+//             if (token) {
+//                 headers.set('authorization', `Bearer ${token}`)
+//             }
+//             return headers
+//         },
+//     })
+
+//     const result = await baseQuery(args, api, extraOptions)
+//     console.debug('Результат первого запроса', { result })
+
+//     if (result?.error?.status !== 401) {
+//       return result
+//     }
+  
+//     const forceLogout = () => {
+//       console.debug('Принудительная авторизация!')
+//       api.dispatch(clearTokens())
+//       window.location.replace('/login')
+//     }
+  
+//     const { token } = api.getState()
+//     console.debug('Данные пользователя в сторе', { token })
+
+//     if (!token.refresh_token) {
+//       return forceLogout()
+//     }
+  
+//     const refreshResult = await baseQuery(
+//       {
+//         url: 'auth/login',
+//         method: 'PUT',
+//         body: {
+//           access_token: localStorage.getItem('access_token'),
+//           refresh_token: localStorage.getItem('refresh_token'),
+//         },
+//       },
+//       api,
+//       extraOptions,
+//     )
+  
+//     console.debug('Результат запроса на обновление токена', { refreshResult })
+  
+//     if (!refreshResult.data.access_token) {
+//       return forceLogout()
+//     }
+  
+//     api.dispatch(setAccessToken( refreshResult.data.access_token ))
+//     api.dispatch(setRefreshToken( refreshResult.data.refresh_token ))
+  
+//     const retryResult = await baseQuery(args, api, extraOptions)
+  
+//     if (retryResult?.error?.status === 401) {
+//       return forceLogout()
+//     }
+
+//     console.debug('Повторный запрос завершился успешно')
+//     return retryResult
+//   }
 
 
 export const avitoApi = createApi({
     reducerPath: 'avitoApi',
     tagTypes: ['Users', 'Comments', 'Ads'],
+    // baseQuery: baseQueryWithReauth,
+
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8090',
-        prepareHeaders: (headers, {getState}) => {
-            const token = (getState() as RootState).token.access_token
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem('access_token')
             if (token) {
-                headers.set('authorization', `Bearer ${token}`)
+              headers.set('authorization', `Bearer ${token}`)
             }
             return headers;
           },
     }),
+
     endpoints: (build) => ({
     //ADS
         getAllAds: build.query<IRequestAds[], number>({
@@ -84,9 +153,7 @@ export const avitoApi = createApi({
         }),
         deleteImg: build.mutation<IRequestAds ,IDeleteImgRequest>({
             query: ({ id, file_url}) => ({
-                // url: `ads/${id}/image/file_url=${file_url}`,
-                url: `ads/${id}/image`,
-                params: `file_url=${file_url}`,
+                url: `ads/${id}/image?file_url=${file_url}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Ads'],
@@ -145,7 +212,8 @@ export const avitoApi = createApi({
                 }
             }),
           }),
-        
+
+
     // USER
         getAllUsers: build.query<IUserRequest[], string>({
             query: () => '/user/all',

@@ -8,7 +8,7 @@ import { InputLogin } from 'shared/inputs';
 import { InputNotNessesary } from 'shared/inputs/input-log-not-ness';
 import { LogoSkyPro } from 'shared/logos';
 import { usePostLoginMutation, usePostRegMutation } from 'store/services';
-import { setAccessToken, setUser } from 'store/slice';
+import { setAccessToken, setRefreshToken, setUser } from 'store/slice';
 
 export const FormReg = () => {
     const [postReg] = usePostRegMutation();
@@ -63,7 +63,11 @@ export const FormReg = () => {
             .unwrap()
             .then((fulfilled) => {
                 dispatch(setAccessToken(fulfilled.access_token));
+                dispatch(setRefreshToken(fulfilled.refresh_token));
+
+                localStorage.setItem('access_token', fulfilled.access_token);
                 localStorage.setItem('refresh_token', fulfilled.refresh_token);
+
                 navigate('/profile')
             })
         }

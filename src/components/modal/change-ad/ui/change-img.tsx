@@ -22,7 +22,6 @@ export const ChangeImgImModal:FC<IProps> = ({adById, indexImg}) => {
     const handleImgUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
         const file = event.target.files?.[0];
-        console.log(file);
         if (file) {
             const formData = new FormData();
             if (file) {

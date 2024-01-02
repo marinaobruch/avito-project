@@ -1,7 +1,7 @@
 import { useId, useState } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setAccessToken, setUser, setUserData } from 'store/slice';
+import { setAccessToken, setRefreshToken, setUser, setUserData } from 'store/slice';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { LogoSkyPro } from 'shared/logos';
@@ -34,7 +34,11 @@ export const FormLogin = () => {
         .unwrap()
         .then((fulfilled) => {
             dispatch(setAccessToken(fulfilled.access_token));
+            dispatch(setRefreshToken(fulfilled.refresh_token));
+            
+            localStorage.setItem('access_token', fulfilled.access_token);
             localStorage.setItem('refresh_token', fulfilled.refresh_token);
+
             if(currentUser) dispatch(setUserData(currentUser));
             navigate('/profile')
         })
@@ -54,6 +58,8 @@ export const FormLogin = () => {
           })
 
         dispatch(setUser(data.email));
+
+        
     }
 
     return (

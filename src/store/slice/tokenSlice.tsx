@@ -15,13 +15,16 @@ export const tokenSlice = createSlice({
     setAccessToken (state, action: PayloadAction<string>) {
       const payload = action.payload ?? initialState;
       state.access_token = payload;
-      localStorage.setItem('access_token', state.access_token);
     },
     setRefreshToken (state, action: PayloadAction<string>) {
         const payload = action.payload ?? initialState;
         state.refresh_token = payload;
       },
+      clearTokens(state) {
+        state.access_token = ''
+        state.refresh_token = ''
+      },
   },
 });
 
-export const { setAccessToken, setRefreshToken } = tokenSlice.actions;
+export const { setAccessToken, setRefreshToken, clearTokens } = tokenSlice.actions;
