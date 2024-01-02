@@ -84,7 +84,9 @@ export const avitoApi = createApi({
         }),
         deleteImg: build.mutation<IRequestAds ,IDeleteImgRequest>({
             query: ({ id, file_url}) => ({
-                url: `ads/${id}/image/file_url=${file_url}`,
+                // url: `ads/${id}/image/file_url=${file_url}`,
+                url: `ads/${id}/image`,
+                params: `file_url=${file_url}`,
                 method: 'DELETE',
             }),
             invalidatesTags: ['Ads'],

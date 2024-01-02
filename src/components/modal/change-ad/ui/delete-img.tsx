@@ -13,6 +13,7 @@ export const ModalImgDelete: FC<IProps> = ({setOpenModalDelete, adId, file_url})
     const [deleteImgAd] = useDeleteImgMutation();
 
     const handleDeleteAd = (e: React.MouseEvent<Element, MouseEvent>) => {
+        console.log(file_url);
         e.stopPropagation();
         deleteImgAd({ id: adId, file_url: file_url }).then((res) => console.log(res));
         setOpenModalDelete(false)
