@@ -13,7 +13,6 @@ import {Puff} from 'react-loader-spinner';
 
 export const MainPage = () => {
    const {data: allAds, isLoading} = useGetAllAdsQuery(100);
-   console.log(allAds);
    const dispatch = useAppDispatch();
 
    const [searchTerm, setSearchTerm] = useState('');

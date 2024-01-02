@@ -6,8 +6,7 @@ import { GrClose } from "react-icons/gr";
 import { useGetAllAdsQuery, usePostAdvMutation, usePostImgInAdvMutation } from "store/index";
 import { useNavigate } from "react-router";
 import { IPostAdv } from "interface/api-interface";
-import { PiPlusThin } from "react-icons/pi";
-import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { AddImgInModal } from "./ui/add-img";
 
 interface INewAdd {
     setOpenNewAd: (arg: boolean) => void;
@@ -19,7 +18,6 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
     const [postImg] = usePostImgInAdvMutation();
     const navigate = useNavigate();
     const [currentImg, setCurrentImg] = useState<object[]>([]);
-    console.log(currentImg);
 
     const {
         handleSubmit,
@@ -56,20 +54,6 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
             .then((data) => console.log(data))
         }
     }
-
-    const handleImgUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault()
-        const file = event.target.files?.[0];
-        if (file) {
-            const formData = new FormData();
-            if (file) {
-                formData.append('file', file);
-                console.log(file);
-                setCurrentImg((currentImg) => [...currentImg, formData]);
-            }
-        }
-    }
-
 
     return (
         <div
@@ -111,93 +95,37 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                             height="200px"
                         />
                     </div>
-
                     <div className="pt-8 pb-1">
                         <div className="flex gap-3">
                             <h4 className="text-base">Фотографии товара</h4>
                             <h5 className="grey-add-text">не более 5 фотографий</h5>
                         </div>
                         <div className="flex gap-2 pt-1">
-                            <div>
-                                <input
-                                    className="hidden"
-                                    type="file" 
-                                    id='file_1'
-                                    onChange={handleImgUpload}
-                                />
-                                <label className="label-img" htmlFor='file_1'>
-                                    {currentImg.length > 0
-                                    ?   <div className="text-green-500">
-                                        <IoCheckmarkDoneCircleOutline />
-                                        </div>
-                                    :   <PiPlusThin />
-                                    } 
-                                </label>
-                            </div>
-                            <div>
-                                <input
-                                    className="hidden"
-                                    type="file" 
-                                    id='file_2'
-                                    onChange={handleImgUpload}
-                                />
-                                <label className="label-img" htmlFor='file_2'>
-                                    {currentImg.length > 1
-                                    ?   <div className="text-green-500">
-                                        <IoCheckmarkDoneCircleOutline />
-                                        </div>
-                                    :   <PiPlusThin />
-                                    } 
-                                </label>
-                            </div>
-                            <div>
-                                <input
-                                    className="hidden"
-                                    type="file" 
-                                    id='file_3'
-                                    onChange={handleImgUpload}
-                                />
-                                <label className="label-img" htmlFor='file_3'>   
-                                    {currentImg.length > 2
-                                    ?   <div className="text-green-500">
-                                        <IoCheckmarkDoneCircleOutline />
-                                        </div>
-                                    :   <PiPlusThin />
-                                    } 
-                                </label>
-                            </div>
-                            <div>
-                                <input
-                                    className="hidden"
-                                    type="file" 
-                                    id='file_4'
-                                    onChange={handleImgUpload}
-                                />
-                                <label className="label-img" htmlFor='file_4'>
-                                    {currentImg.length > 3
-                                    ?   <div className="text-green-500">
-                                        <IoCheckmarkDoneCircleOutline />
-                                        </div>
-                                    :   <PiPlusThin />
-                                    } 
-                                </label>
-                            </div>
-                            <div>
-                                <input
-                                    className="hidden"
-                                    type="file" 
-                                    id='file_5'
-                                    onChange={handleImgUpload}
-                                />
-                                <label className="label-img" htmlFor='file_5'>
-                                    {currentImg.length > 4
-                                    ?   <div className="text-green-500">
-                                        <IoCheckmarkDoneCircleOutline />
-                                        </div>
-                                    :   <PiPlusThin />
-                                    } 
-                                </label>
-                            </div>
+                            <AddImgInModal
+                                idIndex={0}
+                                currentImg={currentImg}
+                                setCurrentImg={setCurrentImg}
+                            />
+                            <AddImgInModal
+                                idIndex={1}
+                                currentImg={currentImg}
+                                setCurrentImg={setCurrentImg}
+                            />
+                            <AddImgInModal
+                                idIndex={2}
+                                currentImg={currentImg}
+                                setCurrentImg={setCurrentImg}
+                            />
+                            <AddImgInModal
+                                idIndex={3}
+                                currentImg={currentImg}
+                                setCurrentImg={setCurrentImg}
+                            />
+                            <AddImgInModal
+                                idIndex={4}
+                                currentImg={currentImg}
+                                setCurrentImg={setCurrentImg}
+                            />
                         </div>
                     </div>
                     <div className="pb-8">
@@ -221,20 +149,3 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
         </div>
     )
 }
-
-
-    // const handleImgUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     event.preventDefault()
-    //     const file = event.target.files?.[0];
-    //     if (file) {
-    //         const formData = new FormData();
-    //         if (file) {
-    //             formData.append('file', file);
-    //             console.log(file);
-    //             if(allAds) {
-    //                 postImg({id: allAds?.length + 1, body: formData})
-    //                 .then((data) => console.log(data))
-    //             }
-    //         }
-    //     }
-    // }
