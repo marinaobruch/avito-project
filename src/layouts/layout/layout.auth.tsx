@@ -1,26 +1,19 @@
 
 import { AddNewAd } from 'components/modal';
-import { useAppDispatch, useAppSelector } from 'hooks/use-api';
+import { useAppSelector } from 'hooks/use-api';
 import { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ButtonIn } from 'shared/buttons';
-import { removeUser } from 'store/slice';
 
 export const LayoutAuth = () => {
 const [openNewAd, setOpenNewAd] = useState<boolean>(false);
 
-const dispatch = useAppDispatch();
 const userEmail = useAppSelector((state) => state.user.email);
 const navigate = useNavigate();
 const { pathname } = useLocation();
 
 const switchOpenNewAd = () => setOpenNewAd(true);
 const handlerMoveToProfile = () => navigate('/profile');
-const handleLogout = () => {
-  dispatch(removeUser());
-  navigate('/login');
-  window.location.reload()
-}
 
   return (
     <div className='pb-10'>
@@ -33,10 +26,7 @@ const handleLogout = () => {
                 onClick={switchOpenNewAd}
               />
               {pathname === '/profile'
-              ? <ButtonIn
-                  text='Выход'
-                  onClick={handleLogout}
-                />
+              ? null
               : <ButtonIn
                   text='Личный кабинет'
                   onClick={handlerMoveToProfile}

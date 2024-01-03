@@ -9,17 +9,24 @@ interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   disabled?:boolean
 }
 
-export const ButtonMainDisabled: FC<IButtonProps> = ({text, width, onClick, type, disabled}) => (
-  <button
-    onClick={onClick}
-    className={`
-      rounded-lg text-base h-12 p-2 text-white bg-sky-500 font-robotoLight hover:bg-sky-700 active:bg-gray-300
-      ${!disabled && 'bg-gray-300 hover:bg-gray-300 active:bg-sky-900'}`
-    }
-    style={{width:`${width}`}}
-    type={type}
-    disabled={!disabled}
-  >
-    {text}
-  </button>
-);
+export const ButtonMainDisabled: FC<IButtonProps> = ({text, width, onClick, type, disabled}) => {
+  console.log(!disabled);
+
+    return (
+      <button
+          onClick={onClick}
+          className={`
+            ${!disabled && 'bg-gray-300 hover:bg-gray-300 active:bg-gray-300'}
+            ${disabled && 'bg-sky-500 hover:bg-sky-700 active:bg-sky-900'}
+            rounded-lg text-base h-12 p-2 text-white font-robotoLight`
+          }
+          style={{width:`${width}`}}
+          type={type}
+          disabled={!disabled}
+      >
+        {text}
+      </button>
+  )
+}
+
+// ${!disabled && 'bg-gray-300 hover:bg-gray-300 active:bg-sky-900'}

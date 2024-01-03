@@ -2,25 +2,28 @@ import { useAppDispatch, useAppSelector } from "hooks/use-api"
 import { BackToMainPage, ContainerContent } from "layouts/container"
 import { useEffect, useId } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { ButtonMainDisabled } from "shared/buttons"
+import { ButtonMain, ButtonMainDisabled } from "shared/buttons"
 import { InputContentNotNess } from "shared/inputs"
 import { useGetCurrentUserQuery, useGetUserAdsQuery, usePatchUserMutation } from "store/services"
-import { setUserData } from "store/slice"
+import { removeUser, setUserData } from "store/slice"
 import { UserAvatar } from "."
 import { CardItem } from "components/card-item"
 
 import {Puff} from 'react-loader-spinner';
 import { IChangeForm } from "interface/api-interface"
+import { useNavigate } from "react-router"
 
 
 
 export const Profile = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const form = useId();
+
     const [patchUser] = usePatchUserMutation();
     const {data: getUser} = useGetCurrentUserQuery('');
     const {data: getUserAds, isLoading: isLoadingAdsUser} = useGetUserAdsQuery('');
     const {data: currentUser, isLoading: isLoadingcurrentUser} = useGetCurrentUserQuery('');
-    const form = useId();
 
     useEffect(() => {
         if(currentUser)
@@ -59,6 +62,12 @@ export const Profile = () => {
             console.log(res);
         }
     )};
+
+    const handleLogout = () => {
+        dispatch(removeUser());
+        navigate('/login');
+        window.location.reload()
+      }
 
     return (
         <ContainerContent>
@@ -136,12 +145,20 @@ export const Profile = () => {
                             />
                         </div>
                         
-                        <ButtonMainDisabled
-                            type="submit"
-                            text="Сохранить"
-                            width="154px"
-                            disabled={isValid}
-                        />
+                        <div className="col-span-2 flex justify-between">
+                            <ButtonMainDisabled
+                                type="submit"
+                                text="Сохранить"
+                                width="154px"
+                                disabled={isValid}
+                            />
+                            <ButtonMain
+                                onClick={handleLogout}
+                                type="submit"
+                                text="Выход"
+                                width="154px"
+                            />
+                        </div>
                     </form>
                 </div>            
             </div>
