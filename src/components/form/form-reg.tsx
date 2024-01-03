@@ -79,21 +79,21 @@ export const FormReg = () => {
             <LayoutMobile />
             <div
                 className='w-full h-full left-0 top-0 flex justify-center items-center bg-sky-500
-                sm-min:fixed sm:bg-white'
+                lg-min:fixed lg:bg-white'
             >
                 <div
                     className='w-96 bg-white flex flex-col justify-center items-center rounded-lg gap-12
-                    sm:mt-28 sm:w-full'
+                    lg:mt-28 lg:w-full'
                 >
-                        <NavLink to={'/login'} className='sm-min:mt-10'>
+                        <NavLink to={'/login'} className='lg-min:mt-10'>
                             <LogoSkyPro />
                         </NavLink>
                     <form
                         id={form}
-                        className='sm:w-full flex flex-col justify-center items-center gap-14' 
+                        className='lg:w-full flex flex-col justify-center items-center gap-14' 
                         onSubmit={handleSubmit(onSubmit)}
                     >
-                        <div className='sm:w-full flex flex-col items-center gap-8'>
+                        <div className='lg:w-full flex flex-col items-center gap-8'>
                             <InputLogin
                                 control={ control }
                                 name="email"
@@ -132,12 +132,12 @@ export const FormReg = () => {
                                 type="text"
                             />
                         </div>
-                        <div className='w-full sm:px-10'>
+                        <div className='w-full px-10'>
                             <ButtonLogIn
                                 type='submit'
                                 text='Зарегистрироваться'
                             />
-                            <div className='text-xl text-red-500 sm:mb-24 sm-min:mb-5'>{errorMessage}</div>
+                            <div className='text-xl text-red-500 lg:mb-24 lg-min:mb-5'>{errorMessage}</div>
                         </div>
                     </form>
                 </div>

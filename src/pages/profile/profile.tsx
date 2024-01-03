@@ -12,6 +12,7 @@ import { CardItem } from "components/card-item"
 import {Puff} from 'react-loader-spinner';
 import { IChangeForm } from "interface/api-interface"
 import { useNavigate } from "react-router"
+import { LayoutMobile, MobileMenu } from "layouts/layout"
 
 
 
@@ -70,8 +71,9 @@ export const Profile = () => {
       }
 
     return (
-        <ContainerContent>
-        <div className="w-1440 mx-10">
+    <ContainerContent>
+        <LayoutMobile />
+        <div className="mx-10">
            <BackToMainPage />
            {isLoadingcurrentUser
            ? <div>
@@ -86,91 +88,97 @@ export const Profile = () => {
                 />
            </div>
             :
-            <div>
-           <h2 className="mt-16 text-4xl">Здравствуйте, {currentUser?.email} !</h2>
+            <div className="w-full">
+                <h2 className="mt-16 text-4xl">Здравствуйте, {currentUser?.email} !</h2>
 
-            <div className="mt-10 mb-16">
-                <h3 className="text-3xl">Настройки профиля</h3>
-                <div className="flex justify-start items-start gap-10 mt-10">
+                <div className="mt-10 mb-16">
+                    <h3 className="text-3xl">Настройки профиля</h3>
+                    <div
+                    className="flex justify-start items-start gap-10 mt-10
+                    lg:flex-col lg:justify-center lg:items-center
+                    ">
 
-                    <UserAvatar getUser={getUser}/>
+                        <UserAvatar getUser={getUser}/>
 
-                    <form 
-                        id={form}
-                        onSubmit={handleSubmit(handleChange)}
-                        className="w-614 grid grid-cols-2 gap-4"
-                    >
-                        <div className="col-span-2 flex gap-4">
-                            <div>
-                                <label className="grey-add-text">Имя</label>
-                                <InputContentNotNess
-                                    control={control}
-                                    name="name"
-                                    placeholder="Имя"
-                                    type="text"
-                                    width='300px'
-                                />
+                        <form 
+                            id={form}
+                            onSubmit={handleSubmit(handleChange)}
+                            className="grid grid-cols-2 gap-4 lg:w-full"
+                        >
+                            <div className="col-span-2 flex gap-4 lg:flex-col">
+                                <div className="col-span-1">
+                                    <label className="grey-add-text">Имя</label>
+                                    <InputContentNotNess
+                                        control={control}
+                                        name="name"
+                                        placeholder="Имя"
+                                        type="text"
+                                        width='100%'
+                                    />
+                                </div>
+                                <div className="col-span-1">
+                                    <label className="grey-add-text">Фамилия</label>
+                                    <InputContentNotNess
+                                        control={control}
+                                        name="surname"
+                                        placeholder="Фамилия"
+                                        type="text" 
+                                        width='100%'
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <label className="grey-add-text">Фамилия</label>
+
+                            <div className="col-span-2">
+                                <label className="grey-add-text">Город</label>
                                 <InputContentNotNess
                                     control={control}
-                                    name="surname"
-                                    placeholder="Фамилия"
+                                    name="city"
+                                    placeholder="Город"
                                     type="text" 
-                                    width='300px'
+                                    width='100%'
                                 />
                             </div>
-                        </div>
 
-                        <div className="col-span-2">
-                            <label className="grey-add-text">Город</label>
-                            <InputContentNotNess
-                                control={control}
-                                name="city"
-                                placeholder="Город"
-                                type="text" 
-                                width='300px'
-                            />
-                        </div>
+                            <div className="col-span-2">
+                                <label className="grey-add-text">Номер</label>
+                                <InputContentNotNess
+                                    control={control}
+                                    name="phone"
+                                    placeholder="Номер"
+                                    type="number" 
+                                    width='100%'
+                                />
+                            </div>
+                            
+                            <div className="col-span-2 flex justify-between
+                                 lg:flex-col lg:gap-4 lg-min:gap-10"
+                            >
+                                <ButtonMainDisabled
+                                    type="submit"
+                                    text="Сохранить"
+                                    width="100%"
+                                    disabled={isValid}
+                                />
+                                <ButtonMain
+                                    onClick={handleLogout}
+                                    type="submit"
+                                    text="Выход"
+                                    width="100%"
+                                />
+                            </div>
+                        </form>
+                    </div>            
+                </div>
 
-                        <div className="col-span-2">
-                            <label className="grey-add-text">Номер</label>
-                            <InputContentNotNess
-                                control={control}
-                                name="phone"
-                                placeholder="Номер"
-                                type="number" 
-                                width='614px'
-                            />
-                        </div>
-                        
-                        <div className="col-span-2 flex justify-between">
-                            <ButtonMainDisabled
-                                type="submit"
-                                text="Сохранить"
-                                width="154px"
-                                disabled={isValid}
-                            />
-                            <ButtonMain
-                                onClick={handleLogout}
-                                type="submit"
-                                text="Выход"
-                                width="154px"
-                            />
-                        </div>
-                    </form>
-                </div>            
+                <h3 className="text-3xl">Мои товары</h3>
+                <div className="grid grid-cols-8 gap-6 mt-5">
+                </div>
+                <CardItem allAds={getUserAds} isLoading={isLoadingAdsUser}/>
             </div>
-
-            <h3 className="text-3xl">Мои товары</h3>
-            <div className="grid grid-cols-8 gap-6 mt-5">
-            </div>
-            <CardItem allAds={getUserAds} isLoading={isLoadingAdsUser}/>
-           </div>
            }
 
         </div>
+        <MobileMenu />
      </ContainerContent>
     )
 }

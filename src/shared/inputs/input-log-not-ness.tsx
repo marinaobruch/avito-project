@@ -16,9 +16,10 @@ export const InputNotNessesary: FC<IInputProps> = ({
         control={ control }
         name={ name }
         render={ ({ field: { onChange, value, onBlur }, fieldState: { error } }) => (
-      <div className="sm:w-full flex flex-col items-center px-10">
+      <div className="lg:w-full flex flex-col items-center px-10">
         <input
-            className="border-b sm:border-2 sm:w-full sm:rounded-full placeholder:text-gray-300 placeholder:text-base sm:p-4"
+            className="border-b placeholder:text-gray-300 placeholder:text-base
+            lg:p-4 lg:border-2 lg:w-full lg:rounded-full"
             autoComplete="on"
             placeholder={ placeholder }
             type={ type }

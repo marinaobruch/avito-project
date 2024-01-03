@@ -68,19 +68,19 @@ export const FormLogin = () => {
             <LayoutMobile />
             <div
                 className='w-full h-full left-0 top-0 flex justify-center items-center bg-sky-500 
-                sm-min:fixed sm:bg-white'
+                lg-min:fixed lg:bg-white'
             >
                 <div
                     className='w-96 h-480 bg-white flex flex-col justify-center items-center rounded-lg gap-12 
-                    sm:mt-28 sm:w-full'
+                    lg:mt-28 lg:w-full'
                 >
                     <LogoSkyPro />
                         <form
                             id={form}
-                            className='sm:w-full flex flex-col justify-center items-center gap-10' 
+                            className='lg:w-full flex flex-col justify-center items-center gap-10' 
                             onSubmit={handleSubmit(onSubmit)}
                         >
-                            <div className='sm:w-full flex flex-col items-center gap-8'>
+                            <div className='lg:w-full flex flex-col items-center gap-8'>
                                 <InputLogin
                                     control={ control }
                                     name="email"
@@ -96,13 +96,13 @@ export const FormLogin = () => {
                             </div>
 
                             <div className='flex flex-col items-center gap-5 w-full'>
-                            <div className='w-full sm:px-10'>
+                            <div className='w-full px-10'>
                                 <ButtonLogIn
                                     type='submit'
                                     text='Войти'
                                 />
                             </div>
-                                <NavLink to={'/register'} className='w-full sm:px-10'>
+                                <NavLink to={'/register'} className='w-full px-10'>
                                     <ButtonReg
                                         type='button'
                                         text='Зарегистрироваться'

@@ -57,14 +57,13 @@ export const MainPage = () => {
                </form>
             </div>
 
-            <h2 className="mt-12 text-4xl">Объявления</h2>
+            <h2 className="mt-12 text-4xl pl-4 md:text-xl md:pl-6 md:mt-8">Объявления</h2>
                <CardItem
                   allAds={adsList} 
                   isLoading={isLoading}
                />
          </div>
          }
-
       </ContainerContent>
    )
 }

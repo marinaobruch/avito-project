@@ -8,18 +8,18 @@ export const BackToMainPage = () => {
     const handleToGoMain = () => navigate('/')
 
     return (
-        <div className="grid grid-cols-8 items-center">
+      <div className="grid grid-cols-8 items-center lg:hidden">
         <div className="col-span-1">
-           <Logo />
+          <Logo />
         </div>
-        <div className="col-span-7">
-              <ButtonMain
-                type="button"
-                onClick={handleToGoMain}
-                text="Вернуться на главную"
-                width="240px"
-              />
+          <div className="col-span-7">
+          <ButtonMain
+            type="button"
+            onClick={handleToGoMain}
+            text="Вернуться на главную"
+            width="240px"
+          />
         </div>
-     </div>
+      </div>
     )
 }

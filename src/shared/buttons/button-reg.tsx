@@ -7,7 +7,7 @@ interface IButtonProps extends HTMLProps<HTMLButtonElement> {
 
 export const ButtonReg: FC<IButtonProps> = ({text}) => (
   <button
-    className='border-2 rounded-lg text-black text-s sm:text-base h-14 w-full p-2 bg-white font-robotoLight hover:bg-gray-100 active:bg-gray-200'
+    className='border-2 rounded-lg text-black text-s lg:text-base h-14 w-full p-2 bg-white font-robotoLight hover:bg-gray-100 active:bg-gray-200'
   >
     {text}
   </button>

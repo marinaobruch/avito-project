@@ -13,7 +13,7 @@ export const LayoutNoAuth = () => {
   return (
     <div className='pb-10'>
         <header className='bg-sky-500 flex items-center justify-end'>
-             <nav className="h-20 flex items-center">
+             <nav className="h-20 flex items-center lg:hidden">
               {!currentUser
               ? <ButtonIn
               text='Вход в личный кабинет'

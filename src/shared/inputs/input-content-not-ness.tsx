@@ -23,7 +23,8 @@ export const InputContentNotNess: FC<IInputProps> = ({
         }) => (
       <div>
         <input
-            className="border-2 rounded-lg h-16 placeholder:text-gray-300 placeholder:text-base px-4 focus:outline-none focus:border-sky-500 text-base"
+            className="border-2 rounded-lg h-16 placeholder:text-gray-300 placeholder:text-base px-4 focus:outline-none focus:border-sky-500 text-base
+            lg:p-6 lg:border-2 lg:w-full lg:rounded-full"
             style={{width:`${width}`}}
             autoComplete="on"
             placeholder={ placeholder }
