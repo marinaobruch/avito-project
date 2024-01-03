@@ -16,7 +16,7 @@ export const Search: FC<IProps> = ({setSearchTerm}) => {
         onKeyDown={handleSearch}
         type="text"
         placeholder="Поиск..."
-        className="h-12 flex-auto w-full rounded-lg border-solid border-2 border-gray-200 p-5 text-sm text-gray-800"
+        className="h-12 w-full rounded-lg border-solid border-2 border-gray-200 p-5 text-sm text-gray-800"
     />
     )
 }
