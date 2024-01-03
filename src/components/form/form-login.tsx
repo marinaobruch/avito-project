@@ -8,6 +8,7 @@ import { LogoSkyPro } from 'shared/logos';
 import { useAppDispatch } from 'hooks/use-api';
 import { useGetCurrentUserQuery, usePostLoginMutation } from 'store/services';
 import { IUserLogin } from 'interface/api-interface';
+import { LayoutMobile, MobileMenu } from 'layouts/layout';
 
 export const FormLogin = () => {
     const [postLogin] = usePostLoginMutation();
@@ -63,44 +64,56 @@ export const FormLogin = () => {
     }
 
     return (
-        <div className='w-full h-full fixed left-0 top-0 flex justify-center items-center bg-sky-500'>
-            <div className='w-96 h-480 bg-white flex flex-col justify-center items-center rounded-lg gap-12'>
-            <LogoSkyPro />
-                <form
-                    id={form}
-                    className='flex flex-col justify-center items-center gap-10' 
-                    onSubmit={handleSubmit(onSubmit)}
+        <div className='flex-col'>
+            <LayoutMobile />
+            <div
+                className='w-full h-full left-0 top-0 flex justify-center items-center bg-sky-500 
+                sm-min:fixed sm:bg-white'
+            >
+                <div
+                    className='w-96 h-480 bg-white flex flex-col justify-center items-center rounded-lg gap-12 
+                    sm:mt-28 sm:w-full'
                 >
-                    <div className='flex flex-col gap-8'>
-                        <InputLogin
-                            control={ control }
-                            name="email"
-                            placeholder="email"
-                            type="email"
-                        />
-                        <InputLogin 
-                            control={ control }
-                            name="password"
-                            placeholder="password"
-                            type="password"
-                        />
-                    </div>
+                    <LogoSkyPro />
+                        <form
+                            id={form}
+                            className='sm:w-full flex flex-col justify-center items-center gap-10' 
+                            onSubmit={handleSubmit(onSubmit)}
+                        >
+                            <div className='sm:w-full flex flex-col items-center gap-8'>
+                                <InputLogin
+                                    control={ control }
+                                    name="email"
+                                    placeholder="email"
+                                    type="email"
+                                />
+                                <InputLogin 
+                                    control={ control }
+                                    name="password"
+                                    placeholder="password"
+                                    type="password"
+                                />
+                            </div>
 
-                    <div className='flex flex-col gap-5'>
-                            <ButtonLogIn
-                                type='submit'
-                                text='Войти'
-                            />
-                        <NavLink to={'/register'}>
-                            <ButtonReg
-                                type='button'
-                                text='Зарегистрироваться'
-                            />
-                        </NavLink>
-                    </div>
-                </form>
-                <div className='text-xl text-red-500'>{errorMessage}</div>
+                            <div className='flex flex-col items-center gap-5 w-full'>
+                            <div className='w-full sm:px-10'>
+                                <ButtonLogIn
+                                    type='submit'
+                                    text='Войти'
+                                />
+                            </div>
+                                <NavLink to={'/register'} className='w-full sm:px-10'>
+                                    <ButtonReg
+                                        type='button'
+                                        text='Зарегистрироваться'
+                                    />
+                                </NavLink>
+                            </div>
+                        </form>
+                        <div className='text-xl text-red-500'>{errorMessage}</div>
+                </div>
             </div>
+            <MobileMenu />
         </div>
     )
 }

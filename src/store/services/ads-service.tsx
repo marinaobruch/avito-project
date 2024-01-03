@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ICommemtRequest, IDeleteImgRequest, IPatchAd, IPostAdv, IPostComment, IPostImgInAdv, IToken, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
-import { clearTokens, setAccessToken, setRefreshToken } from "..";
+// import { clearTokens, setAccessToken, setRefreshToken } from "..";
 
 // const baseQueryWithReauth = async (args, api, extraOptions) => {
 
