@@ -9,7 +9,7 @@ import { useGetAllAdsQuery } from "store/services"
 import { getAllAds } from "store/slice"
 
 import {Puff} from 'react-loader-spinner';
-import { LayoutMobile, MobileMenu } from "layouts/layout"
+import { MainMobileLayout, } from "layouts/layout"
 
 
 export const MainPage = () => {
@@ -35,7 +35,7 @@ export const MainPage = () => {
 
    return (
       <ContainerContent>
-         <LayoutMobile />
+         <MainMobileLayout>
             {isLoading
             ? <div>
                <Puff
@@ -66,7 +66,7 @@ export const MainPage = () => {
                   />
             </div>
             }
-         <MobileMenu />
+            </MainMobileLayout>
       </ContainerContent>
    )
 }

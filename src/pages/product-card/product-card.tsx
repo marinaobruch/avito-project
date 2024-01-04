@@ -14,7 +14,7 @@ export const ProductCard = () => {
         <ContainerContent>
         {adById &&
         <div>
-        <div className="w-1440 mx-10">
+        <div className="mx-10">
            <BackToMainPage />
 
             <div className="mt-10 mb-16">

@@ -27,8 +27,8 @@ export default {
         'sm-min': '640px',
         // => @media (min-width: 640px) { ... }
 
-        'xs': {'max': '320px'},
-        // => @media (max-width: 320px) { ... }
+        'xs': {'max': '380px'},
+        // => @media (max-width: 380px) { ... }
       },
 
       extend: {

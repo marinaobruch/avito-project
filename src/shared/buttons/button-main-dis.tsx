@@ -10,7 +10,6 @@ interface IButtonProps extends HTMLProps<HTMLButtonElement> {
 }
 
 export const ButtonMainDisabled: FC<IButtonProps> = ({text, width, onClick, type, disabled}) => {
-  console.log(!disabled);
 
     return (
       <button

@@ -37,7 +37,7 @@ export const CardItem: FC<IProps> = ({allAds, isLoading}) => {
                     key={item.id}
                     className="
                         col-span-2 hover:border-sky-500 p-1 default-hover hover:scale-105 easy-animation shadow-xl rounded-lg
-                        xl:col-span-3 lg:col-span-2"
+                        xl:col-span-3 lg:col-span-2 xs:col-span-4"
                     onClick={() => navigate(`/product/${item.id}`)}
                 >
                     <div className="w-72 h-72 md:w-52 md:h-52 sm:w-36 sm:h-36 bg-slate-200 cursor-pointer">
