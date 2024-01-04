@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom"
 import { useGetAdByIdQuery } from "store/services";
 import { Carousel, MobileCarousel, ProductAdData, UserAdData } from "./ui";
 import { MainMobileLayout } from "layouts/layout";
-import { IoChevronBackOutline } from "react-icons/io5";
 
 
 export const ProductCard = () => {
@@ -19,15 +18,14 @@ export const ProductCard = () => {
                     <div className="lg-min:mx-10">
                         <BackToMainPage />
                         <div className="mt-10 mb-16">
-                            <div className="flex justify-start items-start gap-10 mt-20
-                                lg:flex-col lg:items-center">
-                                    <div className="sm:hidden">
-                                        <Carousel images={adById.images} />
-                                    </div>
-                                    <div className="sm-min:hidden">
-                                        <MobileCarousel images={adById.images} />
-                                    </div>
-                                <div className=" lg:w-full">
+                            <div className="w-full flex justify-start items-start gap-10 mt-20 lg:flex-col lg:items-center">
+                                <div className="sm:hidden">
+                                    <Carousel images={adById.images} />
+                                </div>
+                                <div className="sm-min:hidden">
+                                    <MobileCarousel images={adById.images} />
+                                </div>
+                                <div className="w-full">
                                     <ProductAdData adById={adById}/>
                                     <UserAdData adById={adById}/>
                                 </div>

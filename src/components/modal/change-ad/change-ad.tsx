@@ -88,7 +88,7 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                             control={control}
                             name="description"
                             placeholder="Введите описание"
-                            width="500px"
+                            width="100%"
                             height="200px"
                         />
                     </div>

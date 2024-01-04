@@ -17,7 +17,7 @@ export const BackToMainPage = () => {
             type="button"
             onClick={handleToGoMain}
             text="Вернуться на главную"
-            width="240px"
+            width='w-60'
           />
         </div>
       </div>

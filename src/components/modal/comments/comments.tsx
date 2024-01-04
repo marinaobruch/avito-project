@@ -3,12 +3,16 @@ import { FC, useEffect, useId, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ButtonMain } from "shared/buttons";
 import { TextareaContent } from "shared/inputs";
-import { GrClose } from "react-icons/gr";
 import { IComment, ICommentsRequest, IRequestAds } from "interface/api-interface";
 import { createDate } from "utils/createDate";
 import { useGetCommentsMutation, usePostCommentMutation } from "store/index";
 import { useAppSelector } from "hooks/use-api";
 import { useNavigate } from "react-router";
+
+import { GrClose } from "react-icons/gr";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
+import { MobileMenu } from "layouts/layout";
 
 
 interface INewAdd {
@@ -26,6 +30,7 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComment
     const navigate = useNavigate();
     const [error, setError] = useState<string>('')
     
+
     useEffect(() => {
         loadComments();
       }, [adById]);
@@ -61,70 +66,85 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComment
     const handleToLogin = () => navigate('/login');
 
     return (
-        <div
-        onClick={() => setOpenModalComments(false)}
-        className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center">
-            <form
-            id={form}
-            onSubmit={handleSubmit(handlePublishComment)}
-            onClick={e => e.stopPropagation()}
-            className="w-600 min-h-900 max-h-40 bg-white absolute rounded-lg p-10">
-                
-                <div className="flex items-center justify-between">
-                    <h2 className="text-4xl">Отзывы о товаре</h2>
-                    <div
-                        onClick={() => setOpenModalComments(false)}
-                        className="text-gray-400 cursor-pointer"
-                    >
-                        <GrClose />
-                    </div>
-                </div>
-
-                <div>
-                    <div className="pb-3">
-                        <h4 className="text-base pt-8 pb-3 font-robotoMedium">Добавить отзыв</h4>
-                        <TextareaContent
-                            control={control}
-                            name="review"
-                            placeholder="Введите отзыв"
-                            width="500px"
-                            height="200px"
-                        />
-                    </div>
-                    <ButtonMain
-                        type="submit"
-                        text="Опубликовать" 
-                        width="181px"
-                    />
-                </div>
-                {error &&
-                    <div className="flex items-center justify-center mt-4 gap-4 p-4">
-                        <div className=" text-sky-600 text-lg">{error}</div>
+            <div
+            onClick={() => setOpenModalComments(false)}
+            className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center
+            lg:block"
+            >
+                <form
+                id={form}
+                onSubmit={handleSubmit(handlePublishComment)}
+                onClick={e => e.stopPropagation()}
+                className="lg-min:w-600 lg-min:min-h-900 lg-min:max-h-40 lg:w-full lg:h-full bg-white absolute rounded-lg p-10">
+                    
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-4xl">Отзывы о товаре</h2>
                         <div
-                            className="text-lg text-sky-600 decoration-double cursor-pointer hover:text-green-500"
-                            onClick={handleToLogin}
-                        >Registration</div>
-                    </div>}
-                <div className="overflow-x-auto overflow-y-auto w-full h-75vh">
-                    {comments.map((item) => (
-                    <div key={item.id} className="pt-9 flex items-start gap-5">
-                            <div>
-                                <div className="w-10 h-10 bg-gray-200 rounded-full">
-                                    <img src="" alt="" />
-                                </div>
-                            </div>
-                            <div className="flex-col">
-                                <div className="flex items-center gap-4 pb-4">
-                                    <div className="text-base font-robotoMedium">{item.author.name}</div>
-                                    <div className="grey-add-text">{createDate(item.created_on)}</div>
-                                </div>
-                                <div className="text-base font-robotoMedium">Комментарий</div>
-                                <div className="text-base">{item.text} </div>
-                            </div>
+                            onClick={() => setOpenModalComments(false)}
+                            className="text-gray-400 cursor-pointer lg:hidden"
+                        >
+                            <GrClose />
                         </div>
-                    ))}
+                        <div
+                            onClick={() => setOpenModalComments(false)}
+                            className="text-gray-400 cursor-pointer lg-min:hidden"
+                        >
+                            <IoIosArrowForward />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="pb-3">
+                            <h4 className="text-base pt-8 pb-3 font-robotoMedium">Добавить отзыв</h4>
+                            <TextareaContent
+                                control={control}
+                                name="review"
+                                placeholder="Введите отзыв"
+                                width="100%"
+                                height="200px"
+                            />
+                            </div>
+                            <ButtonMain
+                                type="submit"
+                                text="Опубликовать" 
+                                width='w-44'
+                            />
+                    </div>
+                    {error &&
+                        <div className="flex w- items-center justify-center mt-4 gap-4 p-4">
+                            <div className=" text-sky-600 text-lg">{error}</div>
+                            <div
+                                className="text-lg text-sky-600 decoration-double cursor-pointer hover:text-green-500"
+                                onClick={handleToLogin}
+                            >Registration</div>
+                        </div>}
+                    <div className="overflow-x-auto overflow-y-auto w-full h-75vh">
+                        {comments.map((item) => (
+                        <div key={item.id} className="pt-9 flex items-start gap-5">
+                                <div>
+                                    <div className="w-10 h-10 bg-gray-200 rounded-full">
+                                    {item.author.avatar
+                                    ? <img
+                                        src={`http://localhost:8090/${item.author.avatar}`}
+                                        alt={item.author.avatar}
+                                    />
+                                    : <FaRegUserCircle />
+                                    }
+                                    </div>
+                                </div>
+                                <div className="flex-col">
+                                    <div className="flex items-center gap-4 pb-4">
+                                        <div className="text-base font-robotoMedium">{item.author.name}</div>
+                                        <div className="grey-add-text">{createDate(item.created_on)}</div>
+                                    </div>
+                                    <div className="text-base font-robotoMedium">Комментарий</div>
+                                    <div className="text-base">{item.text} </div>
+                                </div>
+                            </div>
+                        ))}
+                </div>
+                <MobileMenu />
+                </form>
             </div>
-            </form>
-        </div>
     )
 }

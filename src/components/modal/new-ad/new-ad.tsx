@@ -91,7 +91,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                             control={control}
                             name="description"
                             placeholder="Введите описание"
-                            width="500px"
+                            width="100%"
                             height="200px"
                         />
                     </div>
@@ -142,7 +142,7 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                     <ButtonMain
                         type="submit"
                         text="Опубликовать" 
-                        width="181px"
+                        width='w-44'
                     />
                 </div>
             </form>

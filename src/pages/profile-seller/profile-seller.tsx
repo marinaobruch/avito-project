@@ -60,7 +60,7 @@ export const ProfileSeller = () => {
                                     type="button"
                                     onClick={handleShowNumber}
                                     text= {hideNumber ? phoneNumber : phoneNumberHide}
-                                    width="100%"
+                                    width="w-full"
                                 />
                             </div>
                         </div>            

@@ -7,7 +7,7 @@ interface IContainerProps {
 
 export const MainMobileLayout: FC<IContainerProps> = ({ children }) => {
     return (
-        <div className="">
+        <div>
             <LayoutMobile />
                 { children }
             <MobileMenu />

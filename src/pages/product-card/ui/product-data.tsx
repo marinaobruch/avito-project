@@ -64,22 +64,22 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
                     type="button"
                     onClick={handleShowNumber}
                     text={hideNumber ? phoneNumber : phoneNumberHide}
-                    width="100%"
+                    width="w-full"
                 />
             </div>
             :
-            <div className="flex gap-2">
+            <div className="flex gap-2 sm:flex-col">
                 <ButtonMain
                     onClick={handleOpenRedactor}
                     type="button"
                     text= 'Редактировать'
-                    width="214px"
+                    width="w-60 sm:w-full"
                 />
                 <ButtonMain
                     onClick={handleDeleteAd}
                     type="button"
                     text= 'Снять с публикации'
-                    width="214px"
+                    width="w-60 sm:w-full"
                 />
             </div>
             }

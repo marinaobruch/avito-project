@@ -163,7 +163,7 @@ export const Profile = () => {
                                         onClick={handleLogout}
                                         type="submit"
                                         text="Выход"
-                                        width="100%"
+                                        width="w-full"
                                     />
                                 </div>
                             </form>

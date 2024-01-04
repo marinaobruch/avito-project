@@ -29,13 +29,13 @@ export const ModalCardDelete: FC<IProps> = ({setOpenModalDelete, adId}) => {
                 <div className="flex items-center justify-center gap-4">
                     <ButtonMain 
                         text='Да'
-                        width='150px'
+                        width='w-32'
                         onClick={handleDeleteAd}
                         type='submit'
                     />
                     <ButtonMain 
                         text='Нет'
-                        width='150px'
+                        width='w-32'
                         onClick={() => setOpenModalDelete(false)}
                         type='submit'
                     />
