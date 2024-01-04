@@ -2,8 +2,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ICommemtRequest, IDeleteImgRequest, IPatchAd, IPostAdv, IPostComment, IPostImgInAdv, IToken, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
 // import { clearTokens, setAccessToken, setRefreshToken } from "..";
+// import type { BaseQueryFn } from '@reduxjs/toolkit/query'
 
-// const baseQueryWithReauth = async (args, api, extraOptions) => {
+// const baseQueryWithReauth: BaseQueryFn<
+//         any, // Args
+//         unknown, // Result
+//         { reason: unknown }, // Error
+//         { shout?: boolean | undefined }, // DefinitionExtraOptions
+//         { timestamp: number } // Meta
+//     > = async (args, api, extraOptions) => {
 
 //     const baseQuery = fetchBaseQuery({
 //         baseUrl: 'http://localhost:8090',
@@ -18,22 +25,17 @@ import { IRequestAds } from "interface/api-interface";
 //     })
 
 //     const result = await baseQuery(args, api, extraOptions)
-//     console.debug('Результат первого запроса', { result })
 
 //     if (result?.error?.status !== 401) {
 //       return result
 //     }
   
 //     const forceLogout = () => {
-//       console.debug('Принудительная авторизация!')
 //       api.dispatch(clearTokens())
 //       window.location.replace('/login')
 //     }
-  
-//     const { token } = api.getState()
-//     console.debug('Данные пользователя в сторе', { token })
-
-//     if (!token.refresh_token) {
+//     const refresh = localStorage.getItem('refresh_token')
+//     if (!refresh) {
 //       return forceLogout()
 //     }
   
@@ -50,14 +52,15 @@ import { IRequestAds } from "interface/api-interface";
 //       extraOptions,
 //     )
   
-//     console.debug('Результат запроса на обновление токена', { refreshResult })
-  
 //     if (!refreshResult.data.access_token) {
 //       return forceLogout()
 //     }
   
 //     api.dispatch(setAccessToken( refreshResult.data.access_token ))
 //     api.dispatch(setRefreshToken( refreshResult.data.refresh_token ))
+
+//     localStorage.setItem("access_token", refreshResult.data.access_token)
+//     localStorage.setItem("refresh_token", refreshResult.data.refresh_token)
   
 //     const retryResult = await baseQuery(args, api, extraOptions)
   
@@ -65,7 +68,6 @@ import { IRequestAds } from "interface/api-interface";
 //       return forceLogout()
 //     }
 
-//     console.debug('Повторный запрос завершился успешно')
 //     return retryResult
 //   }
 
