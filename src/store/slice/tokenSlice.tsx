@@ -23,6 +23,8 @@ export const tokenSlice = createSlice({
       clearTokens(state) {
         state.access_token = ''
         state.refresh_token = ''
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('access_token');
       },
   },
 });

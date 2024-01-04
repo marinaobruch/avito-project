@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ICommemtRequest, IDeleteImgRequest, IPatchAd, IPostAdv, IPostComment, IPostImgInAdv, IToken, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
-import { clearTokens, setAccessToken, setRefreshToken } from "..";
-import type { BaseQueryFn } from '@reduxjs/toolkit/query'
+// import { clearTokens, setAccessToken, setRefreshToken } from "..";
+// import type { BaseQueryFn } from '@reduxjs/toolkit/query'
 
 // const baseQueryWithReauth: BaseQueryFn<
 //         /* eslint-disable */
@@ -10,7 +10,7 @@ import type { BaseQueryFn } from '@reduxjs/toolkit/query'
 //         /* eslint-enable */
 //         unknown, // Result
 //         { reason: unknown }, // Error
-//         { shout?: boolean | undefined }, // DefinitionExtraOptions
+//         { shout?: boolean }, // DefinitionExtraOptions
 //         { timestamp: number } // Meta
 //     > = async (args, api, extraOptions) => {
 

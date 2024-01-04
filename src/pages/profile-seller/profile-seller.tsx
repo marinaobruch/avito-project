@@ -25,7 +25,7 @@ export const ProfileSeller = () => {
     const periopOfSales: string = createSellerBy(userData.sells_from);
 
     const handleShowNumber = () => setHideNumber((prev) => !prev);
-    const backToProfile = () => {navigate(`/product/${userData.id}`)}
+    const backToProfile = () => {navigate(-1)}
 
     return (
         <ContainerContent>

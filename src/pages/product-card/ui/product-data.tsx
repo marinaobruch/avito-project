@@ -56,15 +56,17 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
                 className="text-base text-sky-500 cursor-pointer">
                 {comments.length} отзыва
             </div>
-            <div className="text-3xl pt-9 pb-5 font-robotoMedium">{numberWithSpaces(adById?.price)} ₽</div>
+            <div className="text-3xl pt-9 pb-5 lg:py-5 font-robotoMedium">{numberWithSpaces(adById?.price)} ₽</div>
             {model === 'user'
             ?
-            <ButtonMain
-                type="button"
-                onClick={handleShowNumber}
-                text={hideNumber ? phoneNumber : phoneNumberHide}
-                width="214px"
-            />
+            <div>
+                <ButtonMain
+                    type="button"
+                    onClick={handleShowNumber}
+                    text={hideNumber ? phoneNumber : phoneNumberHide}
+                    width="100%"
+                />
+            </div>
             :
             <div className="flex gap-2">
                 <ButtonMain

@@ -17,6 +17,7 @@ export const AppRouter = () => (
                 </Route>
                 <Route element= { <ProfileSeller /> } path="/profile-seller/:id" />
                 <Route element= { <ProductCard /> } path="/product/:id" />
+
             </Route>
 
             <Route element={ <NotFoundPage /> } path="*" />

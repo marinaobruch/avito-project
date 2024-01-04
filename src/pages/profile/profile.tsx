@@ -107,7 +107,7 @@ export const Profile = () => {
                             >
                                 <div className="col-span-2 flex gap-4 lg:flex-col">
                                     <div className="col-span-1">
-                                        <label className="grey-add-text">Имя</label>
+                                        <label className="grey-add-text p-2 lg:pl-6">Имя</label>
                                         <InputContentNotNess
                                             control={control}
                                             name="name"
@@ -117,7 +117,7 @@ export const Profile = () => {
                                         />
                                     </div>
                                     <div className="col-span-1">
-                                        <label className="grey-add-text">Фамилия</label>
+                                        <label className="grey-add-text p-2 lg:pl-6">Фамилия</label>
                                         <InputContentNotNess
                                             control={control}
                                             name="surname"
@@ -129,7 +129,7 @@ export const Profile = () => {
                                 </div>
 
                                 <div className="col-span-2">
-                                    <label className="grey-add-text">Город</label>
+                                    <label className="grey-add-text p-2 lg:pl-6">Город</label>
                                     <InputContentNotNess
                                         control={control}
                                         name="city"
@@ -140,7 +140,7 @@ export const Profile = () => {
                                 </div>
 
                                 <div className="col-span-2">
-                                    <label className="grey-add-text">Номер</label>
+                                    <label className="grey-add-text p-2 lg:pl-6">Номер</label>
                                     <InputContentNotNess
                                         control={control}
                                         name="phone"

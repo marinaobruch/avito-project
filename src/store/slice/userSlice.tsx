@@ -56,9 +56,7 @@ export const userSlice = createSlice({
           phone: '',
           role: '',
           surname: '',
-      },
-      localStorage.removeItem('refresh_token');
-      localStorage.removeItem('access_token');
+      }
     },
   },
 });
