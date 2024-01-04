@@ -7,6 +7,8 @@ import { useGetAllAdsQuery, usePostAdvMutation, usePostImgInAdvMutation } from "
 import { useNavigate } from "react-router";
 import { IPostAdv } from "interface/api-interface";
 import { AddImgInModal } from "./ui/add-img";
+import { MobileMenu } from "layouts/layout";
+import { IoIosArrowForward } from "react-icons/io";
 
 interface INewAdd {
     setOpenNewAd: (arg: boolean) => void;
@@ -63,30 +65,36 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
             id={form}
             onSubmit={handleSubmit(handleChange)}
             onClick={e => e.stopPropagation()}
-            className="w-600 bg-white absolute rounded-lg p-10">
+            className="lg-min:w-600 lg-min:min-h-900 lg-min:max-h-40 lg:w-full lg:h-full bg-white absolute rounded-lg p-10 lg:overflow-y-auto">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-4xl">Новое объявление</h2>
+                    <h2 className="text-4xl lg:text-2xl">Новое объявление</h2>
                     <div
-                    onClick={() => setOpenNewAd(false)}
-                    className="text-gray-400 cursor-pointer"
+                        onClick={() => setOpenNewAd(false)}
+                        className="text-gray-400 cursor-pointer lg:hidden"
                     >
                         <GrClose />
+                    </div>
+                    <div
+                        onClick={() => setOpenNewAd(false)}
+                        className="text-gray-400 cursor-pointer lg-min:hidden"
+                    >
+                        <IoIosArrowForward />
                     </div>
                 </div>
                 <div>
                     <div>
-                        <h4 className="text-base pt-8 pb-1">Название</h4>
+                        <h4 className="text-base lg:text-sm pl-8 pt-8 pb-1">Название</h4>
                         <InputContent
                             control={control}
                             name="title"
                             placeholder="Введите название"
                             type="text"
-                            width="500px"
+                            width="w-full"
                         />
                     </div>
 
                     <div>
-                        <h4 className="text-base pt-8 pb-1">Описание</h4>
+                        <h4 className="text-base lg:text-sm pl-8 pt-8 lg:pt-4 pb-1">Описание</h4>
                         <TextareaContent
                             control={control}
                             name="description"
@@ -95,12 +103,12 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                             height="200px"
                         />
                     </div>
-                    <div className="pt-8 pb-1">
+                    <div className="pt-8 lg:pt-4 pb-1">
                         <div className="flex gap-3">
-                            <h4 className="text-base">Фотографии товара</h4>
+                            <h4 className="text-base lg:text-sm">Фотографии товара</h4>
                             <h5 className="grey-add-text">не более 5 фотографий</h5>
                         </div>
-                        <div className="flex gap-2 pt-1">
+                        <div className="flex gap-2 pt-1 overflow-x-auto">
                             <AddImgInModal
                                 idIndex={0}
                                 currentImg={currentImg}
@@ -129,23 +137,27 @@ export const AddNewAd:FC<INewAdd> = ({setOpenNewAd}) => {
                         </div>
                     </div>
                     <div className="pb-8">
-                        <h4 className="text-base pt-8 pb-1">Цена</h4>
+                        <h4 className="text-base pl-8 pt-8 lg:pt-4 pb-1">Цена</h4>
                         <InputContent
                             control={control}
                             name="price"
                             placeholder="Цена"
                             type="number"
                             addSymbol="₽"
+                            width="w-50 lg:w-11/12"
                         />
                     </div>
 
-                    <ButtonMain
-                        type="submit"
-                        text="Опубликовать" 
-                        width='w-44'
-                    />
+                    <div className="lg:mb-16">
+                        <ButtonMain
+                            type="submit"
+                            text="Опубликовать" 
+                            width='w-44 lg:w-full'
+                        />
+                    </div>
                 </div>
             </form>
+            <MobileMenu />
         </div>
     )
 }

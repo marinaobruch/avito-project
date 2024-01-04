@@ -1,18 +1,17 @@
 import { useId, useState } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setAccessToken, setRefreshToken, setUser, setUserData } from 'store/slice';
+import { setAccessToken, setRefreshToken, setUser } from 'store/slice';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { LogoSkyPro } from 'shared/logos';
 import { useAppDispatch } from 'hooks/use-api';
-import { useGetCurrentUserQuery, usePostLoginMutation } from 'store/services';
+import { usePostLoginMutation } from 'store/services';
 import { IUserLogin } from 'interface/api-interface';
 import { MainMobileLayout } from 'layouts/layout';
 
 export const FormLogin = () => {
     const [postLogin] = usePostLoginMutation();
-    const {data: currentUser} = useGetCurrentUserQuery('');
     const [errorMessage, setErrorMessage] = useState<string>('');
 
     const {
@@ -40,7 +39,6 @@ export const FormLogin = () => {
             localStorage.setItem('access_token', fulfilled.access_token);
             localStorage.setItem('refresh_token', fulfilled.refresh_token);
 
-            if(currentUser) dispatch(setUserData(currentUser));
             navigate('/profile')
         })
         .catch((rejected) => {

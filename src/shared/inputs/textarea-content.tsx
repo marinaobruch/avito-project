@@ -25,7 +25,7 @@ export const TextareaContent: FC<ITextAreaProps> = ({
         }) => (
       <div>
         <textarea
-            className={`p-4 border-2 rounded-lg placeholder:text-gray-300 placeholder:text-base px-4 focus:outline-none focus:border-sky-500 text-base placeholder:pt-3`}
+            className={`p-4 border-2 rounded-lg lg:rounded-3xl placeholder:text-gray-300 placeholder:text-base px-4 focus:outline-none focus:border-sky-500 text-base placeholder:pt-3`}
             style={{width:`${width}`, height:`${height}`}}
             autoComplete="on"
             placeholder={ placeholder }

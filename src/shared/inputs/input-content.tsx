@@ -26,8 +26,8 @@ export const InputContent: FC<IInputProps> = ({
         }) => (
       <div>
         <input
-            className="border-2 rounded-lg h-16 placeholder:text-gray-300 placeholder:text-base px-4 focus:outline-none focus:border-sky-500 text-base"
-            style={{width:`${width}`, height:`${height}`}}
+            className={`border-2 rounded-lg lg:rounded-full h-16 ${width} placeholder:text-gray-300 placeholder:text-base px-4 focus:outline-none focus:border-sky-500 text-base`}
+            style={{height:`${height}`}}
             autoComplete="on"
             placeholder={ placeholder }
             type={ type }

@@ -68,8 +68,7 @@ export const Comments:FC<INewAdd> = ({setOpenModalComments, comments, setComment
     return (
             <div
             onClick={() => setOpenModalComments(false)}
-            className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center
-            lg:block"
+            className="w-full h-full fixed left-0 top-0 bg-gray-800/75 z-10 flex flex-col items-center justify-center"
             >
                 <form
                 id={form}

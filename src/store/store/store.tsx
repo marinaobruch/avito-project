@@ -11,11 +11,11 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import { userSlice } from '../slice';
-import { adsSlice } from '../slice';
-import { profileSlice } from '../slice';
-import { tokenSlice } from '../slice';
-import { avitoApi } from '../services';
+import { userSlice } from '../slice/userSlice';
+import { adsSlice } from '../slice/adsSlice';
+import { profileSlice } from '../slice/profileSlice';
+import { tokenSlice } from '../slice/tokenSlice';
+import { avitoApi } from '../services/ads-service';
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,

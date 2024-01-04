@@ -78,7 +78,7 @@ export const ChangeAd:FC<INewAdd> = ({setOpenModalRedactor, adById}) => {
                             name="title"
                             placeholder="Введите название"
                             type="text"
-                            width="500px"
+                            width="w-full"
                         />
                     </div>
 
