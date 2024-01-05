@@ -31,8 +31,7 @@
 }
 
 .delete-img {
-    @apply flex items-center justify-center w-24 h-24 absolute
-    top-0 left-0 hover:bg-gray-300/50 hover:text-4xl hover:text-red-700
+    @apply cursor-pointer absolute top-0 right-0 p-1 bg-red-300 rounded-full
 }
 
 .opacity-move {

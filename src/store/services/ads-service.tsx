@@ -30,7 +30,8 @@ const baseQueryWithReauth: BaseQueryFn<
     const result = await baseQuery(args, api, extraOptions)
     console.debug('Результат первого запроса', { result })
 
-    if (result?.error?.status !== 401) {
+    if (result?.error?.status !== 401 ||
+        result?.error?.data?.detail === "Incorrect password") {
       return result
     }
   

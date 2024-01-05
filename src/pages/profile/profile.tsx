@@ -156,7 +156,7 @@ export const Profile = () => {
                                     <ButtonMainDisabled
                                         type="submit"
                                         text="Сохранить"
-                                        width="100%"
+                                        width="w-full"
                                         disabled={isValid}
                                     />
                                     <ButtonMain

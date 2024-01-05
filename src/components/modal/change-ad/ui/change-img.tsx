@@ -32,7 +32,7 @@ export const ChangeImgImModal:FC<IProps> = ({adById, indexImg}) => {
         }
     }
 
-    const handleClickToDeleteImg = (e: React.MouseEvent<HTMLDivElement>, urlId: string ) => {
+    const handleClickToDeleteImg = (e: React.MouseEvent<HTMLDivElement> | React.MouseEvent<HTMLSpanElement>, urlId: string ) => {
         console.log(urlId);
         e.stopPropagation();
         setDeleteModal(true);
@@ -41,29 +41,34 @@ export const ChangeImgImModal:FC<IProps> = ({adById, indexImg}) => {
 
     return (
         <div>
-        <input
-            className="hidden"
-            type="file" 
-            id={`file_${indexImg}`}
-            onChange={handleImgUpload}
-        />
+            <input
+                className="hidden"
+                type="file" 
+                id={`file_${indexImg}`}
+                onChange={handleImgUpload}
+            />
         {
         adById.images[indexImg]
         ?   <div
-                className="relative"
-                onClick={(e) => handleClickToDeleteImg(e, adById.images[indexImg].url)}
-            >  
+                className="relative w-24 h-24"
+            >
+                <span
+                    onClick={(e) => handleClickToDeleteImg(e, adById.images[indexImg].url)}
+                    className="delete-img"
+                >
+                        <MdOutlineDeleteOutline />
+                </span>  
                 <label
-                    className="w-24 h-24 bg-gray-200 cursor-pointer"
+                    onClick={(e) => e.preventDefault()}
+                    className="w-24 h-24 bg-gray-200"
                     htmlFor={`file_${indexImg}`}
                 >
-                    <img alt="" src={`http://localhost:8090/${adById.images[indexImg]?.url}`} className="w-24 h-24 object-cover p-1 bg-gray-100"/>
+                    <img
+                        className="w-24 h-24 object-cover p-1 bg-gray-100"
+                        src={`http://localhost:8090/${adById.images[indexImg]?.url}`}
+                        alt=""
+                    />
                 </label>
-                <span className="delete-img easy-animation">
-                    <div className="opacity-0 opacity-move hover:opacity-100">
-                        <MdOutlineDeleteOutline />
-                    </div>
-                </span>
                 {deleteModal && 
                     <ModalImgDelete
                         setOpenModalDelete={setDeleteModal}
@@ -72,7 +77,7 @@ export const ChangeImgImModal:FC<IProps> = ({adById, indexImg}) => {
                     />
                 }
             </div>
-        :   <label className="label-img w-24 h-24" htmlFor='file_1'>
+        :   <label className="label-img" htmlFor='file_1'>
                 <PiPlusThin />
             </label>
         }
