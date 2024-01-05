@@ -22,7 +22,7 @@ export const ProductCard = () => {
                                 <div className="sm:hidden">
                                     <Carousel images={adById.images} />
                                 </div>
-                                <div className="sm-min:hidden">
+                                <div className="sm-min:hidden sm:mb-10">
                                     <MobileCarousel images={adById.images} />
                                 </div>
                                 <div className="w-full">

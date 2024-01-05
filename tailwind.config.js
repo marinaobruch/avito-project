@@ -12,10 +12,10 @@ export default {
         'xl-min': '1279px',
         // => @media (min-width: 1279px) { ... }
   
-        'lg': {'max': '920px'},
-        // => @media (max-width: 920px) { ... }
-        'lg-min': '920px',
-        // => @media (min-width: 920px) { ... }
+        'lg': {'max': '1010px'},
+        // => @media (max-width: 1010px) { ... }
+        'lg-min': '1010px',
+        // => @media (min-width: 1010px) { ... }
   
         'md': {'max': '767px'},
         // => @media (max-width: 767px) { ... }

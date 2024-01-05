@@ -3,12 +3,21 @@ import Add from './../../assets/icons/add.svg'
 import Profile from './../../assets/icons/profile.svg'
 import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
-import { AddNewAd } from 'components/modal'
+import { AddNewAd, ModalWarning } from 'components/modal'
+import { useAppSelector } from 'hooks/use-api'
 
 
 export const MobileMenu = () => {
+const currentUser = useAppSelector((state) => state.user.email)
 const [openNewAd, setOpenNewAd] = useState<boolean>(false);
-const switchOpenNewAd = () => setOpenNewAd(true);
+const [warning, setWarning] = useState<boolean>(false);
+
+const switchOpenNewAd = () => {
+    if(currentUser) {
+        setOpenNewAd(true)
+    }
+    setWarning(true)
+}
 
     return (
         <div className='lg-min:hidden bg-white fixed right-0 bottom-0 h-14 w-full shadow-inner'>
@@ -30,6 +39,13 @@ const switchOpenNewAd = () => setOpenNewAd(true);
             {openNewAd && 
                 <AddNewAd setOpenNewAd={setOpenNewAd}
             />}
+            {warning &&
+                <ModalWarning
+                    text='Пожалуйста, зарегистрируйтесь!'
+                    setWarning={setWarning}
+            />
+
+            }
         </div>
     )
 }
