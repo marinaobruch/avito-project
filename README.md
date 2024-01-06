@@ -1,4 +1,4 @@
-## Project Description // Описание проекта
+# Project Description / Описание проекта
 
 Implementation of an online classifieds site similar to Avito. The application allows users to
  - login and register,
@@ -22,7 +22,7 @@ Implementation of an online classifieds site similar to Avito. The application a
 
 ## Stack / Стек технологий
 
-# The following technologies were used to develop this project / Технологии, используемые при разработке проекта:
+### The following technologies were used to develop this project / Технологии, используемые при разработке проекта:
 
 * TypeScript
 * React
@@ -31,15 +31,15 @@ Implementation of an online classifieds site similar to Avito. The application a
 * RTK Query
 * React Form
 
-# Libraries / Библиотеки
+### Libraries / Библиотеки
 * slick-carousel
 * redux-persist
 * react-icons
 * react-loader-spinner
 
-# Bundler / Сборщик: Vite
+### Bundler / Сборщик: Vite
 
-# Demo Link / Демо-версия проекта
+### Demo Link / Демо-версия проекта
 
 Watch the demo of the project at
 Посмотрите демо версию проекта по ссылке: 
