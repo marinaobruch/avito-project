@@ -6,8 +6,7 @@ Implementation of an online classifieds site similar to Avito. The application a
  - add comments, 
  - attach photos to advertisements,
  - view advertisements posted by other users.
- 
- There is also a feature for filtering advertisements.
+ - there is also a feature for filtering advertisements.
 ------------------------------------------------------------------------------------------
 Реализация сайта онлайн-объявлений, аналогичного Авито. Приложение позволяет пользователям
 - авторизовываться и регистрироваться,
@@ -15,8 +14,7 @@ Implementation of an online classifieds site similar to Avito. The application a
 - добавлять комментарии,
 - прикреплять к рекламным объявлениям фотографии,
 - просматривать рекламные объявления, размещенные другими пользователями.
-
-Также есть функция фильтрации рекламы.
+- также есть функция фильтрации рекламы.
 
 ## How to start a project / Как запустить проект
 
