@@ -1,23 +1,45 @@
-## Project Description
+## Project Description // Описание проекта
 
-Implementation of an online classifieds site similar to Avito. The application allows users to create advertisements, add comments, attach photos to advertisements, and view advertisements posted by other users. There is also a feature for filtering advertisements.
+Implementation of an online classifieds site similar to Avito. The application allows users to
+ - login and register,
+ - create advertisements,
+ - add comments, 
+ - attach photos to advertisements,
+ - view advertisements posted by other users. 
+ There is also a feature for filtering advertisements.
+------------------------------------------------------------------------------------------
+Реализация сайта онлайн-объявлений, аналогичного Авито. Приложение позволяет пользователям
+- авторизовываться и регистрироваться,
+- создавать рекламные объявления,
+- добавлять комментарии,
+- прикреплять к рекламным объявлениям фотографии,
+- просматривать рекламные объявления, размещенные другими пользователями.
+Также есть функция фильтрации рекламы.
 
-## Stack
+## How to start a project / Как запустить проект
 
-#The following technologies were used to develop this project:
+//////
+
+## Stack / Стек технологий
+
+# The following technologies were used to develop this project / Технологии, используемые при разработке проекта:
 
 * TypeScript
 * React
 * TailWind
 * Redux Toolkit
 * RTK Query
+* React Form
 
-#Local application
-* overlayscrollbars (scrollbar) 
+# Libraries / Библиотеки
+* slick-carousel
 * redux-persist
+* react-icons
+* react-loader-spinner
 
-#Bundler Vite
+# Bundler / Сборщик: Vite
 
-## Demo Link
+# Demo Link / Демо-версия проекта
 
 Watch the demo of the project at
+Посмотрите демо версию проекта по ссылке: 
