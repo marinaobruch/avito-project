@@ -1,3 +1,3 @@
-export * from './profile';
-export * from './avatar';
 export * from './'
+export * from './avatar'
+export * from './profile'

@@ -1,7 +1,6 @@
 // import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { IToken } from "interface/api-interface";
 
-
 // const initialState: IToken = {
 //     access_token: '',
 //     refresh_token: ''

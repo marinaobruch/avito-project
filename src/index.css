@@ -3,125 +3,124 @@
 @tailwind utilities;
 
 .grey-add-text {
-    @apply text-base lg:text-sm text-gray-500
+	@apply text-base lg:text-sm text-gray-500;
 }
 
 .default-hover {
-    @apply hover:outline hover:outline-2 hover:outline-sky-500 hover:outline-offset-2  hover:rounded-md
+	@apply hover:outline hover:outline-2 hover:outline-sky-500 hover:outline-offset-2  hover:rounded-md;
 }
 
 .carousel {
-    @apply h-20 w-20 bg-gray-200 default-hover hover:scale-105
+	@apply h-20 w-20 bg-gray-200 default-hover hover:scale-105;
 }
 
 .reg-flex {
-    @apply flex justify-center items-center
+	@apply flex justify-center items-center;
 }
 
 .reg-flex-col {
-    @apply flex flex-col justify-center items-center
+	@apply flex flex-col justify-center items-center;
 }
 
 .easy-animation {
-    @apply transition-all duration-150 ease-in-out
+	@apply transition-all duration-150 ease-in-out;
 }
 
 .label-img {
-    @apply flex items-center justify-center text-gray-300 text-4xl bg-gray-100 select-none cursor-pointer w-24 h-24
+	@apply flex items-center justify-center text-gray-300 text-4xl bg-gray-100 select-none cursor-pointer w-24 h-24;
 }
 
 .delete-img {
-    @apply cursor-pointer absolute top-0 right-0 p-1 bg-red-300 rounded-full
+	@apply cursor-pointer absolute top-0 right-0 p-1 bg-red-300 rounded-full;
 }
 
 .opacity-move {
-    @apply transition-opacity duration-150 ease-in-out cursor-pointer
+	@apply transition-opacity duration-150 ease-in-out cursor-pointer;
 }
 
 @font-face {
-    font-family: 'Roboto-Medium';
-    font-style: normal;
-    font-weight: 400;
-    src:
-      url("src/assets/fonts/Roboto-Medium.ttf") format("ttf"),
-  }
-
+	font-family: 'Roboto-Medium';
+	font-style: normal;
+	font-weight: 400;
+	src: url('src/assets/fonts/Roboto-Medium.ttf') format('ttf');
+}
 
 @font-face {
-    font-family: 'Roboto-Regular';
-    font-style: normal;
-    font-weight: 400;
-    src:
-      url("src/assets/fonts/Roboto-Regular.ttf") format("ttf"),
-  }
+	font-family: 'Roboto-Regular';
+	font-style: normal;
+	font-weight: 400;
+	src: url('src/assets/fonts/Roboto-Regular.ttf') format('ttf');
+}
 
-  @font-face {
-    font-family: 'Roboto-Light';
-    font-style: normal;
-    font-weight: 400;
-    src:
-      url("src/assets/fonts/Roboto-Light.ttf") format("ttf"),
-  }
+@font-face {
+	font-family: 'Roboto-Light';
+	font-style: normal;
+	font-weight: 400;
+	src: url('src/assets/fonts/Roboto-Light.ttf') format('ttf');
+}
 
 @layer base {
-    html {
-        background-color: white;
-    }
+	html {
+		background-color: white;
+	}
 
-    body {
-        /* height: 100vh; */
-        /* width: 100vw; */
-        color: rgb(0, 0, 0);
-        font-size: 1.5rem;
-        line-height: 2rem;
-        background-color: white;
-        /* overflow-x: hidden;
+	body {
+		/* height: 100vh; */
+		/* width: 100vw; */
+		color: rgb(0, 0, 0);
+		font-size: 1.5rem;
+		line-height: 2rem;
+		background-color: white;
+		/* overflow-x: hidden;
         scrollbar-width: 0; */
-    }
+	}
 
-    * {
-        margin: 0;
-        padding: 0;
-    }
+	* {
+		margin: 0;
+		padding: 0;
+	}
 
-    h1, h2, h3, h4 {
-        margin: 0;
-    }
+	h1,
+	h2,
+	h3,
+	h4 {
+		margin: 0;
+	}
 
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
 
-    a {
-        display: block;
-        text-decoration: none;
-        cursor: pointer;
-    }
+	a {
+		display: block;
+		text-decoration: none;
+		cursor: pointer;
+	}
 
-    img {
-        display: block;
-        height: auto;
-        max-width: 100%;
-    }
+	img {
+		display: block;
+		height: auto;
+		max-width: 100%;
+	}
 
-    ul {
-        list-style: none;
-    }
+	ul {
+		list-style: none;
+	}
 
-    button {
-        cursor: pointer;
-    }
+	button {
+		cursor: pointer;
+	}
 
-    input {
-        outline: 0;
-        outline-offset: 0;
-    }
-    
-    input[type="number"]::-webkit-inner-spin-button, 
-    input[type="number"]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-    }
+	input {
+		outline: 0;
+		outline-offset: 0;
+	}
+
+	input[type='number']::-webkit-inner-spin-button,
+	input[type='number']::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
 }

@@ -1,64 +1,65 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserRequest } from "interface/api-interface";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { IUserRequest } from 'interface/api-interface'
 
 interface IUserSlice {
-  email: string;
-  allUsers: IUserRequest[];
-  userData: IUserRequest;
+	email: string
+	allUsers: IUserRequest[]
+	userData: IUserRequest
 }
 
 const initialState: IUserSlice = {
-    email: '',
-    allUsers: [],
-    userData: {
-      id: 0,
-      name: '',
-      email: '',
-      city: '',
-      avatar: '',
-      sells_from: '',
-      phone: '',
-      role: '',
-      surname: '',
-  },
-};
+	email: '',
+	allUsers: [],
+	userData: {
+		id: 0,
+		name: '',
+		email: '',
+		city: '',
+		avatar: '',
+		sells_from: '',
+		phone: '',
+		role: '',
+		surname: '',
+	},
+}
 
 export const userSlice = createSlice({
-  name: "user",
-  initialState: initialState,
+	name: 'user',
+	initialState: initialState,
 
-  reducers: {
-    setAllUser (state, action: PayloadAction<IUserRequest[]>) {
-      const payload = action.payload ?? initialState;
-      state.allUsers = payload;
-    },
+	reducers: {
+		setAllUser(state, action: PayloadAction<IUserRequest[]>) {
+			const payload = action.payload ?? initialState
+			state.allUsers = payload
+		},
 
-    setUser (state, action: PayloadAction<string>) {
-      const payload = action.payload ?? initialState;
-      state.email = payload;
-    },
+		setUser(state, action: PayloadAction<string>) {
+			const payload = action.payload ?? initialState
+			state.email = payload
+		},
 
-    setUserData (state, action: PayloadAction<IUserRequest>) {
-      const payload = action.payload ?? initialState;
-      state.userData = payload;
-    },
+		setUserData(state, action: PayloadAction<IUserRequest>) {
+			const payload = action.payload ?? initialState
+			state.userData = payload
+		},
 
-    removeUser (state) {
-      state.email = '';
-      state.allUsers = [];
-      state.userData = {
-          id: 0,
-          name: '',
-          email: '',
-          city: '',
-          avatar: '',
-          sells_from: '',
-          phone: '',
-          role: '',
-          surname: '',
-      }
-    },
-  },
-});
+		removeUser(state) {
+			state.email = ''
+			state.allUsers = []
+			state.userData = {
+				id: 0,
+				name: '',
+				email: '',
+				city: '',
+				avatar: '',
+				sells_from: '',
+				phone: '',
+				role: '',
+				surname: '',
+			}
+		},
+	},
+})
 
-export const { setAllUser, setUser, setUserData, removeUser } = userSlice.actions;
+export const { setAllUser, setUser, setUserData, removeUser } =
+	userSlice.actions

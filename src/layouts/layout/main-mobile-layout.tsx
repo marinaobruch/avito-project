@@ -1,16 +1,16 @@
-import { FC, ReactNode } from "react";
-import { LayoutMobile, MobileMenu } from ".";
+import { FC, ReactNode } from 'react'
+import { LayoutMobile, MobileMenu } from '.'
 
 interface IContainerProps {
-    children: ReactNode;
-  }
+	children: ReactNode
+}
 
 export const MainMobileLayout: FC<IContainerProps> = ({ children }) => {
-    return (
-        <div>
-            <LayoutMobile />
-                { children }
-            <MobileMenu />
-        </div>
-    )
+	return (
+		<div>
+			<LayoutMobile />
+			{children}
+			<MobileMenu />
+		</div>
+	)
 }

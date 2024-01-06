@@ -1,7 +1,5 @@
-import { FormReg } from "components/form"
+import { FormReg } from 'components/form'
 
 export const Register = () => {
-   return(
-         <FormReg />
-   )
+	return <FormReg />
 }

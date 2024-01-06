@@ -1,3 +1,3 @@
-export * from './buttons';
-export * from './logos';
-export * from  './inputs'
+export * from './buttons'
+export * from './inputs'
+export * from './logos'

@@ -1,2 +1,2 @@
-export * from './container-content';
-export * from './back-to-main';
+export * from './back-to-main'
+export * from './container-content'

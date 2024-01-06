@@ -1,2 +1,2 @@
-export * from './modal-card-del.tsx';
-export * from './modal-warning.tsx';
+export * from './modal-card-del.tsx'
+export * from './modal-warning.tsx'
