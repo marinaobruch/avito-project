@@ -14,21 +14,19 @@ import storage from 'redux-persist/lib/storage'
 import { userSlice } from '../slice/userSlice';
 import { adsSlice } from '../slice/adsSlice';
 import { profileSlice } from '../slice/profileSlice';
-import { tokenSlice } from '../slice/tokenSlice';
 import { avitoApi } from '../services/ads-service';
 
 const rootReducer = combineReducers({
   user: userSlice.reducer,
   ads: adsSlice.reducer,
   profile: profileSlice.reducer,
-  token: tokenSlice.reducer,
   [avitoApi.reducerPath]: avitoApi.reducer,
 })
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['avitoApi'],
+  blacklist: ['avitoApi', 'ads'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

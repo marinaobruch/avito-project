@@ -1,7 +1,7 @@
 import { useId, useState } from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form'
 import { NavLink, useNavigate } from 'react-router-dom';
-import { setAccessToken, setRefreshToken, setUser } from 'store/slice';
+import { setUser } from 'store/slice';
 import { ButtonLogIn, ButtonReg } from 'shared/buttons';
 import { InputLogin } from 'shared/inputs';
 import { LogoSkyPro } from 'shared/logos';
@@ -33,9 +33,6 @@ export const FormLogin = () => {
         await postLogin(data)
         .unwrap()
         .then((fulfilled) => {
-            dispatch(setAccessToken(fulfilled.access_token));
-            dispatch(setRefreshToken(fulfilled.refresh_token));
-            
             localStorage.setItem('access_token', fulfilled.access_token);
             localStorage.setItem('refresh_token', fulfilled.refresh_token);
 

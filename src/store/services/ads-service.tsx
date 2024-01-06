@@ -7,7 +7,6 @@ import {
 } from '@reduxjs/toolkit/query/react'
 import { ICommemtRequest, IDeleteImgRequest, IPatchAd, IPostAdv, IPostComment, IPostImgInAdv, IToken, IUserLogin, IUserPatch, IUserReg, IUserRequest } from "interface/api-interface";
 import { IRequestAds } from "interface/api-interface";
-import { clearTokens, setAccessToken, setRefreshToken } from "..";
 
 const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
@@ -36,7 +35,6 @@ const baseQueryWithReauth: BaseQueryFn<
     }
   
     const forceLogout = () => {
-    //   api.dispatch(clearTokens())
       console.debug('Принудительная авторизация!')
       localStorage.removeItem('refresh_token');
       localStorage.removeItem('access_token');
@@ -61,15 +59,12 @@ const baseQueryWithReauth: BaseQueryFn<
       api,
       extraOptions,
     )
+    
+    console.debug('Результат запроса на обновление токена', { refreshResult })
   
     if (!refreshResult.data.access_token) {
       return forceLogout()
     }
-
-    console.debug('Результат запроса на обновление токена', { refreshResult })
-  
-    // api.dispatch(setAccessToken( refreshResult.data.access_token ))
-    // api.dispatch(setRefreshToken( refreshResult.data.refresh_token ))
 
     localStorage.setItem("access_token", refreshResult.data.access_token)
     localStorage.setItem("refresh_token", refreshResult.data.refresh_token)
@@ -89,17 +84,6 @@ export const avitoApi = createApi({
     reducerPath: 'avitoApi',
     tagTypes: ['Users', 'Comments', 'Ads'],
     baseQuery: baseQueryWithReauth,
-
-    // baseQuery: fetchBaseQuery({
-    //     baseUrl: 'http://localhost:8090',
-    //     prepareHeaders: (headers) => {
-    //         const token = localStorage.getItem('access_token')
-    //         if (token) {
-    //           headers.set('authorization', `Bearer ${token}`)
-    //         }
-    //         return headers;
-    //       },
-    // }),
 
     endpoints: (build) => ({
     //ADS
@@ -288,3 +272,14 @@ export const {
     useGetCommentsMutation,
     usePostCommentMutation,
 } = avitoApi;
+
+// baseQuery: fetchBaseQuery({
+//     baseUrl: 'http://localhost:8090',
+//     prepareHeaders: (headers) => {
+//         const token = localStorage.getItem('access_token')
+//         if (token) {
+//           headers.set('authorization', `Bearer ${token}`)
+//         }
+//         return headers;
+//       },
+// }),

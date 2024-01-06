@@ -66,6 +66,8 @@ export const Profile = () => {
 
     const handleLogout = () => {
         dispatch(removeUser());
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('access_token');
         navigate('/login');
         window.location.reload()
       }
