@@ -44,7 +44,7 @@ export const FormReg = () => {
 			.then((fulfilled) => {
 				console.log(fulfilled)
 				dispatch(setUser(data.email))
-				navigate('/profile')
+				navigate('/')
 			})
 			.catch((rejected) => {
 				if (rejected.status === 400) {

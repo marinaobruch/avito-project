@@ -11,8 +11,6 @@ export const MobileMenu = () => {
 	const [openNewAd, setOpenNewAd] = useState<boolean>(false)
 	const [warning, setWarning] = useState<boolean>(false)
 
-	console.log(currentUser)
-
 	const switchOpenNewAd = () => {
 		if (currentUser) {
 			setOpenNewAd(true)

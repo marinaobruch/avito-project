@@ -32,8 +32,7 @@ export const FormLogin = () => {
 			.then((fulfilled) => {
 				localStorage.setItem('access_token', fulfilled.access_token)
 				localStorage.setItem('refresh_token', fulfilled.refresh_token)
-
-				navigate('/profile')
+				navigate('/')
 			})
 			.catch((rejected) => {
 				if (

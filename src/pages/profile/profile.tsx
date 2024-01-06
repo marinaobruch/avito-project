@@ -22,17 +22,18 @@ export const Profile = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const form = useId()
+	// const [userValue, setUserValue] = useState('')
 
 	const [patchUser] = usePatchUserMutation()
 	const { data: getUser } = useGetCurrentUserQuery('')
 	const { data: getUserAds, isLoading: isLoadingAdsUser } =
 		useGetUserAdsQuery('')
-	const { data: currentUser, isLoading: isLoadingcurrentUser } =
+	const { data: currentUser, isLoading: isLoadingСurrentUser } =
 		useGetCurrentUserQuery('')
 
 	useEffect(() => {
 		if (currentUser) dispatch(setUserData(currentUser))
-	}, [currentUser])
+	}, [currentUser, getUser])
 
 	const cashUser = useAppSelector((state) => state.user.userData)
 
@@ -77,7 +78,7 @@ export const Profile = () => {
 			<MainMobileLayout>
 				<div className='mx-10'>
 					<BackToMainPage />
-					{isLoadingcurrentUser ? (
+					{isLoadingСurrentUser ? (
 						<div>
 							<Puff
 								visible={true}
@@ -94,13 +95,11 @@ export const Profile = () => {
 							<h2 className='mt-16 text-4xl'>
 								Здравствуйте, {currentUser?.email} !
 							</h2>
-
 							<div className='mt-10 mb-16'>
 								<h3 className='text-3xl'>Настройки профиля</h3>
 								<div
 									className='flex justify-start items-start gap-10 mt-10
-                        lg:flex-col lg:justify-center lg:items-center
-                        '
+                	lg:flex-col lg:justify-center lg:items-center'
 								>
 									<UserAvatar getUser={getUser} />
 
@@ -158,7 +157,7 @@ export const Profile = () => {
 
 										<div
 											className='col-span-2 flex justify-between
-                                    lg:flex-col lg:gap-4 lg-min:gap-10'
+                      lg:flex-col lg:gap-4 lg-min:gap-10'
 										>
 											<ButtonMainDisabled
 												type='submit'
@@ -176,7 +175,6 @@ export const Profile = () => {
 									</form>
 								</div>
 							</div>
-
 							<h3 className='text-3xl'>Мои товары</h3>
 							<div className='grid grid-cols-8 gap-6 mt-5'></div>
 							<CardItem allAds={getUserAds} isLoading={isLoadingAdsUser} />
