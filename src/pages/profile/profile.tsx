@@ -30,7 +30,7 @@ export const Profile = () => {
 		useGetUserAdsQuery('')
 	const { data: currentUser, isLoading: isLoadingСurrentUser } =
 		useGetCurrentUserQuery('')
-
+	console.log(getUserAds)
 	useEffect(() => {
 		if (currentUser) dispatch(setUserData(currentUser))
 	}, [currentUser, getUser])
@@ -179,8 +179,14 @@ export const Profile = () => {
 								</div>
 							</div>
 							<h3 className='text-3xl'>Мои товары</h3>
-							<div className='grid grid-cols-8 gap-6 mt-5'></div>
-							<CardItem allAds={getUserAds} isLoading={isLoadingAdsUser} />
+							<div>
+								{getUserAds
+									? getUserAds?.length <= 0 && (
+											<div className='text-base pt-4'>Товаров нет</div>
+										)
+									: ''}
+								<CardItem allAds={getUserAds} isLoading={isLoadingAdsUser} />
+							</div>
 						</div>
 					)}
 				</div>
