@@ -22,7 +22,6 @@ export const Profile = () => {
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
 	const form = useId()
-	// const [userValue, setUserValue] = useState('')
 
 	const [patchUser] = usePatchUserMutation()
 	const { data: getUser } = useGetCurrentUserQuery('')
@@ -30,7 +29,7 @@ export const Profile = () => {
 		useGetUserAdsQuery('')
 	const { data: currentUser, isLoading: isLoadingСurrentUser } =
 		useGetCurrentUserQuery('')
-	console.log(getUserAds)
+
 	useEffect(() => {
 		if (currentUser) dispatch(setUserData(currentUser))
 	}, [currentUser, getUser])

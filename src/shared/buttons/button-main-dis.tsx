@@ -30,5 +30,3 @@ export const ButtonMainDisabled: FC<IButtonProps> = ({
 		</button>
 	)
 }
-
-// ${!disabled && 'bg-gray-300 hover:bg-gray-300 active:bg-sky-900'}

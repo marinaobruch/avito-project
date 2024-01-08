@@ -23,7 +23,7 @@ export const createSellerBy = (data: string) => {
 		} else if (data === 10) {
 			return 'октября'
 		} else if (data === 11) {
-			return 'ноябября'
+			return 'ноября'
 		} else if (data === 12) {
 			return 'декабря'
 		}

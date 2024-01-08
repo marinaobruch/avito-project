@@ -26,7 +26,6 @@ export const Comments: FC<INewAdd> = ({
 	setComments,
 	adById,
 }) => {
-	console.log(comments)
 	const [getComments] = useGetCommentsMutation()
 	const [postComment] = usePostCommentMutation()
 	const currentUser = useAppSelector((state) => state.user.userData)
@@ -126,8 +125,8 @@ export const Comments: FC<INewAdd> = ({
 				<div className='overflow-x-auto overflow-y-auto w-full h-75vh'>
 					{comments.map((item) => (
 						<div key={item.id} className='pt-9 flex items-start gap-5'>
-							<div>
-								<div className='w-10 h-10 bg-gray-200 rounded-full'>
+							<div className=''>
+								<div className='w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center'>
 									{item.author.avatar ? (
 										<img
 											src={`http://localhost:8090/${item.author.avatar}`}
@@ -147,7 +146,7 @@ export const Comments: FC<INewAdd> = ({
 										{createDate(item.created_on)}
 									</div>
 								</div>
-								<div className='text-base font-robotoMedium'>Комментарий</div>
+								<div className='text-lg font-robotoMedium'>Комментарий</div>
 								<div className='text-base'>{item.text} </div>
 							</div>
 						</div>
