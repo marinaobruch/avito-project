@@ -30,6 +30,7 @@ Implementation of an online classifieds site similar to Avito. The application a
 - Redux Toolkit
 - RTK Query
 - React Form
+- React Router
 
 ### Libraries / Библиотеки
 
@@ -42,6 +43,10 @@ Implementation of an online classifieds site similar to Avito. The application a
 
 ## How to start a project / Как запустить проект
 
+
+
+### Запуск бекенда
+
 1. To run the backend, install and run Docker.
 2. Download the 'avito-back' folder and through the terminal go to the folder.
 3. Run the command in the terminal: docker-compose -f docker-compose-backend.yaml up -d
@@ -50,6 +55,23 @@ Implementation of an online classifieds site similar to Avito. The application a
 6. To stop the backend run: docker-compose down
 
 ---
+
+Для клонирования репозитория выполните команду:
+```
+git clone https://github.com/marinaobruch/avito-project.git
+```
+Перед разработкой необходимо проинсталировать пакет проекта.
+```
+cd avito-project
+npm i
+```
+Запуск локального сервера с проектом.
+```
+npm run dev
+```
+Проект будет запущен по адресу: http://localhost:3000
+
+### Start backend
 
 1. Для запуска бэкенда установите и запустите Docker.
 2. Скачайте папку 'avito-back' и через терминал перейдите в папку.
