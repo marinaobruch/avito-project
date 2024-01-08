@@ -1,12 +1,16 @@
-# Project Description / Описание проекта
+# Avito Project
+
+## Project Description / Описание проекта
 
 Implementation of an online classifieds site similar to Avito. The application allows users to
 
 - login and register,
+- update your information on your profile page,
 - create advertisements,
-- add comments,
 - attach photos to advertisements,
-- view advertisements posted by other users.
+- delete and change your advertisements,
+- add comments to advertisements,
+- view advertisements posted by other users,
 - there is also a feature for filtering advertisements.
 
 ---
@@ -14,18 +18,20 @@ Implementation of an online classifieds site similar to Avito. The application a
 Реализация сайта онлайн-объявлений, аналогичного Авито. Приложение позволяет пользователям
 
 - авторизовываться и регистрироваться,
+- обновлять данные о себе на странице профиля,
 - создавать рекламные объявления,
-- добавлять комментарии,
 - прикреплять к рекламным объявлениям фотографии,
-- просматривать рекламные объявления, размещенные другими пользователями.
-- также есть функция фильтрации рекламы.
+- удалять и изменять свои объявления,
+- добавлять комментарии к объявлениями,
+- просматривать рекламные объявления, размещенные другими пользователями,
+- также есть функция фильтрации объявлений.
 
 ## Stack / Стек технологий
 
 ### The following technologies were used to develop this project / Технологии, используемые при разработке проекта:
 
 - TypeScript
-- React
+- React (React Hooks)
 - TailWind
 - Redux Toolkit
 - RTK Query
@@ -43,9 +49,30 @@ Implementation of an online classifieds site similar to Avito. The application a
 
 ## How to start a project / Как запустить проект
 
+### Local start project
 
+To clone the repository, run the command:
 
-### Запуск бекенда
+```
+git clone https://github.com/marinaobruch/avito-project.git
+```
+
+Before development, you must install the project package.
+
+```
+cd avito-project
+npm i
+```
+
+Running a local server with a project.
+
+```
+npm run dev
+```
+
+The project will be launched at: http://localhost:3000
+
+### Start backend
 
 1. To run the backend, install and run Docker.
 2. Download the 'avito-back' folder and through the terminal go to the folder.
@@ -56,22 +83,30 @@ Implementation of an online classifieds site similar to Avito. The application a
 
 ---
 
+### Локальный запуск проекта
+
 Для клонирования репозитория выполните команду:
+
 ```
 git clone https://github.com/marinaobruch/avito-project.git
 ```
+
 Перед разработкой необходимо проинсталировать пакет проекта.
+
 ```
 cd avito-project
 npm i
 ```
+
 Запуск локального сервера с проектом.
+
 ```
 npm run dev
 ```
+
 Проект будет запущен по адресу: http://localhost:3000
 
-### Start backend
+### Запуск бекенда
 
 1. Для запуска бэкенда установите и запустите Docker.
 2. Скачайте папку 'avito-back' и через терминал перейдите в папку.
