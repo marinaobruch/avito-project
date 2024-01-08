@@ -94,10 +94,10 @@ export interface IPostImgInAdv {
 }
 
 //COMMENTS
-export interface ICommemtRequest {
+export interface ICommentRequest {
 	id: number
 	text: string
-	create_on: string
+	created_on: string
 	author: IUserRequest
 }
 export interface ICommentsRequest {

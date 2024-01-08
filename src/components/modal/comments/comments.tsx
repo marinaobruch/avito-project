@@ -1,10 +1,6 @@
 import { useAppSelector } from 'hooks/use-api'
-import {
-	IComment,
-	ICommentsRequest,
-	IRequestAds,
-} from 'interface/api-interface'
-import { FC, useEffect, useId, useState } from 'react'
+import { IComment, ICommentRequest, IRequestAds } from 'interface/api-interface'
+import { FC, SetStateAction, useEffect, useId, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router'
 import { ButtonMain } from 'shared/buttons'
@@ -19,8 +15,8 @@ import { IoIosArrowForward } from 'react-icons/io'
 
 interface INewAdd {
 	setOpenModalComments: (arg: boolean) => void
-	comments: ICommentsRequest[]
-	setComments: (comments: ICommentsRequest[]) => void
+	comments: ICommentRequest[]
+	setComments: (comments: SetStateAction<ICommentRequest[]>) => void
 	adById: IRequestAds
 }
 
@@ -30,6 +26,7 @@ export const Comments: FC<INewAdd> = ({
 	setComments,
 	adById,
 }) => {
+	console.log(comments)
 	const [getComments] = useGetCommentsMutation()
 	const [postComment] = usePostCommentMutation()
 	const currentUser = useAppSelector((state) => state.user.userData)
@@ -44,7 +41,9 @@ export const Comments: FC<INewAdd> = ({
 	const loadComments = () => {
 		getComments(adById.id)
 			.then((res) => {
-				if (res.data) setComments(res.data)
+				if ('data' in res) {
+					if (res.data) setComments(res.data)
+				}
 			})
 			.catch((error) => console.log(error))
 	}

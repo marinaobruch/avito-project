@@ -6,7 +6,7 @@ import {
 	fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react'
 import {
-	ICommemtRequest,
+	ICommentRequest,
 	IDeleteImgRequest,
 	IPatchAd,
 	IPostAdv,
@@ -19,6 +19,7 @@ import {
 	IUserReg,
 	IUserRequest,
 } from 'interface/api-interface'
+import { SetStateAction } from 'react'
 
 const baseQueryWithReauth: BaseQueryFn<
 	string | FetchArgs,
@@ -170,16 +171,12 @@ export const avitoApi = createApi({
 			invalidatesTags: ['Ads'],
 		}),
 		//COMMENTS
-		getComments: build.mutation<ICommemtRequest, number>({
-			query: (id) => ({
-				headers: {
-					'content-type': 'application/json',
-				},
-				url: `ads/${id}/comments`,
-				method: 'GET',
-			}),
+		getComments: build.mutation<SetStateAction<ICommentRequest[]>, number>({
+			query: (id) => `ads/${id}/comments`,
+			invalidatesTags: ['Comments'],
 		}),
-		postComment: build.mutation<ICommemtRequest, IPostComment>({
+
+		postComment: build.mutation<ICommentRequest, IPostComment>({
 			query: ({ id, body }) => ({
 				headers: {
 					'content-type': 'application/json',

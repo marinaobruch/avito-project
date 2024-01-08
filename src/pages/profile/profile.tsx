@@ -60,7 +60,10 @@ export const Profile = () => {
 
 	const handleChange: SubmitHandler<IChangeForm> = (data) => {
 		patchUser(data).then((res) => {
-			dispatch(setUserData(res.data))
+			if ('data' in res) {
+				console.log(res.data)
+				dispatch(setUserData(res.data))
+			}
 			console.log(res)
 		})
 	}

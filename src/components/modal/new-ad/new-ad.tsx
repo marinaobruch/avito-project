@@ -42,7 +42,9 @@ export const AddNewAd: FC<INewAdd> = ({ setOpenNewAd }) => {
 			// передаю картинки в запрос
 			if (currentImg) {
 				for (let i = 0; i < 5; i++) {
-					addImgInRequest(res.data.id, currentImg[i])
+					if ('data' in res) {
+						addImgInRequest(res.data.id, currentImg[i])
+					}
 				}
 			}
 		})

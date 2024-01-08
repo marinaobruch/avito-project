@@ -1,6 +1,6 @@
 import { ChangeAd, Comments, ModalCardDelete } from 'components/modal'
 import { useAppSelector } from 'hooks/use-api'
-import { ICommentsRequest, IRequestAds } from 'interface/api-interface'
+import { ICommentRequest, IRequestAds } from 'interface/api-interface'
 import { FC, useEffect, useState } from 'react'
 import { ButtonMain } from 'shared/buttons'
 import { useGetCommentsMutation } from 'store/index'
@@ -17,7 +17,7 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
 	const adId = adById.id
 	const model = adUser.email === currentUserData.email ? 'creator' : 'user'
 
-	const [comments, setComments] = useState<ICommentsRequest[]>([])
+	const [comments, setComments] = useState<ICommentRequest[]>([])
 
 	const [hideNumber, setHideNumber] = useState<boolean>(false)
 	const [openModalRedactor, setOpenModalRedactor] = useState<boolean>(false)
@@ -31,7 +31,7 @@ export const ProductAdData: FC<IProps> = ({ adById }) => {
 	const loadComments = () => {
 		getComments(adById.id)
 			.then((res) => {
-				if (res.data) setComments(res.data)
+				if ('data' in res) setComments(res.data)
 			})
 			.catch((error) => console.log(error))
 	}
