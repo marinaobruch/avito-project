@@ -13,8 +13,6 @@ Implementation of an online classifieds site similar to Avito. The application a
 - view advertisements posted by other users,
 - there is also a feature for filtering advertisements.
 
----
-
 Реализация сайта онлайн-объявлений, аналогичного Авито. Приложение позволяет пользователям
 
 - авторизовываться и регистрироваться,
@@ -25,6 +23,8 @@ Implementation of an online classifieds site similar to Avito. The application a
 - добавлять комментарии к объявлениями,
 - просматривать рекламные объявления, размещенные другими пользователями,
 - также есть функция фильтрации объявлений.
+
+---
 
 ## Stack / Стек технологий
 
@@ -45,7 +45,11 @@ Implementation of an online classifieds site similar to Avito. The application a
 - react-icons
 - react-loader-spinner
 
+---
+
 ### Bundler / Сборщик: Vite
+
+---
 
 ## How to start a project / Как запустить проект
 
