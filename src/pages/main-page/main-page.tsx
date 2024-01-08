@@ -5,8 +5,8 @@ import { filterAds } from 'hooks/use-filter'
 import { ContainerContent } from 'layouts/container'
 import { useEffect, useState } from 'react'
 import { Logo } from 'shared/logos'
-import { useGetAllAdsQuery, useGetCurrentUserQuery } from 'store/services'
-import { getAllAds, setUserData } from 'store/slice'
+import { useGetAllAdsQuery } from 'store/services'
+import { getAllAds } from 'store/slice'
 
 import { MainMobileLayout } from 'layouts/layout'
 import { Puff } from 'react-loader-spinner'
@@ -15,7 +15,7 @@ export const MainPage = () => {
 	const { data: allAds, isLoading } = useGetAllAdsQuery(100)
 	const dispatch = useAppDispatch()
 
-	const { data: getUser } = useGetCurrentUserQuery('')
+
 	const [searchTerm, setSearchTerm] = useState('')
 	const [adsList, setAdsList] = useState(allAds)
 
@@ -32,10 +32,6 @@ export const MainPage = () => {
 			setAdsList(filteredCars)
 		}
 	}, [searchTerm, allAds])
-
-	useEffect(() => {
-		if (getUser) dispatch(setUserData(getUser))
-	}, [getUser])
 
 	return (
 		<ContainerContent>
