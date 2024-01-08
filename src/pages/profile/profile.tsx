@@ -40,10 +40,10 @@ export const Profile = () => {
 	const { handleSubmit, control, watch } = useForm<IChangeForm>({
 		mode: 'onChange',
 		defaultValues: {
-			name: cashUser?.name,
-			surname: cashUser?.surname,
-			city: cashUser?.city,
-			phone: cashUser?.phone,
+			name: cashUser?.name ? cashUser?.name : '',
+			surname: cashUser?.surname ? cashUser?.surname : '',
+			city: cashUser?.city ? cashUser?.city : '',
+			phone: cashUser?.phone ? cashUser?.phone : '',
 		},
 	})
 

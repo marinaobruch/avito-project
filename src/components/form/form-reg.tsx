@@ -44,20 +44,16 @@ export const FormReg = () => {
 			.then((fulfilled) => {
 				console.log(fulfilled)
 				dispatch(setUser(data.email))
-				navigate('/profile')
 			})
 			.catch((rejected) => {
 				if (rejected.status === 400) {
 					setErrorMessage('Такой пользователь уже существует')
 					return
 				}
-				setErrorMessage('Что-то пошло не так, попробуйте позже')
-				return
 			})
 		console.log(errorMessage)
-
 		{
-			errorMessage.length > 0 &&
+			errorMessage.length >= 0 &&
 				(await postLogin(data)
 					.unwrap()
 					.then((fulfilled) => {

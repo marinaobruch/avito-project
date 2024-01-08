@@ -11,7 +11,8 @@ Implementation of an online classifieds site similar to Avito. The application a
 - delete and change your advertisements,
 - add comments to advertisements,
 - view advertisements posted by other users,
-- there is also a feature for filtering advertisements.
+- there is also a feature for filtering advertisements,
+- the project can be viewed from any device, adaptive is implemented.
 
 Реализация сайта онлайн-объявлений, аналогичного Авито. Приложение позволяет пользователям
 
@@ -22,7 +23,8 @@ Implementation of an online classifieds site similar to Avito. The application a
 - удалять и изменять свои объявления,
 - добавлять комментарии к объявлениями,
 - просматривать рекламные объявления, размещенные другими пользователями,
-- также есть функция фильтрации объявлений.
+- также есть функция фильтрации объявлений,
+- проект можно просматривать с любых устройств, реализован адаптив.
 
 ---
 
