@@ -2,7 +2,7 @@ import { CardItem } from 'components/card-item'
 import { useAppSelector } from 'hooks/use-api'
 import { BackToMainPage, ContainerContent } from 'layouts/container'
 import { MainMobileLayout } from 'layouts/layout'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ButtonMain } from 'shared/buttons'
 import { NoPhotoBig } from 'shared/logos'
 import { useGetAdByUserIdQuery } from 'store/index'
@@ -16,11 +16,16 @@ export const ProfileSeller = () => {
 	const userData = useAppSelector((state) => state.profile.choisenUser)
 	const { data: getAdsByUserId, isLoading } = useGetAdByUserIdQuery(userData.id)
 	const [hideNumber, setHideNumber] = useState<boolean>(false)
+	const [sellTime, setSellTime] = useState<string>('')
 	const navigate = useNavigate()
 
 	const phoneNumber: string | undefined = userData?.phone
 	const phoneNumberHide = CreateHideNumber(phoneNumber)
-	const periopOfSales: string = createSellerBy(userData.sells_from)
+	const periodOfSales: string = createSellerBy(sellTime)
+
+	useEffect(() => {
+		if (userData.sells_from) setSellTime(userData.sells_from)
+	}, [userData])
 
 	const handleShowNumber = () => setHideNumber((prev) => !prev)
 	const backToProfile = () => {
@@ -57,7 +62,7 @@ export const ProfileSeller = () => {
 								<div className='text-xl'>{userData.name}</div>
 								<div className='text-base text-gray-500'>{userData.city}</div>
 								<div className='text-base text-gray-500'>
-									Продает товары с {periopOfSales}
+									Продает товары с {periodOfSales}
 								</div>
 								<ButtonMain
 									type='button'
