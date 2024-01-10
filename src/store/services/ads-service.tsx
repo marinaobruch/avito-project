@@ -13,6 +13,7 @@ import {
 	IPostComment,
 	IPostImgInAdv,
 	IRequestAds,
+	IResponseLogin,
 	IToken,
 	IUserLogin,
 	IUserPatch,
@@ -61,7 +62,7 @@ const baseQueryWithReauth: BaseQueryFn<
 		return forceLogout()
 	}
 
-	const refreshResult = await baseQuery(
+	const refreshResult: IResponseLogin = await baseQuery(
 		{
 			url: 'auth/login',
 			method: 'PUT',

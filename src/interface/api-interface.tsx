@@ -41,6 +41,14 @@ export interface IToken {
 	refresh_token: string
 }
 
+export interface IResponseLogin {
+	data: {
+		access_token: string
+		refresh_token: string
+		token_type: string
+	}
+}
+
 //ADS
 export interface IRequestAds {
 	title: string
