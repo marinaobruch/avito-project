@@ -6,13 +6,13 @@ import { AppRouter } from './routes'
 import { persistor, store } from './store'
 
 const App = () => (
-	<Provider store={store}>
-		<PersistGate loading={null} persistor={persistor}>
-			<BrowserRouter>
-				<AppRouter />
-			</BrowserRouter>
-		</PersistGate>
-	</Provider>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 )
 
 export default App
